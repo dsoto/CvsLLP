@@ -84,26 +84,38 @@ The optimization is then executed for several LEGPs, resulting in a cost vs. rel
 
 The energy balance model requires two sets of time series data. 
 This first is a vector of normal to sun insolation $\unit{(W/m^2)}$ for each hour of the year. The second time series data set is of hourly electricity demand $\unit{(W\cdot hr)}$ throughout the year. 
+Given the geographic coordinates of the microgrid, the dates of the insolation measurements, and the ground reflectance of the location, we calculate the insolation on the collector $(I_C)$ using the methodology outlined by Masters \cite{}. To convert available insolation into PV electricity generation, $E_{gen}$, the nominal PV capacity must be specified. We estimated that the nominal PV capacity will only be reached at the maximum insolation value of the year long data set. 
 
+\begin{equation}
+A_{pv} = \frac{max(I_C)}{P_{nom}}
+\end{equation}
+
+The generated energy is linearly scaled at all times, $t$, according to available insolation. 
+
+\begin{equation}
+E_{pv}(t) = A_{pv} \cdot I_C(t)
+\end{equation}
+
+
+and the maximum and minimum allowable battery charge levels in watt hours, must be specified.
 
 
 \begin{equation}
 E_B (t+1) = E_B (t) + E_{pv} (t) - E_{dem} (t)
 \end{equation}
 
-\subsection{Optimization Algorithm}
 
 \begin{equation}
 LEG(t) = E_{dem} (t) - (E_{pv} (t)+E_B(t-1)-E_{Bmin})
 \end{equation}
 
 
-
+\subsection{Optimization Algorithm}
 
 
 
 \begin{equation}
-LEGP = \frac{\sum_{t=1}^T LEG(t)}{\sum_{t=1}^T E_{gen} (t)}
+LEGP = \frac{\sum_{t=1}^T LEG(t)}{\sum_{t=1}^T E_{dem} (t)}
 \end{equation}
 
 
