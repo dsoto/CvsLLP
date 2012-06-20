@@ -1,7 +1,7 @@
 \documentclass{article}
 
 \begin{document}
-
+\newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
 \begin{abstract}
 This publication presents a tool by which policy makers can
 understand the trade-offs between increased capital cost and the
@@ -63,14 +63,52 @@ cost vs. loss of energy to generate curve.
 
 
 \section{Model}
-We use a energy balance model to simulate the production, storage,
-distribution, and consumption of energy in a village microgrid.
+The primary metric we use to evaluate a micro-grid's performance is called Lack of Energy to Generate Probability (LEGP) which was introduced by Wissem et al.\cite{}.
+LEGP is equal to the demand that a microgrid was unable to meet divided by the total demand over a specified time frame. 
+For our model the time frame was 8760 hours, or one year. 
+We express system reliability using an energy metric, instead of time based metrics such as Loss of Load Probability (LOLP), because of the highly variable demand profiles of offgrid communities. 
+Within many of the off-grid communities observed a vast majority of electricity demand occurred during the few hours following sunset.
+Electricity was used for applications such as lighting, television, and radio. 
+LOLP does not accurately describe the quality of a microgrid's service when there are several hours per day when the microgrid is operational but there is little to no electricity demand. 
+LOLP also fails to account for periods, such as during the late evening and early morning, when the microgrid is not operational but there is no electricity demand.
 
-The primary metric we used to evaluate system performance was Lack of Energy to Generate Probability (LEGP) which was introduced by Wissem et al. 
+The model we created contains two basic levels.
+% perhaps I can put in a little schematic which illustrates the different levels and their interaction
+The inner level conducts an energy balance analysis on an hourly timescale.
+This analysis simulates the production, storage, distribution, and consumption of energy in a village microgrid for each hour over the course of a year. 
+The energy balance level is called upon by an script which computes all of the PV generation and battery storage combinations which satisfy a particular LEGP. 
+This script then determines the generation and storage combination with the minimum initial capital investment cost. 
+The optimization is then executed for several LEGPs, resulting in a cost vs. reliability plot.
 
-If the consumption in the village is greater than the production of the
-generation and storage, we define a loss of energy to generate event
-following the work of \cite{}.
+\subsection{Energy Balance Algorithm}
+
+The energy balance model requires two sets of time series data. 
+This first is a vector of normal to sun insolation $\unit{(W/m^2)}$ for each hour of the year. The second time series data set is of hourly electricity demand $\unit{(W\cdot hr)}$ throughout the year. 
+
+
+
+\begin{equation}
+E_B (t+1) = E_B (t) + E_{pv} (t) - E_{dem} (t)
+\end{equation}
+
+\subsection{Optimization Algorithm}
+
+\begin{equation}
+LEG(t) = E_{dem} (t) - (E_{pv} (t)+E_B(t-1)-E_{Bmin})
+\end{equation}
+
+
+
+
+
+
+\begin{equation}
+LEGP = \frac{\sum_{t=1}^T LEG(t)}{\sum_{t=1}^T E_{gen} (t)}
+\end{equation}
+
+
+
+
 
 We calculate the minimum cost system for a given level of reliability.
 We then plot the cost versus reliability of the system.
