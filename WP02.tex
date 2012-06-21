@@ -83,16 +83,20 @@ The optimization is then executed for several LEGPs, resulting in a cost vs. rel
 \subsection{Energy Balance Algorithm}
 
 The energy balance model requires two sets of time series data. 
-This first is a vector of normal to sun insolation $\unit{(W/m^2)}$ for each hour of the year. The second time series data set is of hourly electricity demand $\unit{(W\cdot hr)}$ throughout the year. 
-Given the geographic coordinates of the microgrid, the dates of the insolation measurements, and the ground reflectance of the location, we calculate the insolation on the collector $(I_C)$ using the methodology outlined by Masters \cite{}. To convert available insolation into PV electricity generation, $E_{gen}$, the nominal PV capacity must be specified. We estimated that the nominal PV capacity will only be reached at the maximum insolation value of the year long data set. 
+The first is a vector of normal to sun insolation in \unit{W/m^2} for each hour of the year.
+The second time series data set is of hourly electricity demand in \unit{W\cdot hr} throughout the year. 
+Given the geographic coordinates of the microgrid, the dates of the insolation measurements, and the ground reflectance of the location, we calculate the insolation on the collector, $I_C$, using the methodology outlined by Masters \cite{}. 
+To convert available insolation into PV electricity generation, the nominal PV capacity, $P_{nom}$, must be specified by the model operator or an external script.
+We estimate that the nominal PV capacity will only be reached at the maximum insolation value within the one year data set.
 
-\begin{equation}
+As seen in equation \ref{eq:A}, we then use a scaling factor, $ A_{pv}$ with units of \unit{m^2} to estimate the energy generated at all other times. Then as equation \ref{eq:EPV} illustrates, the generated energy, $E_{pv}$, is linearly scaled at all times, $t$, according to available insolation. 
+
+
+\begin{equation} \label{eq:A}
 A_{pv} = \frac{max(I_C)}{P_{nom}}
 \end{equation}
 
-The generated energy is linearly scaled at all times, $t$, according to available insolation. 
-
-\begin{equation}
+\begin{equation} \label{eq:EPV}
 E_{pv}(t) = A_{pv} \cdot I_C(t)
 \end{equation}
 
