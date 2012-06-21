@@ -1,7 +1,9 @@
 \documentclass{article}
 
-\begin{document}
 \newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
+
+\begin{document}
+
 \begin{abstract}
 This publication presents a tool by which policy makers can
 understand the trade-offs between increased capital cost and the
@@ -20,46 +22,36 @@ production and storage, it is important to reduce the investment cost
 which reduces the delivered cost of electricity.
 Using measured and simulated weather and demand data we calculate the
 generation and storage costs at a given level of reliability.
-
-
 %% wasteful guidelines
 Traditional guidelines regarding system autonomy can lead to systems
 that are more expensive than necessary.
 In order to provide a system that has excellent autonomy despite
 variations in solar resource is expensive.
-
-Many off-grid situations may not have a thermal backup due to cost or
-logistic difficulty that allows for production of electricity during a
-solar shortfall.
 We investigate the trade-offs between increased reliability and
 increased expense of generation and storage.
+These curves allow a policy-maker or system installer to make informed
+decisions about the predicted uptime of the system and the resulting
+cost of the system.
+If customers may be willing to go without service for a certain time period
+each year, if the tariff is significantly lowered.
 
 %% previous research
 Previous research by Markvart and Egido and Lorenzo construct curves
 that specify the locus of system sizes that satisfy a given LLP.
 Their work does not specify the lowest cost point on each of the
 iso-reliability curves.
+%% how we build on previous research
 This work adds an estimation of the lowest cost point for a given
 reliability and allows us to construct a marginal cost of reliability
 curve.
-We believe that this curve will be useful to planners of off-grid
-electricity.
+The shape of this reliability curve depends on the local weather
+patterns as well as the load patterns.
+This work demonstrates the differences in the shape of the cost vs.
+reliability curve for different climates.
+This allows a more accurate view of cost and autonomy than is available
+from average monthly insolation data.
 
-%% describe investigations that were carried out
-We can further investigate the financial return that being able to sell
-the power made available by increased capital costs to create increased
-reliability.
-This investigation will determine if there is an optimum operating point
-from the operator perspective.
-We also investigate whether the shape of this cost versus reliability
-curve changes in response to different types of loads.
 
-The last part of this work will be the investigation of these marginal
-reliability costs given the types of loads and the per hour service
-costs for providing these loads.
-
-We also investigate the effect of weather patterns on the shape of the
-cost vs. loss of energy to generate curve.
 
 
 \section{Model}
@@ -134,15 +126,3 @@ levels of reliability.
 
 
 \end{document}
-
-
-Outline:
---------
-change in reliability vs cost curve based on types of load (light,
-freeze, computer)
-efficiency of loads and the effect on avoided generation and storage and
-customer avoided tariff?
-
-Questions and Themes
---------------------
-How does consumption and payment variability affect price?
