@@ -113,7 +113,6 @@ E_{Bmin} & \text{if } E_B(t) \leq E_{Bmin}.
 \end{cases}
 \end{equation}
 
-
 When the battery capacity has been depleted, we quantify the demand that cannot be met using a variable called Lack of Energy to Generate, $LEG$, which was proposed by Wissem et al. \cite{ }. 
 We define $LEG$ using equation \ref{eq:LEG}. 
 
@@ -127,10 +126,44 @@ We are then able to assess the microgrid's performance using $LEGP$ which is cal
 LEGP = \frac{\sum_{t=1}^T LEG(t)}{\sum_{t=1}^T E_{dem} (t)}
 \end{equation}
 
-
-
-
 \subsection{Optimization Algorithm}
+
+The optimization algorithm calls upon the energy balance algorithm to find all of the PV generation and battery storage combinations which satisfy a desired $LEGP$. This algorithm can be applied to a range of $LEGPs$ to understand how system reliability influences the consumer cost of electricity. We must specify several inputs in order to utilize the optimization algorithm. The inputs are:
+
+\begin{itemize}
+\item The range of $LEGPs$ on which to perform system optimization
+\item The incremental step sizes by which the battery bank and the PV array are allowed to change
+\item The weather and electricity demand data which are called upon by the energy summation algorithm
+\item The cost per W of installed PV capacity and the cost per Whr of installed battery capacity. 
+\end{itemize}
+
+For a specified LEGP, the algorithm first finds the smallest PV module which will achieve the LEGP when given a very large battery bank i.e(with a capacity which is 100 times the peak electricity demand). 
+The optimization algorithm calls upon the energy balance algorithm, which in turn computes the LEGP. For each iteration, $P_{nom}$ is increased by $P_{step}$ e.g.(100W). 
+When the optimization algorithm calls upon the energy balance algorithm, it specifies the initial charge state of the battery bank to be $E_{Bmin}$.
+\begin{verbatim}
+
+** First Step **
+- For a desired LEGP, find the smallest PV module
+ which will achieve the LEGP given a huge battery bank i.e(100x peak electricity 
+ demand)
+		Given the finite PV and battery increments the actual LEGP will be 
+		slightly better than the LEGP specified
+
+** Second Step **  
+- Increase the PV capacity by the fixed increment. Then find the smallest 
+  Battery Bank which satisfies the Desired LEGP
+  
+** Third Step ** 
+- Calculate the cost of each combination based on the 
+  fixed cost of PV and Battery
+
+** Fourth Step **
+-Save the minimum cost option
+
+** Fifth Step **
+- Compute last expensive battery/PV combination for all other 
+ desired LEGPs. Produce a plot of Cost vs LEGP 
+\end{verbatim}
 
 
 We calculate the minimum cost system for a given level of reliability.
