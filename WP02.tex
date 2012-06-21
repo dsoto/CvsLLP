@@ -1,5 +1,5 @@
 \documentclass{article}
-
+\usepackage{amsmath}
 \begin{document}
 \newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
 \begin{abstract}
@@ -89,41 +89,48 @@ Given the geographic coordinates of the microgrid, the dates of the insolation m
 To convert available insolation into PV electricity generation, the nominal PV capacity, $P_{nom}$, must be specified by the model operator or an external script.
 We estimate that the nominal PV capacity will only be reached at the maximum insolation value within the one year data set.
 
-As seen in equation \ref{eq:A}, we then use a scaling factor, $ A_{pv}$ with units of \unit{m^2} to estimate the energy generated at all other times. Then as equation \ref{eq:EPV} illustrates, the generated energy, $E_{pv}$, is linearly scaled at all times, $t$, according to available insolation. 
-
+As seen in equation \ref{eq:A}, we then use a scaling factor, $ A_{pv}$ with units of \unit{m^2} to estimate the energy generated at all other times.  
 
 \begin{equation} \label{eq:A}
 A_{pv} = \frac{max(I_C)}{P_{nom}}
 \end{equation}
 
+Then as equation \ref{eq:EPV} illustrates, the generated energy, $E_{pv}$, is linearly scaled at all times, $t$, according to available insolation.
+
 \begin{equation} \label{eq:EPV}
 E_{pv}(t) = A_{pv} \cdot I_C(t)
 \end{equation}
 
-
-and the maximum and minimum allowable battery charge levels in watt hours, must be specified.
-
+In order to conduct the one year simulation,the maximum and minimum allowable battery charge levels $E_{Bmin}$ and $E_{Bmax}$ must be specified in \unit{W\cdot hr}.
+We then compute the charge level of the battery bank for all hours using equation \ref{eq:ESUM}. 
 
 \begin{equation}
-E_B (t+1) = E_B (t) + E_{pv} (t) - E_{dem} (t)
+E_B(t+1) =
+\begin{cases}
+E_{Bmax} & \text{if } E_B(t+1) \geq E_{Bmax},\\
+E_B (t) + E_{pv} (t) - E_{dem} (t) & \text{if } E_{Bmin}\geq E_B(t+1)\leq E_{Bmax},\\
+E_{Bmin} & \text{if } E_B(t) \leq E_{Bmin}.
+\end{cases}
 \end{equation}
 
 
-\begin{equation}
+When the battery capacity has been depleted, we quantify the demand that cannot be met using a variable called Lack of Energy to Generate, $LEG$, which was proposed by Wissem et al. \cite{ }. 
+We define $LEG$ using equation \ref{eq:LEG}. 
+
+\begin{equation} \label{eq:LEG}
 LEG(t) = E_{dem} (t) - (E_{pv} (t)+E_B(t-1)-E_{Bmin})
 \end{equation}
 
+We are then able to assess the microgrid's performance using $LEGP$ which is calculated using equation \ref{eq:LEGP}.
 
-\subsection{Optimization Algorithm}
-
-
-
-\begin{equation}
+\begin{equation} \label{eq:LEGP}
 LEGP = \frac{\sum_{t=1}^T LEG(t)}{\sum_{t=1}^T E_{dem} (t)}
 \end{equation}
 
 
 
+
+\subsection{Optimization Algorithm}
 
 
 We calculate the minimum cost system for a given level of reliability.
