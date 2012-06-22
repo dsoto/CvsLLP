@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{amsmath}
-\begin{document}
+\usepackage{graphicx}
 \newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
 
 \begin{document}
@@ -97,7 +97,7 @@ E_{pv}(t) = A_{pv} \cdot I_C(t)
 In order to conduct the one year simulation,the maximum and minimum allowable battery charge levels $E_{Bmin}$ and $E_{Bmax}$ must be specified in \unit{W\cdot hr}.
 We then compute the charge level of the battery bank for all hours using equation \ref{eq:ESUM}. 
 
-\begin{equation}
+\begin{equation} \label{eq:ESUM}
 E_B(t+1) =
 \begin{cases}
 E_{Bmax} & \text{if } E_B(t+1) \geq E_{Bmax},\\
@@ -137,11 +137,22 @@ The algorithm continues to increase PV generation until $E_{Bmax}$ ceases to cha
 It is important to note that due to the incremental step sizes of PV and battery capacity, the achieved LEGP of the system will always be lower than the specified value. 
 Once we have a comprehensive list of PV and battery options which satisfy a desired LEGP, the optimization algorithm computes the cost per \unit{W\cdot hr} of electricity for each system combination.
 
-If a range of $LEGPs$ is specified, the optimization algorithm only stores the lowest cost system combination for each $LEGP$. From that we are able to plot the cost versus reliability of the system. From the cost per \unit{kW\cdot hr} plot, and the associated data matrices, we are able to study how reliability drives system costs in various climates with varying demand profiles. 
-
+If a range of $LEGPs$ is specified, the optimization algorithm only stores the lowest cost system combination for each $LEGP$. 
+From that we are able to plot the cost versus reliability of the system. 
+From the cost per \unit{kW\cdot hr} plot, and the associated data matrices, we are able to study how reliability drives system costs in various climates with varying demand profiles. 
 
 \section{Results}
+
+The results presented were obtained by using the demand profile of a micro-grid near Segou, Mali, which encompasses twenty households.
+The households use electricity primarily for nighttime lighting.
+Also on the micro-grid is a 250 liter freezer which provides the micro-grid with a base demand of 250 W. Peak demand on the microgrid is approximately 450 W. 
+The consumer demand data was created by propagating a single week of demand over an entire year.
+There is a scarcity of hourly ground based insolation data for locations best served by isolated micro-grids. 
+Thus, all insolation measurements were extrapolated from the HelioClim 3 database. HelioClim 3 data is of normal to sun insolation on the ground level and is derived from Meteosat Second Generation satellite images. 
+
+
 \subsection{Cost vs LEGP Curve}
+
 \subsection{Weather Patterns}
 
 
