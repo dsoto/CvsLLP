@@ -1,5 +1,6 @@
 \documentclass{article}
-
+\usepackage{amsmath}
+\begin{document}
 \newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
 
 \begin{document}
@@ -75,49 +76,68 @@ The optimization is then executed for several LEGPs, resulting in a cost vs. rel
 \subsection{Energy Balance Algorithm}
 
 The energy balance model requires two sets of time series data. 
-This first is a vector of normal to sun insolation $\unit{(W/m^2)}$ for each hour of the year. The second time series data set is of hourly electricity demand $\unit{(W\cdot hr)}$ throughout the year. 
-Given the geographic coordinates of the microgrid, the dates of the insolation measurements, and the ground reflectance of the location, we calculate the insolation on the collector $(I_C)$ using the methodology outlined by Masters \cite{}. To convert available insolation into PV electricity generation, $E_{gen}$, the nominal PV capacity must be specified. We estimated that the nominal PV capacity will only be reached at the maximum insolation value of the year long data set. 
+The first is a vector of normal to sun insolation in \unit{W/m^2} for each hour of the year.
+The second time series data set is of hourly electricity demand in \unit{W\cdot hr} throughout the year. 
+Given the geographic coordinates of the microgrid, the dates of the insolation measurements, and the ground reflectance of the location, we calculate the insolation on the collector, $I_C$, using the methodology outlined by Masters \cite{}. 
+To convert available insolation into PV electricity generation, the nominal PV capacity, $P_{nom}$, must be specified by the model operator or an external script.
+We estimate that the nominal PV capacity will only be reached at the maximum insolation value within the one year data set.
 
-\begin{equation}
+As seen in equation \ref{eq:A}, we then use a scaling factor, $ A_{pv}$ with units of \unit{m^2} to estimate the energy generated at all other times.  
+
+\begin{equation} \label{eq:A}
 A_{pv} = \frac{max(I_C)}{P_{nom}}
 \end{equation}
 
-The generated energy is linearly scaled at all times, $t$, according to available insolation. 
+Then as equation \ref{eq:EPV} illustrates, the generated energy, $E_{pv}$, is linearly scaled at all times, $t$, according to available insolation.
 
-\begin{equation}
+\begin{equation} \label{eq:EPV}
 E_{pv}(t) = A_{pv} \cdot I_C(t)
 \end{equation}
 
-
-and the maximum and minimum allowable battery charge levels in watt hours, must be specified.
-
+In order to conduct the one year simulation,the maximum and minimum allowable battery charge levels $E_{Bmin}$ and $E_{Bmax}$ must be specified in \unit{W\cdot hr}.
+We then compute the charge level of the battery bank for all hours using equation \ref{eq:ESUM}. 
 
 \begin{equation}
-E_B (t+1) = E_B (t) + E_{pv} (t) - E_{dem} (t)
+E_B(t+1) =
+\begin{cases}
+E_{Bmax} & \text{if } E_B(t+1) \geq E_{Bmax},\\
+E_B (t) + E_{pv} (t) - E_{dem} (t) & \text{if } E_{Bmin}\geq E_B(t+1)\leq E_{Bmax},\\
+E_{Bmin} & \text{if } E_B(t) \leq E_{Bmin}.
+\end{cases}
 \end{equation}
 
+When the battery capacity has been depleted, we quantify the demand that cannot be met using a variable called Lack of Energy to Generate, $LEG$, which was proposed by Wissem et al. \cite{ }. 
+We define $LEG$ using equation \ref{eq:LEG}. 
 
-\begin{equation}
+\begin{equation} \label{eq:LEG}
 LEG(t) = E_{dem} (t) - (E_{pv} (t)+E_B(t-1)-E_{Bmin})
 \end{equation}
 
+We are then able to assess the microgrid's performance using $LEGP$ which is calculated using equation \ref{eq:LEGP}.
 
-\subsection{Optimization Algorithm}
-
-
-
-\begin{equation}
+\begin{equation} \label{eq:LEGP}
 LEGP = \frac{\sum_{t=1}^T LEG(t)}{\sum_{t=1}^T E_{dem} (t)}
 \end{equation}
 
+\subsection{Optimization Algorithm}
 
+The optimization algorithm calls upon the energy balance algorithm to find all of the PV generation and battery storage combinations which satisfy a desired $LEGP$. This algorithm can be applied to a range of $LEGPs$ to understand how system reliability influences the consumer cost of electricity. We must specify several inputs in order to utilize the optimization algorithm. The inputs are:
 
+\begin{itemize}
+\item The range of $LEGPs$ on which to perform system optimization
+\item The incremental step sizes by which the battery bank and the PV array are allowed to change
+\item The weather and electricity demand data which are called upon by the energy summation algorithm
+\item The cost per watt of installed PV capacity and the cost per Whr of installed battery capacity. 
+\end{itemize}
 
+For a specified LEGP, the algorithm first finds the smallest PV module which will achieve the LEGP when given a very large battery bank i.e(with a capacity which is 100 times the peak electricity demand). 
+Then the algorithm increases the PV generation capacity, $P_{nom}$,by a fixed step size, $P_{step}$.
+With the increased $P_{nom}$, the algorithm recalculates the battery bank capacity, $E_{Bmax}$, which is necessary to satisfy the desired LEGP.
+The algorithm continues to increase PV generation until $E_{Bmax}$ ceases to change. 
+It is important to note that due to the incremental step sizes of PV and battery capacity, the achieved LEGP of the system will always be lower than the specified value. 
+Once we have a comprehensive list of PV and battery options which satisfy a desired LEGP, the optimization algorithm computes the cost per \unit{W\cdot hr} of electricity for each system combination.
 
-We calculate the minimum cost system for a given level of reliability.
-We then plot the cost versus reliability of the system.
-We note that the magnitude of the slope of the curve increases at higher
-levels of reliability.
+If a range of $LEGPs$ is specified, the optimization algorithm only stores the lowest cost system combination for each $LEGP$. From that we are able to plot the cost versus reliability of the system. From the cost per \unit{kW\cdot hr} plot, and the associated data matrices, we are able to study how reliability drives system costs in various climates with varying demand profiles. 
 
 
 \section{Results}
