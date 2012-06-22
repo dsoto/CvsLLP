@@ -134,42 +134,17 @@ The optimization algorithm calls upon the energy balance algorithm to find all o
 \item The range of $LEGPs$ on which to perform system optimization
 \item The incremental step sizes by which the battery bank and the PV array are allowed to change
 \item The weather and electricity demand data which are called upon by the energy summation algorithm
-\item The cost per W of installed PV capacity and the cost per Whr of installed battery capacity. 
+\item The cost per watt of installed PV capacity and the cost per Whr of installed battery capacity. 
 \end{itemize}
 
 For a specified LEGP, the algorithm first finds the smallest PV module which will achieve the LEGP when given a very large battery bank i.e(with a capacity which is 100 times the peak electricity demand). 
-The optimization algorithm calls upon the energy balance algorithm, which in turn computes the LEGP. For each iteration, $P_{nom}$ is increased by $P_{step}$ e.g.(100W). 
-When the optimization algorithm calls upon the energy balance algorithm, it specifies the initial charge state of the battery bank to be $E_{Bmin}$.
-\begin{verbatim}
+Then the algorithm increases the PV generation capacity, $P_{nom}$,by a fixed step size, $P_{step}$.
+With the increased $P_{nom}$, the algorithm recalculates the battery bank capacity, $E_{Bmax}$, which is necessary to satisfy the desired LEGP.
+The algorithm continues to increase PV generation until $E_{Bmax}$ ceases to change. 
+It is important to note that due to the incremental step sizes of PV and battery capacity, the achieved LEGP of the system will always be lower than the specified value. 
+Once we have a comprehensive list of PV and battery options which satisfy a desired LEGP, the optimization algorithm computes the cost per \unit{W\cdot hr} of electricity for each system combination.
 
-** First Step **
-- For a desired LEGP, find the smallest PV module
- which will achieve the LEGP given a huge battery bank i.e(100x peak electricity 
- demand)
-		Given the finite PV and battery increments the actual LEGP will be 
-		slightly better than the LEGP specified
-
-** Second Step **  
-- Increase the PV capacity by the fixed increment. Then find the smallest 
-  Battery Bank which satisfies the Desired LEGP
-  
-** Third Step ** 
-- Calculate the cost of each combination based on the 
-  fixed cost of PV and Battery
-
-** Fourth Step **
--Save the minimum cost option
-
-** Fifth Step **
-- Compute last expensive battery/PV combination for all other 
- desired LEGPs. Produce a plot of Cost vs LEGP 
-\end{verbatim}
-
-
-We calculate the minimum cost system for a given level of reliability.
-We then plot the cost versus reliability of the system.
-We note that the magnitude of the slope of the curve increases at higher
-levels of reliability.
+If a range of $LEGPs$ is specified, the optimization algorithm only stores the lowest cost system combination for each $LEGP$. From that we are able to plot the cost versus reliability of the system. From the cost per \unit{kW\cdot hr} plot, and the associated data matrices, we are able to study how reliability drives system costs in various climates with varying demand profiles. 
 
 
 \section{Results}
