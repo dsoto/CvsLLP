@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
 
@@ -57,7 +58,7 @@ from average monthly insolation data.
 
 \section{Model}
 The primary metric we use to evaluate a micro-grid's performance is called Lack of Energy to Generate Probability (LEGP) which was introduced by Wissem et al.\cite{}.
-LEGP is equal to the demand that a microgrid was unable to meet divided by the total demand over a specified time frame. 
+LEGP is equal to the demand that a micro-grid was unable to meet divided by the total demand over a specified time frame. 
 For our model the time frame was 8760 hours, or one year. 
 We express system reliability using an energy metric, instead of time based metrics such as Loss of Load Probability (LOLP), because of the highly variable demand profiles of offgrid communities. 
 Within many of the off-grid communities observed a vast majority of electricity demand occurred during the few hours following sunset.
@@ -78,7 +79,7 @@ The optimization is then executed for several LEGPs, resulting in a cost vs. rel
 The energy balance model requires two sets of time series data. 
 The first is a vector of normal to sun insolation in \unit{W/m^2} for each hour of the year.
 The second time series data set is of hourly electricity demand in \unit{W\cdot hr} throughout the year. 
-Given the geographic coordinates of the microgrid, the dates of the insolation measurements, and the ground reflectance of the location, we calculate the insolation on the collector, $I_C$, using the methodology outlined by Masters \cite{}. 
+Given the geographic coordinates of the micro-grid, the dates of the insolation measurements, and the ground reflectance of the location, we calculate the insolation on the collector, $I_C$, using the methodology outlined by Masters \cite{}. 
 To convert available insolation into PV electricity generation, the nominal PV capacity, $P_{nom}$, must be specified by the model operator or an external script.
 We estimate that the nominal PV capacity will only be reached at the maximum insolation value within the one year data set.
 
@@ -113,7 +114,7 @@ We define $LEG$ using equation \ref{eq:LEG}.
 LEG(t) = E_{dem} (t) - (E_{pv} (t)+E_B(t-1)-E_{Bmin})
 \end{equation}
 
-We are then able to assess the microgrid's performance using $LEGP$ which is calculated using equation \ref{eq:LEGP}.
+We are then able to assess the micro-grid's performance using $LEGP$ which is calculated using equation \ref{eq:LEGP}.
 
 \begin{equation} \label{eq:LEGP}
 LEGP = \frac{\sum_{t=1}^T LEG(t)}{\sum_{t=1}^T E_{dem} (t)}
@@ -144,16 +145,53 @@ From the cost per \unit{kW\cdot hr} plot, and the associated data matrices, we a
 \section{Results}
 
 The results presented were obtained by using the demand profile of a micro-grid near Segou, Mali, which encompasses twenty households.
+The micro-grid currently relies on 1.4 \unit{kW} of nominal PV capacity, and 17.280 \unit{kW\cdot hr} of lead acid battery storage.
 The households use electricity primarily for nighttime lighting.
-Also on the micro-grid is a 250 liter freezer which provides the micro-grid with a base demand of 250 W. Peak demand on the microgrid is approximately 450 W. 
+Also on the micro-grid is a 250 liter freezer which provides the micro-grid with a base demand of approximately 250 W. 
+Peak demand on the micro-grid is approximately 450 W. 
 The consumer demand data was created by propagating a single week of demand over an entire year.
-There is a scarcity of hourly ground based insolation data for locations best served by isolated micro-grids. 
-Thus, all insolation measurements were extrapolated from the HelioClim 3 database. HelioClim 3 data is of normal to sun insolation on the ground level and is derived from Meteosat Second Generation satellite images. 
+There is a scarcity of hourly ground based insolation data for locations such as Segou, Mali, which are best served by isolated micro-grids. 
+Thus, all insolation measurements were extrapolated from the HelioClim 3 database. The utilized HelioClim 3 data is of normal to sun insolation on the ground level.
+HelioClim 3 data is derived from Meteosat Second Generation satellite images. 
 
+Analysis and on the ground observation indicate that the micro-grid is electricity generation limited. 
+Below in figure \ref{•} is a one year time series of the current system using the aforementioned energy balance algorithm.
+The $LEGP$ of the micro-grid is 8.14 percent.
 
 \subsection{Cost vs LEGP Curve}
 
-\subsection{Weather Patterns}
+For the purpose of economic modeling, the initial capital cost of PV installation was estimated as 1.50 \unit{USD/W}.
+The capital cost of battery installation was 0.20 \unit{USD/W\cdot hr}. 
+The cost of the PV will be repaid using a 20 year loan with an interest rate of 10 percent. 
+The repayment period for the batteries is 3 years at an interest rate of 10 percent. 
+This results in annual cost of 0.1762 \unit{USD/W} of PV capacity and an annual cost of 0.0804 \unit{USD/W\cdot hr}.
+The metric used to evaluate the system cost was the break even retail electricity cost in \unit{USD/kWh}. This was found by dividing the annual payment cost by the number of \unit{kW\cdot hr} produced.
+
+When running optimization algorithm, the nominal PV system capacity was allowed to be adjusted in increments of 100 W. 
+Similarly, the battery storage could be adjusted in increments of 100 \unit{W\cdot hr}.
+The minimum energy disconnect was chosen as 50 percent of the nominal battery capacity.
+Also, the initial battery charge state was chosen as the minimum energy disconnect.
+The cost versus $LEGP$ curve for this analysis is illustrated as figure \ref{fig:CostVLEGPMali}.
+
+\begin{figure}[h]  \label{fig:CostVLEGPMali}
+  \centering
+    %\includegraphics[trim = 18mm 70mm 18mm 70mm, clip,width=.85\textwidth]{MaliFridgeCostPerkWhVsLEGP}
+    %trim
+  \caption{Cost vs. LEGP of Micro-Grid in Segou, Mali}
+\end{figure}
+
+Figure \ref{fig:CostVLEGPMali} clearly illustrates that there are two distinct regimes on the cost vs $LEGP$ plot. 
+The first is the linear portion of figure \ref{fig:CostVLEGPMali} corresponding to $ 0.05 \lesssim LEGP \leq 0.20$. 
+The second resembles an exponential function and corresponds to $ 0.01 \leq LEGP \lesssim 0.05$. 
+The linear region corresponds to decreasing the $LEGP$ associated diurnal day-night solar behavior. 
+The exponential region corresponds to eliminating the $LEGP$ associated with rainy periods.
+Because there are scattered rainy periods which can last for several days, large increases in PV and battery capacity are needed to marginally decrease $LEGP$.
+% I need to figure out how to best correlate the two portions of the curve with the diurnal and seasonal resource availability
+
+
+\subsubsection{Effects of Weather Patterns}
+
+\subsubsection{Effects of Demand Usage Profiles}
 
 
 \end{document}
