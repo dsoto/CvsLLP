@@ -155,7 +155,7 @@ Thus, all insolation measurements were extrapolated from the HelioClim 3 databas
 HelioClim 3 data is derived from Meteosat Second Generation satellite images. 
 
 Analysis and on the ground observation indicate that the micro-grid is electricity generation limited. 
-Below in figure \ref{•} is a one year time series of the current system using the aforementioned energy balance algorithm.
+Below in figure \ref{pvBat5} is a one year time series of the current system using the aforementioned energy balance algorithm.
 The $LEGP$ of the micro-grid is 8.14 percent.
 
 \subsection{Cost vs LEGP Curve}
@@ -171,22 +171,37 @@ When running optimization algorithm, the nominal PV system capacity was allowed 
 Similarly, the battery storage could be adjusted in increments of 100 \unit{W\cdot hr}.
 The minimum energy disconnect was chosen as 50 percent of the nominal battery capacity.
 Also, the initial battery charge state was chosen as the minimum energy disconnect.
-The cost versus $LEGP$ curve for this analysis is illustrated as figure \ref{fig:CostVLEGPMali}.
+The cost versus $LEGP$ curve for this analysis is illustrated as figure \ref{CostVLEGPMali}.
 
-\begin{figure}[h]  \label{fig:CostVLEGPMali}
+\begin{figure}[ht]  
   \centering
-    %\includegraphics[trim = 18mm 70mm 18mm 70mm, clip,width=.85\textwidth]{MaliFridgeCostPerkWhVsLEGP}
-    %trim
+    \includegraphics[trim = 10mm 70mm 10mm 70mm, clip,width=.85\textwidth]{MaliFridgeCostPerkWhVsLEGP}
   \caption{Cost vs. LEGP of Micro-Grid in Segou, Mali}
+  \label{CostVLEGPMali}
 \end{figure}
 
-Figure \ref{fig:CostVLEGPMali} clearly illustrates that there are two distinct regimes on the cost vs $LEGP$ plot. 
-The first is the linear portion of figure \ref{fig:CostVLEGPMali} corresponding to $ 0.05 \lesssim LEGP \leq 0.20$. 
+Figure \ref{CostVLEGPMali} clearly illustrates that there are two distinct regimes on the cost vs $LEGP$ plot. 
+The first is the linear portion of figure \ref{CostVLEGPMali} corresponding to $ 0.05 \lesssim LEGP \leq 0.20$. 
 The second resembles an exponential function and corresponds to $ 0.01 \leq LEGP \lesssim 0.05$. 
 The linear region corresponds to decreasing the $LEGP$ associated diurnal day-night solar behavior. 
 The exponential region corresponds to eliminating the $LEGP$ associated with rainy periods.
 Because there are scattered rainy periods which can last for several days, large increases in PV and battery capacity are needed to marginally decrease $LEGP$.
 % I need to figure out how to best correlate the two portions of the curve with the diurnal and seasonal resource availability
+
+When making necessary trade offs between cost and quality of service, figure \ref{CostVLEGPMali} indicates that the micro-grid should be sized for a LEGP of approximately five percent.
+Knowing such, we can further analyze the micro-grid composition with a LEGP of 0.05.
+Figure \ref{pvBat5} illustrates the PV generation and battery storage combination which produce a LEGP of 0.05. 
+Also illustrated is the cost per kWh in USD of each combination. 
+As figure \ref{pvBat5} indicates, the minimum cost of 0.466 \unit{USD/kW\cdot hr} corresponds to a battery capacity of 7000 \unit{W\cdot hr} and a PV capacity of 1800 W.
+
+\begin{figure}[ht] 
+  \centering
+    \includegraphics[trim = 15mm 50mm 15mm 53mm, clip,width=.75\textwidth]{pvCapVsBatCap5Perc}
+  \caption{Above - PV Capacity vs. Battery Capacity for Fixed LEGP of 0.05 of Micro-Grid in Segou, Mali. Below - Cost Per kWh vs. Battery Capacity at the Same Location and LEGP.}
+\label{pvBat5}
+\end{figure}
+
+Now that a potential micro-grid composition has been specified, we can conduct further analysis using the energy balance algorithm in order to better understand the micro-grid's temporal behavior.
 
 
 \subsubsection{Effects of Weather Patterns}
