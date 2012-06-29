@@ -64,12 +64,12 @@ We express system reliability using an energy metric, instead of time based metr
 Within many of the off-grid communities observed a vast majority of electricity demand occurred during the few hours following sunset.
 Electricity was used for applications such as lighting, television, and radio. 
 LOLP does not accurately describe the quality of a microgrid's service when there are several hours per day when the microgrid is operational but there is little to no electricity demand. 
-LOLP also fails to account for periods, such as during the late evening and early morning, when the microgrid is not operational but there is no electricity demand.
+LOLP also fails to account for periods, such as during the late evening and early morning, when the micro-grid is not operational but there is no electricity demand.
 
 The model we created contains two basic levels.
 % perhaps I can put in a little schematic which illustrates the different levels and their interaction
 The inner level conducts an energy balance analysis on an hourly timescale.
-This analysis simulates the production, storage, distribution, and consumption of energy in a village microgrid for each hour over the course of a year. 
+This analysis simulates the production, storage, distribution, and consumption of energy in a village micro-grid for each hour over the course of a year. 
 The energy balance level is called upon by an script which computes all of the PV generation and battery storage combinations which satisfy a particular LEGP. 
 This script then determines the generation and storage combination with the minimum initial capital investment cost. 
 The optimization is then executed for several LEGPs, resulting in a cost vs. reliability plot.
@@ -183,11 +183,10 @@ The cost versus $LEGP$ curve for this analysis is illustrated as figure \ref{Cos
 Figure \ref{CostVLEGPMali} clearly illustrates that there are two distinct regimes on the cost vs $LEGP$ plot. 
 The first is the linear portion of figure \ref{CostVLEGPMali} corresponding to $ 0.05 \lesssim LEGP \leq 0.20$. 
 The second resembles an exponential function and corresponds to $ 0.01 \leq LEGP \lesssim 0.05$. 
-The linear region corresponds to decreasing the $LEGP$ associated diurnal day-night solar behavior. 
-The exponential region corresponds to eliminating the $LEGP$ associated with rainy periods.
-Because there are scattered rainy periods which can last for several days, large increases in PV and battery capacity are needed to marginally decrease $LEGP$.
-% I need to figure out how to best correlate the two portions of the curve with the diurnal and seasonal resource availability
-
+%The linear region corresponds to decreasing the $LEGP$ associated diurnal day-night solar behavior. 
+%The exponential region corresponds to eliminating the $LEGP$ associated with rainy periods.
+%Because there are scattered rainy periods which can last for several days, large increases in PV and battery capacity are needed to marginally decrease $LEGP$.
+%% I need to figure out how to best correlate the two portions of the curve with the diurnal and seasonal resource availability
 When making necessary trade offs between cost and quality of service, figure \ref{CostVLEGPMali} indicates that the micro-grid should be sized for a LEGP of approximately five percent.
 Knowing such, we can further analyze the micro-grid composition with a LEGP of 0.05.
 Figure \ref{pvBat5} illustrates the PV generation and battery storage combination which produce a LEGP of 0.05. 
@@ -202,11 +201,43 @@ As figure \ref{pvBat5} indicates, the minimum cost of 0.466 \unit{USD/kW\cdot hr
 \end{figure}
 
 Now that a potential micro-grid composition has been specified, we can conduct further analysis using the energy balance algorithm in order to better understand the micro-grid's temporal behavior.
+By definition, an LEGP of 0.05 signifies that five percent of electricity demand cannot be met.
+However, it is important to know \emph{when} energy shortfalls occur. 
+Knowing this begins to illuminate the effects of energy shortfalls on vital services and local income generating activities. 
+Figure \ref{shortfallMap}, is a binary map of electricity service which provides us with an excellent qualitative understanding of the micro-grid's time variant reliability. 
+From figure \ref{shortfallMap}, we can see that energy shortfalls follow both daily and seasonal patterns. 
+On a daily level we see that the further into the evening, the more likely that the battery system will run out of stored energy. 
+This trend continues until mid-morning when insolation reaches sufficiently high levels.
+The diurnal trend is more pronounced between November and March.
+A predictable LEG is to be expected during these months because the months correspond to the dry season in Segou, Mali.
+In addition, they correspond to the months of least geometrically available insolation.
+In contrast, during the rainy season which spans from June until September, LEG is less predictable. 
+Energy shortfalls tend to occur for longer intervals, but sporadically among days.  
 
+\begin{figure}[ht] 
+  \centering
+    \includegraphics[trim = 1mm 50mm 10mm 53mm, clip,width=1\textwidth]{colorMapofPowerOutage}
+  \caption{Time map of inability to meet demand. Rows are the day of the year, and columns are the hour of the day. Green signifies functional system. purple signifies energy shortfall.}
+  % should I normalize this figure by dividing by 365
+\label{shortfallMap}
+\end{figure}
+
+The micro-grid's performance is also well captured by figure \ref{histHourBin} which illustrates LEPG on an hourly basis while using the one year data set. 
+From this figure we see a strong time of day dependence on LEGP. 
+
+\begin{figure}[ht] 
+  \centering
+    \includegraphics[trim = 15mm 50mm 15mm 53mm, clip,width=.75\textwidth]{timeOfShortfallByHourCount}
+  \caption{LEGP for each hour using yearly data set.}
+  % should I normalize this figure by dividing by 365
+\label{histHourBin}
+\end{figure}
 
 \subsubsection{Effects of Weather Patterns}
 
+
+
 \subsubsection{Effects of Demand Usage Profiles}
 
-
+ 
 \end{document}
