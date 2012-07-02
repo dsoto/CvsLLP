@@ -22,9 +22,38 @@ This article is divided into four primary sections.
 The first section details our procedure for generating cost versus reliability curves for isolated micro-grids. We quantify system reliability using an energy based metric called lack of energy to generate probability (\emph{LEGP}) introduced by Wissem et al.\cite{}. 
 The cost versus \emph{LEGP} curves are based off of an energy balance algorithm, and they utilize historical hourly insolation and demand profiles.
 The second section uses our energy balance algorithm to assess the effects of weather and demand profiles on cost versus system \emph{LEGP} curves.  
-The third section focuses analyzes a particular insolation and demand profile. 
+In the third section we investigate a particular insolation and demand profile, and we adjust the micro-grid's \emph{LEGP}.
+In doing so, we assess the temporal behavior of decreased system reliability. 
+In the fourth, and final, section of the article, we further elucidate our findings and the lessons learned from our research. 
+
+\section{Generation of Cost Versus Reliability Curves}
+The primary metric we use to evaluate a micro-grid's performance is called lack of energy to generate probability (LEGP) which was introduced by Wissem et al.\cite{}.
+LEGP is equal to the electricity demand that a micro-grid was unable to meet divided by the total demand over a specified time frame. 
+For our model the time frame was 8760 hours, or one year. 
+Although time based metrics such as loss of load probability \emph{LOLP} may be used to evaluate system performance, these tend to inflate the perceived performance of micro-grids in the developing world.  
+Many of the micro-grids we have observed are only used for a small fraction of the day.
+We are more concerned about a micro-grids ability to supply demanded energy, and thus chose \emph{LEGP} as our primary performance metric. 
+
+We decided to quantify system cost based on the "break-even" consumer price of electricity in cost per kilowatt-hour\unit{(USD/kWh)}. 
+As opposed to installation capital cost, or annual payment, this metric allows us to directly compare micro-grids of different sizes and demand patterns. 
+%% Talk about how we estimated costs. 
 
 
+
+A majority of the analysis we conducted may be replicated using \emph{HOMER} or another proprietary energy balance micro-grid simulator. 
+However, we chose to create our own energy balance and optimization models.
+This gave us increased control over the modeling and optimization process. 
+In addition, it allowed us to not treat the software like a "black box."
+The model we created contains two basic levels.
+The inner level conducts an energy balance analysis on an hourly timescale.
+This analysis simulates the production, storage, distribution, and consumption of energy by a micro-grid for each hour over the course of a year. 
+The energy balance level is called upon by an script which computes all of the PV generation and battery storage combinations which satisfy a particular LEGP. 
+This script then determines the generation and storage combination with the minimum initial capital investment cost. 
+The optimization is then executed for several LEGPs, resulting in a cost vs. reliability plot.
+
+\section{Impact of Weather and Demand Profiles on Cost vs. \emph{LEGP} Curve}
+\section{Impact of \emph{LEGP} on Micro-Grid Temporal Performance Characteristics}
+\section{Discussion}
 
 
 \end{document}
