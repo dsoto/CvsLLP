@@ -92,10 +92,8 @@ The consumer demand data was created by propagating a single week of demand over
 Although \emph{LEGP} is an important metric, it by no means fully characterizes system performance. 
 In particular, \emph{LEGP} does not describe when micro-grid energy shortfalls occur.
 As we will illustrate, daily and seasonal variations in energy shortfall may greatly effect a micro-grid's viability for different demand profiles. 
-We begin by analyzing \emph{LEGP} curve generated using the Segou weather data and the demand profile from the previous section. 
+We begin by analyzing the \emph{LEGP} curve generated using the Segou, Mali, weather data and the demand profile from the previous section. 
 This plot is illustrated as figure \ref{CostVLEGPMali}.
-
-
 
 \begin{figure}[ht]  
   \centering
@@ -103,6 +101,27 @@ This plot is illustrated as figure \ref{CostVLEGPMali}.
   \caption{Cost vs. LEGP of Micro-Grid in Segou, Mali}
   \label{CostVLEGPMali}
 \end{figure}
+
+From figure \ref{CostVLEGPMali} we decided to further analyze the micro-grid temporal behavior with \emph{LEGPs} of 0.05 and 0.01.
+ We chose to analyze $LEGP = 0.01$ because it approaches the upper threshold of consumer willingness to pay.
+We chose to analyze the system characteristics with $LEGP = 0.05$ because it corresponds to intersection of the linear and exponential cost regimes.
+According to figure \ref{CostVLEGPMali}, for \emph{LEGPs} below 0.05 the marginal cost of electricity generation begins to increase exponentially.  
+
+%% Describe the PV and battery size combination for the LEGP 0.01 and the LEGP 0.05 systems. 
+To observe the diurnal characteristics of micro-grid performance, we created figure \ref{hourlyLEGP}. Given our specified \emph{LEGPs} of 0.01 and 0.05, we are able to see the hourly \emph{LEGPs} for each potential system configuration.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[trim = 50mm 95mm 50mm 95mm, clip,width=1\textwidth]{timeOfShortfallByHourCount0105}
+\caption{Probability of energy shortfall for each hour. Model uses weather from Segou, Mali, and micro-grid demand profile with refrigerator base load}
+\label{hourlyLEGP}
+\end{figure} 
+
+
+
+
+
+
 
 
 \section{Discussion}
