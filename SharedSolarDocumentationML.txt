@@ -25,7 +25,7 @@ other .m files
 makeAveDay.m - creates a variable called aveDays. This function makes an average
 hourly day of demand data from one week of demand data.  
 
-makeSynthYear.m - creates two year long hourly demand profiles. Each
+makeSynthDemYear.m - creates two year long hourly demand profiles. Each
 is a 8760 x 1 vector. Within each of the two data sets every day is identical. The 
 first vector created is called fridgeDemandYearSyn. Within fridgeDemandYearSyn hours 
 between 1AM and 6PM have a demand of 250 watts. Between 6PM and 1AM there is a demand 

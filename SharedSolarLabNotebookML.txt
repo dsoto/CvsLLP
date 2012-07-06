@@ -1,0 +1,15 @@
+Mitchell Lee
+Shared Solar Lab Notebook
+
+07062012
+Goals
+-Create Synthetic Demand Data. One of ML06 with a constant
+refridgerator base load.
+-Run synthetic data through optimization model. 
+
+Completed
+- makeSynthDemYear.m - creates synthetic hourly electricity demand. There are 
+two cases, each of which is a one year (8760) vector. 
+	- fridgeDemandYearSyn
+	- lightDemandYearSyn
+
