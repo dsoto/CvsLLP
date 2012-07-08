@@ -9,7 +9,60 @@ refridgerator base load.
 
 Completed
 - makeSynthDemYear.m - creates synthetic hourly electricity demand. There are 
-two cases, each of which is a one year (8760) vector. 
+two cases, each of which is a one year (8760) vector.  The synthetic hourly 
+demand is stored as a .mat file called synthDem.mat
 	- fridgeDemandYearSyn
 	- lightDemandYearSyn
 
+07082012
+Goals
+-Partially functionalize pvBatOpt.m
+-Run synthetic demand data (of system with and without refridgerator base load)
+through the cost vs LEGP algorithm. Do this for Mali, Luxor, Kisangari,
+and Nouakchott.
+
+Completed Actions
+
+pvBatOptf.m
+
+-Created a new function called pvBatOptf.m which is a partially
+functionalized version on pvBatOpt. The function requires three inputs. 
+These are weathVec, demVec, LEGPVec
+	-weathVec - is a 8760 x 1 vector. It is a yearly insolation profile at 
+	hourly measurements 
+
+	-demVec - is a 8760 x1 vector. It is the yearly demand profile recorded 
+	at hourly intervals. 
+	
+	- LEGPVec - is the vector which represents the range of LEGPs in which 
+	system performance will be analyzed. 
+	
+The output of pvBatOptf.m is an array called best.
+	-best - has six columns. Its number of rows corresponds to the length
+	of LEGPVec. In order from left to right, the columns correspond to the 
+	following. Desired LEGP, the lowest cost option for the LEGP, the battery
+	cost for the lowest cost option, the pv cost for the lowest cost option,
+	the nominal battery capacity, and the nominal pv capacity. 
+	
+Variables which still must be specified within pvBatOptf.m and the associated 
+functions.
+	-pvStep - incrememtal step size that script adjusts PV bank
+	-batStep - incrememtal step size that script adjusts battery bank
+	-pvCost - cost per W of PV
+	-batCost - cost per Wh of battery
+	-batPerDis - allowable battery percent discharge.  
+	
+Variables that must be altered inside of BOTH SuppDemSum.m and BatCapCal.m
+	-phi_c - collector azimuth
+	-sigma - collector tilt angle from the ground level
+	-Long - longitude
+	-LTM - local time meriadian
+	-rho - ground reflectance 
+	
+
+	
+	
+	
+	
+	
+	

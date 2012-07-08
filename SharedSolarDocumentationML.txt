@@ -8,6 +8,16 @@ System Optimization Model
 pvBatOpt.m - is the main optimization algorithm is calls on
 SuppDemSum.m  and batCapCal.m
 
+pvBatOptf.m - is the same algorithm as pvBatOpt.m but in function
+form. The function requires three inputs. 
+These are weathVec, demVec, LEGPVec
+	-weathVec - is a 8760 x 1 vector. It is a yearly insolation profile at 
+	hourly measurements 
+	-demVec - is a 8760 x1 vector. It is the yearly demand profile recorded 
+	at hourly intervals. 
+	-LEGPVec - is the vector which represents the range of LEGPs in which 
+	system performance will be analyzed. 
+
 SuppDemSum.m - given PV capacity and Battery capacity this 
 outputs the LEGP of the system. This is used by pvBatOpt.m
 to compute the minimum pv panel size that is necessary to meet
@@ -19,6 +29,8 @@ to actually produce the battery vs. PV curve
 
 resourceCalc.m - computes takes the insolation data and converts
 that into the net insolation w/m^2 on the collector.
+	Edited on 07082012 corrected so that phi_c and L are converted into
+	radians.
 
 other .m files
 
