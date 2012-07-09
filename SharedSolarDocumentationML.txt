@@ -5,12 +5,19 @@ Shared Solar Documentation
 
 System Optimization Model
 
+batCapCal.m - computes the necessary Battery bank for a given 
+PV array and desired LEGP. This is called upon by pvBatopt.m 
+to actually produce the battery vs. PV curve
+
 pvBatOpt.m - is the main optimization algorithm is calls on
 SuppDemSum.m  and batCapCal.m
 
 pvBatOptf.m - is the same algorithm as pvBatOpt.m but in function
-form. The function requires three inputs. 
-These are weathVec, demVec, LEGPVec
+form. The function requires four inputs. 
+These are dates, weathVec, demVec, LEGPVec
+	-dates - is a 8760x4 array. It contains year, month, day, hour. pvBatOptf.m
+	adds the minute and second columns so that Matlab translates the dates
+	correctly into numeric form.
 	-weathVec - is a 8760 x 1 vector. It is a yearly insolation profile at 
 	hourly measurements 
 	-demVec - is a 8760 x1 vector. It is the yearly demand profile recorded 
@@ -18,19 +25,25 @@ These are weathVec, demVec, LEGPVec
 	-LEGPVec - is the vector which represents the range of LEGPs in which 
 	system performance will be analyzed. 
 
-SuppDemSum.m - given PV capacity and Battery capacity this 
-outputs the LEGP of the system. This is used by pvBatOpt.m
-to compute the minimum pv panel size that is necessary to meet
-a specified LEGP, when there is a nearly infinite battery bank
-
-batCapCal.m - computes the necessary Battery bank for a given 
-PV array and desired LEGP. This is called upon by pvBatopt.m 
-to actually produce the battery vs. PV curve
-
 resourceCalc.m - computes takes the insolation data and converts
 that into the net insolation w/m^2 on the collector.
 	Edited on 07082012 corrected so that phi_c and L are converted into
 	radians.
+	
+SuppDemSum.m - given PV capacity and Battery capacity this 
+outputs the LEGP of the system. This is used by pvBatOpt.m
+to compute the minimum pv panel size that is necessary to meet
+a specified LEGP, when there is a nearly infinite battery bank
+	
+testMultiWeathPvBatOpt.m - specifies the four inputs which are 
+necessary to run pvBatOptf.m. It also calls upon pvBatOptf.m 
+to run the energy balance and optimization algorithms 
+for multiple weather profiles and locations at the same time.
+	-The inputs are the date range (8760 x 4 array), the solar resource
+	profiles (8760 x (number of profiles) array), the demand profile 
+	(8760 x 1 vector), and the range of LEGPs (vector).
+	-Output is a three dimensional matrix length(LEGPs) x 6 x # of solar resource
+	profiles. This matrix is called bestMultiLoc. 
 
 other .m files
 
@@ -49,6 +62,18 @@ figures
 
 .mat files (Data Sets)
 
+aveDayfridgeDemand.mat - was created by aveDays.
+	 contains:
+		-aveDays - fridgeDemandWeek averaged on an hourly basis to make a
+				representative day of electricity demand.
+
+bestFMultiLoc1.mat - 20x6x4 matrix. This is best matrix for 4 different weather
+profiles. In order they are MaliNTSData_2005_2,LuxorNTSData2005, KisanganiNTS2005,
+and NouakchottNTS2005. This was completed using the synthetic fridge demand data 
+from synthDem.mat 
+**This needs to be Redone. The coordinates for the different weather profiles 
+are not being updated for this data set**
+
 ML05_ML06_UGProfile.mat - This is a bundle of arrays that are used
 to run the system optimization model. It contains: 
 	-NTS solar data 
@@ -61,15 +86,27 @@ to run the system optimization model. It contains:
 		-fridgeDemandWeek - hourly data for one week
 		-fridgeDemandYear - fridgeDemandWeek propogated out to a full year.
 		-fridgeDemandDaily - fridgeDemandYear compressed into daily resolution 
-		
-aveDayfridgeDemand.mat - was created by aveDays.
-	 contains:
-		-aveDays - fridgeDemandWeek averaged on an hourly basis to make a
-				representative day of electricity demand.
 
+resourceSolTim1.mat
+	-Contains the NTS solar resource profiles for Kisangani, Luxor, (Segou Mali), 
+	and Nouakchott from the HelioClim3 database. These the solar
+	data points are measured at True Solar Time.The data range is 1/1/2005
+	to 12/31/2005. The ground reflectance (albeto) is 0.2. Data is 
+	measured at Hourly Intervals. 
+	-The locations of the cities were chosen using the search feature of the
+	HelioClim/SoDa interface.
+	The cordinates are (using G. Masters convention):
+		-Segou, Mali, 13.45 Lat, 6.26 Long
+		-Luxor, Egypt, 25.68 Lat, -32.65 Long
+		-Kisangani, DRC, 0.51 Lat,-25.2 Long
+		-Nouakchott, Mauritania, 18.08 Lat, 15.97 Long
+				
 synthDem.mat - was created by makeSynthYear.m - It contains synthetic electricity
 demand data characteristic of ML05 and ML06.
 	-  fridgeDemandYearSyn. Within fridgeDemandYearSyn hours between 1AM and 6PM 
 	have a demand of 250 watts. Between 6PM and 1AM there is a demand of 400 watts.
 	-	lightDemandYearSyn.m. Between 6PM and 1AM there is a demand of 150 watts. 
 	During other hours there is no demand.
+	
+	
+	
