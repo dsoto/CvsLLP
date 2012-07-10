@@ -100,6 +100,21 @@ resourceSolTim1.mat
 		-Luxor, Egypt, 25.68 Lat, -32.65 Long
 		-Kisangani, DRC, 0.51 Lat,-25.2 Long
 		-Nouakchott, Mauritania, 18.08 Lat, 15.97 Long
+		
+	CORRECTIONS FOR MISSING DATA
+	All data missing from columns 5 through 11
+	Kisangani, DRC
+	rows 2574 through 2587. Replaced by 2550 through 2563
+	rows 5646 through 5779. Replaced by 5502 through 5635
+	rows 7903 through 7914. Replaced by 7879 through 7890
+	Luxor, Egypt
+	rows 2574 through 2587. Replaced by 2550 through 2563
+	rows 5646 through 5779. Replaced by 5502 through 5635
+	rows 7903 through 7914. Replaced by 7879 through 7890
+	Segou, Mali
+	rows 5646 through 5779. Replaced by 5502 through 5635
+	Nouakchott, Mauritania
+	rows 5646 through 5779. Replaced by 5502 through 5635
 				
 synthDem.mat - was created by makeSynthYear.m - It contains synthetic electricity
 demand data characteristic of ML05 and ML06.

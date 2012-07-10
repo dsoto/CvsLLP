@@ -34,7 +34,7 @@ These are weathVec, demVec, LEGPVec
 	-demVec - is a 8760 x1 vector. It is the yearly demand profile recorded 
 	at hourly intervals. 
 	
-	- LEGPVec - is the vector which represents the range of LEGPs in which 
+	-LEGPVec - is the vector which represents the range of LEGPs in which 
 	system performance will be analyzed. 
 	
 The output of pvBatOptf.m is an array called best.
@@ -59,10 +59,67 @@ Variables that must be altered inside of BOTH SuppDemSum.m and BatCapCal.m
 	-LTM - local time meriadian
 	-rho - ground reflectance 
 	
+07092012
 
+Goals
+-Need to run pvBatOptf.m for all of the locations. Need to complete this
+for fridgeDemandSyn and lightDemandSyn. 
+
+Completed Actions
+-Modified pvBatOptf.m. It needed a fourth input for
+the  dates. Dates can be entered as  a 8760 x 4 array. The extra columns for 
+minutes and seconds are added by the function.  
+
+-created testMultiWeathPvBatOpt.m which specifies the four inputs 
+which are necessary to run pvBatOptf.m. It also calls upon pvBatOptf.m 
+to run the energy balance and optimization algorithms for multiple weather
+profiles and locations at the same time.
+	-The inputs are the date range (8760 x 4 array), the solar resource
+	profiles (8760 x (number of profiles) array), the demand profile 
+	(8760 x 1 vector), and the range of LEGPs (vector).
+	-Output is a three dimensional matrix length(LEGPs) x 6 x # of solar resource
+	profiles. This matrix is called bestMultiLoc. 
 	
+-created resourceSolTim1.mat
+	-Contains the NTS solar resource profiles for Kisangani, Luxor, (Segou Mali), 
+	and Nouakchott from the HelioClim3 database. These the solar
+	data points are measured at True Solar Time.The data range is 1/1/2005
+	to 12/31/2005. The ground reflectance (albeto) is 0.2. Data is 
+	measured at Hourly Intervals. 
+	-The locations of the cities were chosen using the search feature of the
+	HelioClim/SoDa interface.
+	The cordinates are (using G. Masters convention):
+		-Segou, Mali, 13.45 Lat, 6.26 Long
+		-Luxor, Egypt, 25.68 Lat, -32.65 Long
+		-Kisangani, DRC, 0.51 Lat,-25.2 Long
+		-Nouakchott, Mauritania, 18.08 Lat, 15.97 Long
 	
-	
+
+07102012
+Goals
+-Fix pvBatOptf.m and associated files so that the coordinates of each location
+can be updated. 
+-Fix the weather data sets to get rid of gaps in data. 
+
+Completed Actions
+-Removed missing data points from resourceSolTim1.mat
+CORRECTIONS FOR MISSING DATA
+	All data missing from columns 5 through 11
+	Kisangani, DRC
+	rows 2574 through 2587. Replaced by 2550 through 2563
+	rows 5646 through 5779. Replaced by 5502 through 5635
+	rows 7903 through 7914. Replaced by 7879 through 7890
+	Luxor, Egypt
+	rows 2574 through 2587. Replaced by 2550 through 2563
+	rows 5646 through 5779. Replaced by 5502 through 5635
+	rows 7903 through 7914. Replaced by 7879 through 7890
+	Segou, Mali
+	rows 5646 through 5779. Replaced by 5502 through 5635
+	Nouakchott, Mauritania
+	rows 5646 through 5779. Replaced by 5502 through 5635
+
+
+
 	
 	
 	
