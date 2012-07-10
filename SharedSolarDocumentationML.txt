@@ -60,6 +60,29 @@ are saved as a .mat file called synthDem.mat
 
 figures
 
+MultiLocCostvsLEGP1.fig - created by testWeathPVBatOpt.m using on 07102012 using
+the following input parameters 
+	dates = MaliNTS(:,1:4);
+	weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)];
+	[r,c] = size(weather);
+	lats = [13.45,25.68,0.51,18.08];
+	demVec = fridgeDemandYearSyn;
+	LEGPVec = 0.01:0.01:0.20;
+	bestMultiLoc = zeros(length(LEGPVec),6,c);
+This is a plot of the first two columns of bestMultiLoc1.
+
+MultiLocCostvsLEGP2.fig - created by testWeathPVBatOpt.m using on 07102012 using
+the following input parameters 
+	dates = MaliNTS(:,1:4);
+	weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)];
+	[r,c] = size(weather);
+	lats = [13.45,25.68,0.51,18.08];
+	demVec = lightDemandYearSyn;
+	LEGPVec = 0.01:0.01:0.20;
+	bestMultiLoc = zeros(length(LEGPVec),6,c);
+This is a plot of the first two columns of bestMultiLoc2.
+	
+	
 .mat files (Data Sets)
 
 aveDayfridgeDemand.mat - was created by aveDays.
@@ -68,11 +91,24 @@ aveDayfridgeDemand.mat - was created by aveDays.
 				representative day of electricity demand.
 
 bestFMultiLoc1.mat - 20x6x4 matrix. This is best matrix for 4 different weather
-profiles. In order they are MaliNTSData_2005_2,LuxorNTSData2005, KisanganiNTS2005,
-and NouakchottNTS2005. This was completed using the synthetic fridge demand data 
-from synthDem.mat 
-**This needs to be Redone. The coordinates for the different weather profiles 
-are not being updated for this data set**
+profiles. In order they are MaliNTS,LuxorNTS, KisanganiNTS,
+and NouakchottNTS. This was completed using the synthetic fridge demand data 
+from synthDem.mat. These were tested using the LEGPVec = 0.01:0.01:0.20.
+	dates = MaliNTS(:,1:4)
+	weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)]
+	lats = [13.45,25.68,0.51,18.08];
+	demVec = fridgeDemandYearSyn;
+	LEGPVec = 0.01:0.01:0.20;
+
+bestFMultiLoc2.mat - 20x6x4 matrix. This is best matrix for 4 different weather
+profiles. In order they are MaliNTS,LuxorNTS, KisanganiNTS,
+and NouakchottNTS. This was completed using the synthetic light demand data 
+from synthDem.mat. These were tested using the LEGPVec = 0.01:0.01:0.20.
+	dates = MaliNTS(:,1:4)
+	weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)]
+	lats = [13.45,25.68,0.51,18.08];
+	demVec = lightDemandYearSyn;
+	LEGPVec = 0.01:0.01:0.20;
 
 ML05_ML06_UGProfile.mat - This is a bundle of arrays that are used
 to run the system optimization model. It contains: 

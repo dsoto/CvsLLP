@@ -118,8 +118,31 @@ CORRECTIONS FOR MISSING DATA
 	Nouakchott, Mauritania
 	rows 5646 through 5779. Replaced by 5502 through 5635
 
+-Updated in the energy balance/optimization algorithm so that 
+the Latitude of each of the locations is passed to resourceCal.m. 
+A variable within testMultWeathPvBatOpt.m called lats must be 
+specified. lats is a vector whose length is the same as the number of 
+weather profiles. 
 
-
+-Ran the energy balance/optimization algorithm for the following 
+input parameters. The demand profiles came from synthDem.mat
+and the resource profiles came from resourceSolTim1.mat
+	dates = MaliNTS(:,1:4)
+	weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)]
+	lats = [13.45,25.68,0.51,18.08];
+	demVec = fridgeDemandYearSyn;
+	LEGPVec = 0.01:0.01:0.20;
+The output was stored as bestMultiLoc1.mat. The array contained
+within the .mat is also called bestMultiLoc1.
 	
+-Ran the energy balance/optimization algorithm with the same input 
+parameters as the previous iteration. The demand profile was 
+lightDemandYearSyn which also came from resourceSolTim1.mat. The 
+result was stored as bestMultiLoc2.mat. The array contained
+within the .mat is also called bestMultiLoc2.
+
+-Plot the first two columns of bestMultiLoc1 and bestMultiLoc2
+as cost per kWh vs LEGP plot. These ares saved as MultiLocCostvsLEGP1.fig 
+and MultiLocCostvsLEGP2.fig respectively.
 	
 	
