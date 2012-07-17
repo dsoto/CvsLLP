@@ -144,5 +144,27 @@ within the .mat is also called bestMultiLoc2.
 -Plot the first two columns of bestMultiLoc1 and bestMultiLoc2
 as cost per kWh vs LEGP plot. These ares saved as MultiLocCostvsLEGP1.fig 
 and MultiLocCostvsLEGP2.fig respectively.
+
+07142012 
+
+Modified energy balance algorithm such that resourceCal is only called
+upon once for each weather profile. testMultiWeathPvBatOpt.m no longer
+passes resource (normal to sun insolation) to the other scripts. Instead,
+it passes I_C which is the insolation on the collector. pvBat no longer 
+receives lats, because no solar geometry calculations are made within it. 
 	
+07172012
+
+Created functions/ scripts to produce figures for WP02.tex. The scripts that
+were created are:
+	testSingleWeathPvBatOpt.m - This creates MaliFridgeCostPerkWhr.fig.
 	
+	makeLEGPHistogram.m - Used to created fully formated plots bar graphs for 
+	WP02.tex. The first bar plot is of Hourly LEGP, with average demand
+	superimposed on top of it. The second bar plot is of monthly LEGP with a 
+	line plot of net monthly insolation (W/m^2) superimposed on it. 
+		makeMonthlyRad.m (function for makeLEGPHistogram.m)
+
+Also testMultiWeathPvBatOpt.m was utilized in order to create 
+MWCostPerkWhVsLEGP0105. This a cost per kWh vs LEGP using fridgeDemandYear
+and the weather profiles for [MaliNTS,LuxotNTS,KisanganiNTS];
