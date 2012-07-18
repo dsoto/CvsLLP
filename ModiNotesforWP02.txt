@@ -1,0 +1,112 @@
+Mitchell Lee
+Shared Solar
+Notes to Improve/Continue working on WP02
+Began on 07182012
+
+Introduction
+
+Paragraph 1
+
+Modi Notes
+Large grids -> smaller grids
+network cost go down
+	->smoothing aggrigation of demand 
+	and multiple source turned on/off
+	->storage
+	"right sizing storeage"
+	cost reliability
+	
+Soto Notes 
+literature ib existing microgrid assumptions
+Justiy storage focus based on context
+
+Translation
+
+In the developed world there are relatively constant
+electricity demand profiles. 
+Given the diversity of loads and generation sources, energy
+storage will only supply a small percentage of electricity 
+demand.
+The diversity of load/supply allows for this minimal amount
+of storage to result in a high system reliability. 
+
+As the size of electricity distribution networks is decreased,
+so is the diversity of demand sources and 
+the diversity of generation.
+Thus, the smaller the a micro-grid, the more vulnerable 
+it becomes to fluctuations in demand and electricity generation. 
+As a result, small islanded micro-grids must rely more heavily on
+energy storage in order to buffer variability and meet demand.  
+Storage is very expensive; as a result, it is vital to appropriately 
+size electricity storage capacity.
+
+Paragraph 2
+
+Modi Notes
+"Solar"
+{some ... solar pv micro grid}
+
+Soto Notes
+
+->Focus on solar, wait on LEGP
+->introduce each section
+->reliability cost tradeoff
+
+Translation
+
+In the context of the developing world, epecially in regions 
+which currently have minimal electricity availability, making 
+tradeoffs between system cost and reliability may be appealing.
+This paper is focused upon cost versus reliability tradeoffs in
+the context of isolated micro-grids with PV electricity generation
+and battery storage. 
+In the first section of the article we describe our methodology 
+for analyzing micro-grids. 
+We provide an overview of the computational tools that we have developed.
+We also explain the metric that we use to quanitify micro-grid reliability
+and is advantages.
+In the second section of the article, we characterize the relationship 
+between cost and reliability for stand alone PV micro-grids. 
+In particular, we analyze the effects of insolation avaialability on 
+the interplay between cost in reliability. 
+(Im starting to feel like that
+we can produce a coherent 5 page paper without this section)
+In the third section of the article, we critically evaluate the 
+the effects of LEGP on a micro-grid's temporal performance 
+characterstics. 
+Temporal behavior is evaluated on two different time scales. 
+We observe micro-grid performance on a daily level with hourly resolution. 
+Micro-grid performance is also evaluated on a yearly level 
+with monthly resolution. 
+
+Methodology
+
+Modi Notes
+
+Introduce LEGP in this section
+
+1. supply-weather location
+2. demand curtailment 
+3. technology.
+
+Soto Notes 
+
+Table of weather sources
+Table of pv cost and finance assumptions
+
+Lee Notes
+
+Introduce demand and solar resources profiles. 
+Remind them that this is of of battery/pv stand-alone 
+micro-grid.
+Reference table that contains these properties, as wells as,
+the cost of PV/battery, and the PV/battery step size.
+
+With regards to calculations start broad and narrow in. 
+->Energy Balance Algorithm
+->LEG
+->LEGP
+->Optimization
+
+
+
