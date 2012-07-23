@@ -82,6 +82,14 @@ Also on the micro-grid is a 250 liter freezer which provides the micro-grid with
 Peak demand on the micro-grid is approximately 450 W. 
 The consumer demand data was created by propagating a single week of demand over an entire year.
 
+\begin{figure}[ht]
+\centering
+\includegraphics[trim = 10mm 48mm 10mm 48mm, clip,width=.75\textwidth]{MWCostPerkWhVsLEGP0105}
+\caption{Cost per kWhr versus LEGP for three distinct climates.}
+\label{MWCostperkWhrLEGP}
+\end{figure} 
+
+
 \section{Impact of \emph{LEGP} on Micro-Grid Temporal Performance Characteristics}
 
 % goal of section is to demonstrate that there is more to microgrid
@@ -120,7 +128,7 @@ This plot is illustrated as figure \ref{CostVLEGPMali}.
 
 \begin{figure}[ht]  
   \centering
-    \includegraphics[trim = 10mm 70mm 10mm 70mm, clip,width=.85\textwidth]{MaliFridgeCostPerkWhVsLEGP}
+    \includegraphics[trim = 8mm 48mm 8mm 48mm, clip,width=.75\textwidth]{MaliFridgeCostPerkWhVsLEGP}
   \caption{Cost vs. LEGP of Micro-Grid in Segou, Mali}
   \label{CostVLEGPMali}
 \end{figure}
@@ -131,19 +139,26 @@ We chose to analyze the system characteristics with $LEGP = 0.05$ because it cor
 According to figure \ref{CostVLEGPMali}, for \emph{LEGPs} below 0.05 the marginal cost of electricity generation begins to increase exponentially.  
 
 %% Describe the PV and battery size combination for the LEGP 0.01 and the LEGP 0.05 systems. 
-To observe the diurnal characteristics of the micro-grid's performance, we created figure \ref{hourlyLEGP}. Given our specified \emph{LEGPs} of 0.01 and 0.05, we are able to see the hourly \emph{LEGPs} for each potential system configuration.
+To observe the diurnal characteristics of the micro-grid's performance, we created figure \ref{hourlyLEGP}.
+Given our specified annual \emph{LEGPs} of 0.01 and 0.05, we are able to see the hourly \emph{LEGPs} for each potential system configuration.
+Superimposed on \ref{hourlyLEGP} is the average hourly electricity demand in \unit{Whr}.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[trim = 50mm 95mm 50mm 95mm, clip,width=1\textwidth]{timeOfShortfallByHourCount0105}
+\includegraphics[trim = 8mm 48mm 8mm 48mm, clip,width=.75\textwidth]{timeOfShortfallByHourCount0105}
 \caption{Probability of energy shortfall for each hour. Model uses weather from Segou, Mali, and micro-grid demand profile with refrigerator base load.}
 \label{hourlyLEGP}
 \end{figure} 
 
+In addition to the diurnal characteristics of \emph{LEGP}, we wish to assess the seasonal characteristics of \emph{LEGP}. 
+We created figure \ref{monthlyLEGP} in order to do such.
+Figure \ref{monthlyLEGP} shows the \emph{LEGP} for each month given yearly \emph{LEGPs} of 0.01 and 0.05.
+Superimposed on figure \ref{monthlyLEGP} is the monthly insolation in \unit{Whr/m^2}.
+
 
 \begin{figure}[ht]
 \centering
-\includegraphics[trim = 40mm 92mm 40mm 92mm, clip,width=1\textwidth]{monthlyLEGPMali0105}
+\includegraphics[trim = 10mm 48mm 10mm 48mm, clip,width=.75\textwidth]{monthlyLEGPMali0105}
 \caption{LEGP for each month, and corresponding solar resource. Model uses weather from Segou, Mali, and micro-grid demand profile with refrigerator base load.}
 \label{monthlyLEGP}
 \end{figure} 

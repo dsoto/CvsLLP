@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage[top=1 in, bottom=1 in, left=1 in, right=1 in]{geometry}
 \newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
 
 \begin{document}
@@ -25,7 +26,9 @@ Thus, it is vital to appropriately size electricity storage capacity.
 For communities which are geographically isolated and lack economical development, standalone micro-grids often represent the only potential form of affordable and reliable electricity service. 
 Given cost constraints, it may be desirable to make trade-offs between system costs and reliability for these communities. 
 In making such trade-offs, storage capacity would be undersized in a manner which 
-drastically reduces capital costs, minimally impairs economic activity, and is acceptable to micro-grid consumers. 
+drastically %significantly
+reduces capital costs, minimally impairs economic activity, and is acceptable to micro-grid consumers. 
+%we don't have to be as narrow as "economic activity."
 
 This paper is focused upon cost versus reliability trade-offs in
 the context of standalone micro-grids with PV electricity generation
@@ -50,5 +53,36 @@ Micro-grid performance is also evaluated on a yearly level
 with monthly resolution. 
 
 \section{Methodology}
+\subsection{Input Parameters}
+Our analysis of standalone micro-grid performance draws upon the energy balance algorithm used by Wissem et al \ref{ }. 
+Two data sets are required in order to use the energy balance algorithm, one of energy consumption, the other describing solar resource availability.
+Energy usage and insolation data was used at hourly temporal resolution. 
+% Origin of demand data
+%
+The electricity demand data is from a micro-grid that we installed near Segou,Mali and is measured in {\unit{W\!\cdot \! hr}} throughout the year. 
+The micro-grid supplies electricity to twenty households which use electricity primarily for nighttime lighting.
+Also on the micro-grid is a 250 liter freezer which provides the micro-grid with a base demand of approximately 250 W. 
+Peak demand on the micro-grid is approximately 450 W. 
+A single week of demand data was created by combining seven unique days without energy shortfalls. 
+The annual consumer demand data was created by propagating the week of demand over an entire year.
+% Origin of resource data
+% 
+For isolated locations in the developing world, ground based insolation data is not usually available. 
+When available this data often lacks sufficient temporal resolution. 
+Thus, all insolation measurements were extrapolated from the HelioClim 3 database.
+HelioClim 3 data is derived from Meteosat Second Generation satellite images.
+The utilized HelioClim 3 data is of normal to sun insolation on the ground level.
+When gaps within the Helioclim database were filled by using the corresponding hours in the preceding day or days.
+%How many gaps in the data were there?
+
+%Optimization Parameters
+Throughout all of the analysis we used a fixed capital cost of 1.50 \unit{USD/W} for PV capacity and a cost of 0.20 \unit{USD/W \! \cdot \! hr} for battery capacity.
+The maximum allowable battery depth of discharge, DOD, is equal to 50 percent, effectively doubling the cost of energy storage to 0.40 \unit{USD/W \! \cdot \! hr}. 
+The payback period for the PV modules was 20 years, and the payback period for the batteries is three years. 
+We applied a ten percent annual compound interest to the capital costs. 
+A summary of the cost analysis input parameters is provided within table \ref{}.
+
+\subsection{Optimization Parameters and Strategy}
+
 
 \end{document}
