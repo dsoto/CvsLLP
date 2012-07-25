@@ -126,7 +126,22 @@ We are more concerned about a micro-grids ability to supply demanded energy, and
 We decided to quantify system cost based on the "break-even" consumer price of electricity in cost per kilowatt-hour\unit{(USD/kW\! \cdot \! hr)}.
 As opposed to installation capital cost, or annual payment, this metric allows us to directly compare micro-grids of different sizes and demand patterns.
 Moreover, the metric is easily understood by the development community, and it allows for electricity rates to be easily compared to those of traditional grid systems.
-
+% This may be a good place to end this section (discuss with Daniel)
+ 
 % Describe the isoreliability cost versus LEGP Curves
+In order to assess how increasing system reliability drives system costs, we create cost \unit{USD/kW\! \cdot \! hr} versus \emph{LEGP} curves.
+Each point on a \unit{USD/kW\! \cdot \! hr} versus \emph{LEGP} curve represents the lowest cost battery storage and PV generation combination for a specified reliability. 
+The minimum cost combinations were created using our optimization strategy. 
+A majority of the analysis we conducted may be replicated using \emph{HOMER} or another proprietary energy balance micro-grid simulator.
+However, we chose to create our own energy balance and optimization models.
+This gave us increased control over the modeling and optimization process.
+In addition, it allowed us to not treat the software like a "black box."
+The model we created contains two basic levels.
+The inner level conducts an energy balance analysis on an hourly timescale.
+This analysis simulates the production, storage, distribution, and consumption of energy by a micro-grid for each hour over the course of a year.
+The energy balance level is called upon by an outer-level script which computes all of the PV generation and battery storage combinations which satisfy a particular LEGP.
+This script then determines the generation and storage combination with the minimum initial capital investment cost.
+The optimization is then executed for several LEGPs, resulting in a cost vs. reliability plot. 
+
 
 \end{document}
