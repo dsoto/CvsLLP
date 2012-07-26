@@ -168,3 +168,17 @@ were created are:
 Also testMultiWeathPvBatOpt.m was utilized in order to create 
 MWCostPerkWhVsLEGP0105. This a cost per kWh vs LEGP using fridgeDemandYear
 and the weather profiles for [MaliNTS,LuxotNTS,KisanganiNTS];
+
+07252012
+
+Created makeEnerBalancePlot.m. This uses the energy balance and optimization
+algorithms to produce an energy balance plot for the days 2 through 8 of the 
+year. This script was used to create energyBalance.fig. 
+
+energyBalance.fig -  This figure was created by makeEnerBalancePlot.m.
+Energy balance algorithm calculations from January 2, 2005 until Jan 8, 2005. 
+Simulation uses micro-grid demand with refrigerator base load
+and insolation profile from Segou, Mali. Micro-grid contains 2500 W of nominal PV 
+capacity, and 13000 W-hr of nominal battery capacity. Battery low charge disconnect
+is 6500 W-hr. Y axis scale for electricity supply and demand is on the left 
+side of the figure. Y axis scale for battery storage is on the right of figure.

@@ -73,6 +73,11 @@ other .m files
 makeAveDay.m - creates a variable called aveDays. This function makes an average
 hourly day of demand data from one week of demand data.  
 
+makeEnerBalancePlot.m - creates an energy balance plot of one week 
+of data series. The week starts on the second day of the year.
+On the plot are supply, demand, and battery charge state. 
+This script was used to create energyBalance.fig and energyBalance.pdf.
+
 makeLEGPHistorgram.m - a modified version of testMultiWeathPvBatOpt.m. Produces
 two bar plots. The first bar plot is of the hourly LEGP over the course of the year. 
 The second bar plot is the monthly LEGP for an entire year. All plot formatting is 
@@ -103,6 +108,14 @@ there is a demand of 150 watts. At all other watts there is no demand. These vec
 are saved as a .mat file called synthDem.mat
 
 figures
+
+energyBalance.fig - This figure was created by makeEnerBalancePlot.m.
+Energy balance algorithm calculations from January 2, 2005 until Jan 8, 2005. 
+Simulation uses micro-grid demand with refrigerator base load
+and insolation profile from Segou, Mali. Micro-grid contains 2500 W of nominal PV 
+capacity, and 13000 W-hr of nominal battery capacity. Battery low charge disconnect
+is 6500 W-hr. Y axis scale for electricity supply and demand is on the left 
+side of the figure. Y axis scale for battery storage is on the right of figure.
 
 MaliFridgeCostPerkWhr.fig - stored in CvsLLP. This figure was created by
 testSingleWeathPvBatOpt.m in 07172012. It is the cost per kWh vs LEGP 
