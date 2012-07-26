@@ -209,7 +209,9 @@ To find the lowest cost options, we create PV versus battery curves.
 These curves contain all PV and Battery combinations which maintain the desired \emph{LEGP}. 
 We then compute the cost of each point on the iso-reliability curve.
 An example of an iso-reliability curve is illustrated as figure \ref{energyBalance}.
+%
 %insert a figure containing an iso-reliability plot and the associated cost curve
+%
 \begin{figure}[ht] 
   \centering
     \includegraphics[trim = 25mm 86mm 25mm 90mm, clip,width=.8\textwidth]{isoReliabilityCurve.pdf}
@@ -219,10 +221,13 @@ Superimposed on the plot is the cost per kW-hr of each micro-grid combination.
 The minimum cost point for both curves is marked with an x.}
 \label{energyBalance}
 \end{figure}
-%make sure that the minimum cost point is clearly indicated 
-Once we have computed the lowest cost PV and battery combination for each of the desired \emph{LEGPs} we are then able to assemble a cost in \unit{USD/kWh\! \cdot \!hr} curve. 
+%
+%
+Once we have computed the lowest cost PV and battery combination for each of the desired \emph{LEGPs}, we are able to assemble a cost in \unit{USD/kWh\! \cdot \!hr} curve. 
 An example of one such curve is illustrated as figure \ref{MaliFridgeCostPerkWhVsLEGP}.
-
+%
+% Create Cost vs Reliability Curve
+%
 \begin{figure}[ht] 
   \centering
     \includegraphics[trim = 25mm 85mm 25mm 90mm, clip,width=.75\textwidth]{MaliFridgeCostPerkWhVsLEGP.pdf}
@@ -232,5 +237,15 @@ The simulation uses the insolation profile from Segou, Mali.
 \emph{LEGPs} range from 0.01 to 0.20}
 \label{MaliFridgeCostPerkWhVsLEGP}
 \end{figure}
+
+% Explain the main features of the cost versus reliabilty curve
+
+The cost versus \emph{LEGP} curve illustrated as figure \ref{MaliFridgeCostPerkWhVsLEGP} is of the micro-grid with a refrigerator base load. The weather profile used by the model is of Segou, Mali.
+When analyzing figure \ref{MaliFridgeCostPerkWhVsLEGP}, we observe a knee in the curve where \emph{LEGP} is approximately equal to 0.05.
+For \emph{LEGPs} greater than 0.05, adding micro-grid capacity has a high return on investment; for a small increase in the cost of electricity, system reliability is greatly increased. 
+This is because added capacity is reducing diurnal energy shortfalls which occur prior to sunrise. 
+For lower \emph{LEGPs}, the marginal cost of added reliability increases. 
+This is because added capacity is being used to remove energy shortfalls which occur as a result of seasonal rain and cloud coverage. 
+
 
 \end{document}
