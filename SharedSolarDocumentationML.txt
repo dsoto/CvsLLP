@@ -78,6 +78,11 @@ of data series. The week starts on the second day of the year.
 On the plot are supply, demand, and battery charge state. 
 This script was used to create energyBalance.fig and energyBalance.pdf.
 
+makeIsoReliaPlot.m - creates an isoReliability plot of PV capacity versus 
+battery capacity. Superimposd on the plot is the cost of each generation
+and storage combination. Reliability is measured as LEGP and cost is 
+measured as USD/kWhr.
+
 makeLEGPHistorgram.m - a modified version of testMultiWeathPvBatOpt.m. Produces
 two bar plots. The first bar plot is of the hourly LEGP over the course of the year. 
 The second bar plot is the monthly LEGP for an entire year. All plot formatting is 
@@ -116,6 +121,13 @@ and insolation profile from Segou, Mali. Micro-grid contains 2500 W of nominal P
 capacity, and 13000 W-hr of nominal battery capacity. Battery low charge disconnect
 is 6500 W-hr. Y axis scale for electricity supply and demand is on the left 
 side of the figure. Y axis scale for battery storage is on the right of figure.
+
+isoReliabilityCurve.fig - This was created by makeIsoReliaPlot.m. This curve is for 
+	an LEGP of 0.05 with a demand profile from fridgeDemandWeek from truDem.mat.
+	Electricity supply was from MaliNTS from resourceSolTim1.mat The plot is clipped
+	so that battery capacity goes from 6000 to 20000 Whr with a spacing of 2000 Whr. 
+	PV demand goes from 0 to 7000 W with a spacing of 1000 W. Costs are printed 
+	from 0 to 5 USD with a spacing of 0.50 USD.
 
 MaliFridgeCostPerkWhr.fig - stored in CvsLLP. This figure was created by
 testSingleWeathPvBatOpt.m in 07172012. It is the cost per kWh vs LEGP 

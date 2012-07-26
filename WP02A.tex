@@ -208,10 +208,29 @@ In order to create this curve, we must know the lowest cost PV and battery combi
 To find the lowest cost options, we create PV versus battery curves.
 These curves contain all PV and Battery combinations which maintain the desired \emph{LEGP}. 
 We then compute the cost of each point on the iso-reliability curve.
-An example of an iso-reliability curve is illustrated as figure \ref{}.
+An example of an iso-reliability curve is illustrated as figure \ref{energyBalance}.
 %insert a figure containing an iso-reliability plot and the associated cost curve
+\begin{figure}[ht] 
+  \centering
+    \includegraphics[trim = 25mm 86mm 25mm 90mm, clip,width=.8\textwidth]{isoReliabilityCurve.pdf}
+  \caption{Iso-reliability curve of a micro-grid system with an \emph{LEGP} of 0.05. 
+Simulation uses micro-grid demand with refrigerator base load and insolation profile from Segou, Mali.
+Superimposed on the plot is the cost per kW-hr of each micro-grid combination.
+The minimum cost point for both curves is marked with an x.}
+\label{energyBalance}
+\end{figure}
 %make sure that the minimum cost point is clearly indicated 
 Once we have computed the lowest cost PV and battery combination for each of the desired \emph{LEGPs} we are then able to assemble a cost in \unit{USD/kWh\! \cdot \!hr} curve. 
-An example of one such curve is illustrated as figure \ref{}.
+An example of one such curve is illustrated as figure \ref{MaliFridgeCostPerkWhVsLEGP}.
+
+\begin{figure}[ht] 
+  \centering
+    \includegraphics[trim = 25mm 85mm 25mm 90mm, clip,width=.75\textwidth]{MaliFridgeCostPerkWhVsLEGP.pdf}
+  \caption{Cost in \unit{USD/kw\! \cdot \! hr} versus \emph{LEGP} of 
+micro-grid with refrigerator base load.
+The simulation uses the insolation profile from Segou, Mali.
+\emph{LEGPs} range from 0.01 to 0.20}
+\label{MaliFridgeCostPerkWhVsLEGP}
+\end{figure}
 
 \end{document}
