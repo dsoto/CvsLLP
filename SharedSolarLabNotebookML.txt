@@ -195,3 +195,36 @@ measured as USD/kWhr.
 	- The plot is clipped so that battery capacity goes from 6000 to 20000 Whr
 	with a spacing of 2000 Whr. PV demand goes from 0 to 7000 W with a spacing 
 	of 1000 W. Costs are printed from 0 to 5 USD with a spacing of 0.50 USD.
+	
+	
+07272012
+
+To Do 
+
+Do a cost versus LEGP curve for the micro-grid
+with and without the refridgerator base load.
+-See if  the knee in the curves are in the same 
+place
+-run TestSingleWeathPvBatOpt.m for both cases. 
+
+Result. There is no knee in the curve. It has 
+a shape that appears more parabolic. As a result,
+I am going to look at the hourly bar plots for 
+0.01 and 0.05 with and without the refridgerator
+base load. 
+
+I good teaching figure would be a bar graph
+of monthly insolation in Mali. Perhaps this can 
+lead the next sub-section.
+	
+Completed
+
+Modified SuppDemSum.m to correct a mistake in the 
+script. The first element batChar need to be changed to
+batMin. This removes the occurance of a high LEGP
+measurement at 2 AM.  
+
+Modified TestSingleWeathPvBatOpt.m so that it produces
+a USD/kWhr versus LEGP plot for two different demand 
+profiles. The resulting plot is called 
+MaliFandLCostPerkWhVsLEGP.pdf

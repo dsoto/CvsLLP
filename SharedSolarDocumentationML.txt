@@ -67,6 +67,8 @@ for one weather profile/location.
 	(8760 x 1 vector), and the range of LEGPs (vector).
 	-Output is a two dimensional matrix length(LEGPs) x 6.
 	This matrix is called bestMultiLoc. 
+This was modified so that it can conduct the simulation for two different 
+demand profiles in one run.
 
 other .m files
 
@@ -132,6 +134,11 @@ isoReliabilityCurve.fig - This was created by makeIsoReliaPlot.m. This curve is 
 MaliFridgeCostPerkWhr.fig - stored in CvsLLP. This figure was created by
 testSingleWeathPvBatOpt.m in 07172012. It is the cost per kWh vs LEGP 
 for the Mali demand profile, using Mali weather.
+
+MaliFandLCostPerkWhVsLEGP.pdf - stored in CvsLLP. This figure was created by
+testSingleWeathPvBatOpt.m in 07272012 It is the cost per kWh vs LEGP 
+for the Mali demand profiles with and without fridge, using Mali weather.
+
 
 monthlyLEGPMali0105.fig - stored in CvsLLP folder. This figure was created by
 testMultiWeathPvBatOpt.m on 07172012. It contains the monthly LEGP for 
