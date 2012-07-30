@@ -46,6 +46,8 @@
 		%% - The conclusions drawn about this micro-grid are unique to this
 		%% - micro-grid. The decision making processes will facilitate the 	
 		%% - sizing of micro-grids by others.
+		
+	%% Effects of load profile on  cost versus LEGP curve
 	%% Temporal Behavior of average day for micro-grids.
 		%% - Present cost versus LEGP curve for micro-grid without fridgerator
 		%% - base load. 
@@ -225,35 +227,40 @@ The minimum cost point for both curves is marked with an x.}
 %
 %
 Once we have computed the lowest cost PV and battery combination for each of the desired \emph{LEGPs}, we are able to assemble a cost in \unit{USD/kWh\! \cdot \!hr} curve. 
-An example of one such curve is illustrated as figure \ref{MaliFridgeCostPerkWhVsLEGP}.
-%
-% Create Cost vs Reliability Curve
-%
+An example of cost versus reliability curves is illustrated as figure \ref{MaliFandLCostPerkWhVsLEGP}
+
 \begin{figure}[ht] 
   \centering
-    \includegraphics[trim = 25mm 85mm 25mm 90mm, clip,width=.75\textwidth]{MaliFridgeCostPerkWhVsLEGP.pdf}
+    \includegraphics[trim = 25mm 85mm 25mm 90mm, clip,width=.75\textwidth]{MaliFandLCostPerkWhVsLEGP.pdf}
   \caption{Cost in \unit{USD/kw\! \cdot \! hr} versus \emph{LEGP} of 
-micro-grid with refrigerator base load.
+micro-grid with refrigerator and lighting only base loads.
 The simulation uses the insolation profile from Segou, Mali.
 \emph{LEGPs} range from 0.01 to 0.20}
-\label{MaliFridgeCostPerkWhVsLEGP}
+\label{MaliFandLCostPerkWhVsLEGP}
 \end{figure}
+
 
 % Explain the main features of the cost versus reliabilty curve
 
-The cost versus \emph{LEGP} curve illustrated as figure \ref{MaliFridgeCostPerkWhVsLEGP} is of the micro-grid with a refrigerator base load. The weather profile used by the model is of Segou, Mali.
-When analyzing figure \ref{MaliFridgeCostPerkWhVsLEGP}, we observe a knee in the curve where \emph{LEGP} is approximately equal to 0.05.
+The cost versus \emph{LEGP} curves illustrated as figure \ref{MaliFandLCostPerkWhVsLEGP} are of a micro-grid with and without a refrigerator base load. The weather profile used by the model is of Segou, Mali.
+When analyzing figure \ref{MaliFandLCostPerkWhVsLEGP} for the micro-grid with a refrigerator base load, we observe a knee in the curve where \emph{LEGP} is approximately equal to 0.05.
 For \emph{LEGPs} greater than 0.05, adding micro-grid capacity has a high return on investment; for a small increase in the cost of electricity, system reliability is greatly increased. 
 This is because added capacity is reducing diurnal energy shortfalls which occur prior to sunrise. 
 For lower \emph{LEGPs}, the marginal cost of added reliability increases. 
 This is because added capacity is being used to remove energy shortfalls which occur as a result of seasonal rain and cloud coverage. 
-Figure \ref{MaliFridgeCostPerkWhVsLEGP} has a fundamentally different shape than the cost versus reliability curve created by Wissem et al. \cite{}. 
+
+%% Describe why the shape is different for the micro-grid without the base-load. 
+	%% -  I am assuming this is because there isn't much electricity usage in
+	%% - in the early morning.
+	%% Do some testing with pretend data to verify or reject hypothesis
+
+The curves within figure \ref{MaliFandLCostPerkWhVsLEGP} have a fundamentally different shape than the cost versus reliability curve created by Wissem et al. \cite{}. 
 This is because, unlike Wissem et al. \cite{•}, we only apply a positive value to electricity which can be sold to the micro-grid.
 Energy which cannot be sold directly to the micro-grid, and cannot be stored, is considered lost and does not generate revenue. 
 
 \section{Decision Making Based on Temporal Characteristics}
 
-Cost versus \emph{LEGP} curves, like that represented in figure \ref{MaliFridgeCostPerkWhVsLEGP}, provide a means to understand the marginal cost of additional micro-grid capacity. 
+Cost versus \emph{LEGP} curves, like that represented in figure \ref{MaliFandLCostPerkWhVsLEGP}, provide a means to understand the marginal cost of additional micro-grid capacity. 
 By doing so they illustrate the break even cost of electricity, which must be charged to consumers, in order to provide a particular \emph{LEGP} of service. 
 However, these curves do not indicate if the design \emph{LEGP} satisfies the consumers' electricity demand needs. 
 In order to observe the efficacy of a potential micro-grid, we analyze the temporal performance of the grids.
@@ -265,7 +272,39 @@ However, we believe that presenting our decision processes and data visualizatio
 
 \subsection{Hourly Variations in Micro-Grid Performance}
 
+%% These figures Illustrate
+	%% Hourly reliability and yearly reliability are not the same
+	%% - The hourly reliability is strongly effected by the weather and demand
+	%% - profiles.
+	%% ** The imbalance between daytime and nighttime demand exacerbates the
+	%% ** difference between daytime and nightime reliability.
+	
+%% These figures imply 
+	%%  0.05 LEGP might be acceptible for the both micro-grids. 
+	%% ** For the lighting only system there is almost no demand when there 
+	%% ** is a large energy shortfall.
+	%% - For the micro-grid with refrigerator energy shortfalls occur when it 
+	%% - it is cool. 0.05 might be acceptible, as long as, the people keep the
+	%% - door closed.
+	%% ** In order to fully understand the micro-grid performance, we need to 
+	%% ** analyze the data further, and see how performance varies by season. 
 
+\begin{figure}[ht]
+\centering
+\includegraphics[trim = 0mm 35mm 0mm 35mm, clip,width=1\textwidth]{timeOfSFByHourFrLig0105}
+\caption{Probability of energy shortfall for each hour. 
+Superimposed on the plots is the energy demanded by the micro-grids. 
+On the left is the results of \emph{LEGP} optimization for micro-grids with a refrigerator base load. 
+For an annual \emph{LEGP} of 0.01, its battery and PV capacities are 13000 \unit{W \! \cdot \!hr} and 2500 W.
+For an annual \emph{LEGP} of 0.05, its battery and PV capacities are 7800 \unit{W \! \cdot \!hr} and 2000 W.
+On the right is the results of the same analysis without a refrigerator base load. 
+For an annual \emph{LEGP} of 0.01, its battery and PV capacities are 3600 \unit{W \! \cdot \!hr} and 500 W.
+For an annual \emph{LEGP} of 0.05, its battery and PV capacities are 2600 \unit{W \! \cdot \!hr} and 400 W.}
+\label{hourlyLEGP}
+\end{figure} 
 
 \subsection{Seasonal Variations of Micro-Grid Performance}
+
+
+
 \end{document}
