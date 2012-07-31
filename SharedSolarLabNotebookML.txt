@@ -228,3 +228,17 @@ Modified TestSingleWeathPvBatOpt.m so that it produces
 a USD/kWhr versus LEGP plot for two different demand 
 profiles. The resulting plot is called 
 MaliFandLCostPerkWhVsLEGP.pdf
+
+07312012
+
+Modified makeLEGPHistogram.m. The script was split into two separate scripts.
+makeLEGPHistorgram.m only create the hourly LEGP bar plots. A second file 
+called make LEGPHistogramM.m was created to make the monthly LEGP bar plots.
+Both of the scripts have the added feature of makeing all bar plots for the 
+demand profile with the refrigerator base load and the demand profile without
+the refrigerator base load. 
+
+A error in the monthly bar plot script was discovered and rectified. The LEGs were
+accidently being sorted by day instead of month. 
+
+

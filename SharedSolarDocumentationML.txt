@@ -86,21 +86,28 @@ and storage combination. Reliability is measured as LEGP and cost is
 measured as USD/kWhr.
 
 makeLEGPHistorgram.m - a modified version of testMultiWeathPvBatOpt.m. Produces
-two bar plots. The first bar plot is of the hourly LEGP over the course of the year. 
-The second bar plot is the monthly LEGP for an entire year. All plot formatting is 
-contained within makeLEGHistorgram.m
+two bar subplots within a single larger plot. The first bar plot is 
+of the hourly LEGP over the course of the year, for the demand profile with 
+refrigerator base load. The second bar plot is for the demand profile without
+the refrigerator base load. The are conducted for yearly LEGPs of 0.01 and 0.05.
 
 	-Hourly bar plot - The hourly LEGP for two different yearly LEGPs. 
 	The values for the bar plot are stored in the array LEGPHourly. Superimposed
 	is a line plot of the hourly energy demand. The line plot has its scale defined
 	on the right side of the figure. The line plot is made by calling on the 
-	function makeAveDay.m.
+	function makeAveDay.m. Superimpose on the plot is the mean hourly demand.
+
+makeLEGPHistorgramM.m - a modified version of testMultiWeathPvBatOpt.m. Produces
+two bar subplots within a single larger plot. The first bar plot is 
+of the monthly LEGP over the course of the year, for the demand profile with 
+refrigerator base load. The second bar plot is for the demand profile without
+the refrigerator base load. The are conducted for yearly LEGPs of 0.01 and 0.05.
 
 	-monthly bar plot - The monthly LEGP for two different yearly LEGPs. 
 	The values for the bar plot are stored in the array LEGPmonthly. Superimposed
 	is a line plot of the monthly energy demand. The line plot has its scale defined
 	on the right side of the figure. The line plot is made by calling on the 
-	function makeMonthlyRad.m.
+	function makeMonthlyRad.m. Superimposed on the plot is the net monthly insolation.
 
 makeMonthlyRad.m - takes in the hourly date stamps for a year and the corresponding 
 insolation on the collector. The function then finds the sum of insolation for 
