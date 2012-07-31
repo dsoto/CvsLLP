@@ -250,7 +250,7 @@ For lower \emph{LEGPs}, the marginal cost of added reliability increases.
 This is because added capacity is being used to remove energy shortfalls which occur as a result of seasonal rain and cloud coverage. 
 
 %% Describe why the shape is different for the micro-grid without the base-load. 
-	%% -  I am assuming this is because there isn't much electricity usage in
+	%% - I am assuming this is because there isn't much electricity usage in
 	%% - in the early morning.
 	%% Do some testing with pretend data to verify or reject hypothesis
 
@@ -289,6 +289,13 @@ However, we believe that presenting our decision processes and data visualizatio
 	%% ** In order to fully understand the micro-grid performance, we need to 
 	%% ** analyze the data further, and see how performance varies by season. 
 
+The yearly \emph{LEGP} of a micro-grid does not provide insight to when energy shortfalls occur on a daily basis. 
+The \emph{LEGP} for any given hour may be significantly higher, or lower, than the yearly average.  
+This is illustrated by figure \ref{hourlyLEGP} which contains the hourly reliabilities for micro-grids under two different demand profiles.
+Within each subplot, the hourly \emph{LEPGs} are illustrated for annual \emph{LEGPs} of 0.05 and 0.01. 
+Superimposed on each subplot in figure \ref{hourlyLEGP} is the corresponding micro-grid demand profile. 
+Both subplots used the same insolation availability data. 
+
 \begin{figure}[ht]
 \centering
 \includegraphics[trim = 0mm 35mm 0mm 35mm, clip,width=1\textwidth]{timeOfSFByHourFrLig0105}
@@ -302,6 +309,25 @@ For an annual \emph{LEGP} of 0.01, its battery and PV capacities are 3600 \unit{
 For an annual \emph{LEGP} of 0.05, its battery and PV capacities are 2600 \unit{W \! \cdot \!hr} and 400 W.}
 \label{hourlyLEGP}
 \end{figure} 
+
+From figure \ref{hourlyLEGP}, we observe that a majority of energy shortfall occurs in the late evening, and early morning hours. 
+Being standalone PV micro-grids with battery storage, energy shortfalls occur when the battery bank has been depleted, and the solar resource has not yet returned to sufficient levels.
+From the figure, we also observe that the demand profiles on a micro-grid can significantly influence hourly \emph{LEGP} behavior. 
+For the demand profile without a significant base load, the difference in \emph{LEGP} between hours with and without significant insolation availability is increased. 
+
+%
+%Why is this the case and why is it important?
+%
+
+From figure \ref{hourlyLEGP}, we are beginning to understand the implications of our specified \emph{LEGPs} on the performance of the micro-grids.  
+However, our understanding is not yet sufficient to make confident design decisions.
+Before making design decisions, we must know how the daily and hourly energy shortfalls are. 
+This is particularly evident when sizing the micro-grid for the demand profile with a refrigerator base load.  
+Energy shortfalls occur mostly at night, when it is cool and there is no demand for frozen goods. 
+An \emph{LEGP} of 0.05 might be acceptable, as long as, the refrigerator is well insulated. 
+On the other hand, if most of the energy shortfalls are concentrated in a short time frame, an \emph{LEGP} of 0.05 may not be acceptable. 
+This would be especially true if the micro-grid was responsible for keeping food and vaccines cold, and there was no possibility of obtaining an internal combustion generator. 
+
 
 \subsection{Seasonal Variations of Micro-Grid Performance}
 
