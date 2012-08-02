@@ -241,4 +241,20 @@ the refrigerator base load.
 A error in the monthly bar plot script was discovered and rectified. The LEGs were
 accidently being sorted by day instead of month. 
 
+08022012
+
+Created a function called energyDir.m - energyDir.m provides a 8760 vector of 
+how much energy went directly from the PV module to the load without first being 
+stored in the battery. This is not 100 percent accurate because 
+the simulation is conducted on an hourly time scale. However, this sould 
+provide insight as to how much the system is relying on the batttery bank.
+	[ enDir ] = energyDir( supply,demand )
+	Each of the inputs is a 8760 x 1 vector. The output is also an 8760 x 1 vector.
+	To find the percent of direct energy
+	enDirPerc = sum(enDir)./(sum(demand))-sum(LEG))
+	OR
+	enDirPerc = sum(enDir)./sum(demand))
+	
+makeLEGPHistogram.m was modified so that it calls upon energyDir.m for both the 
+fridge demand calculations and the light demand calculations.
 
