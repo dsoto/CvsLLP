@@ -70,6 +70,8 @@ for one weather profile/location.
 This was modified so that it can conduct the simulation for two different 
 demand profiles in one run.
 
+
+
 other .m files
 
 ebergyDir.m - A function that is called upon by makeLEGPHistogram. 
@@ -173,6 +175,12 @@ MaliNTS resource with fridgeDemandYear demand. Monthly LEGPs are
 plotted for yearly LEGPs of 0.01 and 0.05. Superimposed on the plot is the 
 monthly insolation profile.
 
+monthlyLEGPMali010305.fig - stored in CvsLLP folder. This figure was created by
+makeLEGPHistogramM.m on 08082012. It contains the monthly LEGP for 
+MaliNTS resource with fridgeDemandYear demand. Monthly LEGPs are
+plotted for yearly LEGPs of 0.01, 0.03 and 0.05. 
+
+
 MultiLocCostvsLEGP1.fig - created by testWeathPVBatOpt.m using on 07102012 using
 the following input parameters 
 	dates = MaliNTS(:,1:4);
@@ -199,6 +207,14 @@ MWCostPerkWhVsLEGP0105 - MW stands for Multi-Weather. This figure is saved in
 the CvsLLP folder. This figure was created by testMultiWathPvBatOpt.m on 
 07172012.It is a cost per kWh curve vs LEGP curve. The underlying data is 
 for fridgeDemandYear and [MaliNTS,LuxorNTS, KisanganiNTS]
+
+timeOfSFByHourAug010305.fig was created using makeLEGPHistogram.m which was
+modified to produce the plots just for the month of August. This was only done
+for the fridge demand micro-grid. The bar types are on the plot. One for
+each of the following: LEGP of 0.01, 0.03, and 0.05. Superimposed on 
+the plot is a graph of the average demand profile. The weather profile for this
+plot is for MaliNTS2005. The demand profile comes from fridgeDemandYear
+which is from truDem.mat.
 
 timeOfSFByHourAugFrLig0105.fig - This is saved in the CvsLLP folder. It was 
 	created by makeLEGPHistogram.m on 08072012. The hourly LEGP 

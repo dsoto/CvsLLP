@@ -280,3 +280,16 @@ LEG1(5089:5832,ix)
 dates(5089:5832,4) 
 demVec(5089:5832) 
 Hours 5089 through 5832 correspond to the month of August.
+
+timeOfSFByHourAug010305.fig was created using makeLEGPHistogram.m which was
+modified to produce the plots just for the month of August. This was only done
+for the fridge demand micro-grid. The bar types are on the plot. One for
+each of the following: LEGP of 0.01, 0.03, and 0.05. Superimposed on 
+the plot is a graph of the average demand profile. The weather profile for this
+plot is for MaliNTS2005. The demand profile comes from fridgeDemandYear
+which is from truDem.mat.
+
+
+
+
+
