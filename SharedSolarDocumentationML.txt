@@ -111,6 +111,10 @@ being stored in the battery bank.
 	on the right side of the figure. The line plot is made by calling on the 
 	function makeAveDay.m. Superimpose on the plot is the mean hourly demand.
 	
+	- By commenting/uncommenting out two blocks of text, the hourly LEGP bar plot 
+	can be made just for the month of August. The month of August corresponds to
+	the hours of 5089 to 5832
+	
 	
 
 makeLEGPHistorgramM.m - a modified version of testMultiWeathPvBatOpt.m. Produces
@@ -195,6 +199,19 @@ MWCostPerkWhVsLEGP0105 - MW stands for Multi-Weather. This figure is saved in
 the CvsLLP folder. This figure was created by testMultiWathPvBatOpt.m on 
 07172012.It is a cost per kWh curve vs LEGP curve. The underlying data is 
 for fridgeDemandYear and [MaliNTS,LuxorNTS, KisanganiNTS]
+
+timeOfSFByHourAugFrLig0105.fig - This is saved in the CvsLLP folder. It was 
+	created by makeLEGPHistogram.m on 08072012. The hourly LEGP 
+	during August for two different yearly LEGPs (0.01 and 0.05). 
+	The values for the bar plot are stored in the array LEGPHourly.
+	Superimposed is a line plot of the hourly energy demand. 
+	The line plot hasits scale definedon the right side of the
+	figure. This figure consists of two subplots. One the left is 
+	the micro-grid performance with a refrigerator the base load. 
+	On the right is the same figure for the micro-grid without a 
+	base load. The line plot is made by calling on the 
+	function makeAveDay.m. This file is also saved as a pdf file 
+	with the same name. 
 
 timeOfShortFallByHourCount0105.fig - This is saved in the CvsLLP folder. It was 
 	created by makeLEGPHistogram.m on 07172012. The hourly LEGP for two different 

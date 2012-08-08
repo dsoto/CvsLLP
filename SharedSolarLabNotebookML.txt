@@ -258,3 +258,25 @@ provide insight as to how much the system is relying on the batttery bank.
 makeLEGPHistogram.m was modified so that it calls upon energyDir.m for both the 
 fridge demand calculations and the light demand calculations.
 
+08082012
+
+makeLEGPHistogram.m was modifed. By commenting/uncommenting out two blocks of
+text, the hourly LEGP bar plot can be made just for the month of August. 
+
+
+The figure timeOfSFByHourAugFrLig0105.fig was created. This figure illustrates
+the hourly LEGPs for microgrid during the month of August.
+The plot has two subplots. On the left is a plot of hourly LEGP for the
+micro-grid with a refrigerator base load, and on the right is the same plot
+for the micro-grid without the base load. Hourly LEGPs are illustrated for
+yearly LEGPs of 0.05 and 0.01. Superimposed on each of the plots is the 
+mean energy demand for that time. 
+
+timeOfSFByHourAugFrLig0105.fig was created using makeLEGPHistogram.m which was
+modified to produce the plots just for the month of August. 
+
+LEGHourly and LEGPHourly were created using:
+LEG1(5089:5832,ix) 
+dates(5089:5832,4) 
+demVec(5089:5832) 
+Hours 5089 through 5832 correspond to the month of August.
