@@ -289,7 +289,14 @@ the plot is a graph of the average demand profile. The weather profile for this
 plot is for MaliNTS2005. The demand profile comes from fridgeDemandYear
 which is from truDem.mat.
 
+08092012
 
-
+Created a function called makeLEGMap.m - 
+is a matlab function called upon by makeLEGPHistogram.m. It produces
+a heatmap of LEP. One the y-axis is the day number. On the x-axis is the hour
+of the day. Cells are colored based on the magnitude of the LEG. 
+The function requires two inputs. The inputs are LEG and Hours. The output is a 
+figure called LEGMap. This function can be used to create non-full year LEGMaps.
+These must be made for entire days. 
 
 
