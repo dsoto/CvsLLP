@@ -299,4 +299,12 @@ The function requires two inputs. The inputs are LEG and Hours. The output is a
 figure called LEGMap. This function can be used to create non-full year LEGMaps.
 These must be made for entire days. 
 
+08102012
 
+Using makeLEGMap.m I created three figures. LEGMap01.fig, LEGMap02.fig, 
+and LEGMap03.fig. These plots are for the month of August. 
+The load profile is fridgeDemandYear and the weather profile 
+is MaliNTS. These makeLEGMaps.m was called on by 
+makeLEGPHistogram.m. These plot were then included in Notes for revision
+of WP02A.docx. This was given to Daniel Soto, and is an outline for a new
+version of WP02A.texs

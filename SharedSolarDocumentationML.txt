@@ -135,7 +135,7 @@ a heatmap of LEP. One the y-axis is the day number. On the x-axis is the hour
 of the day. Cells are colored based on the magnitude of the LEG. 
 The function requires two inputs. The inputs are LEG and Hours. The output is a 
 figure called LEGMap. This function can be used to create non-full year LEGMaps.
-These must be made for entire days.
+These must be made for entire days. 
 	
 makeMonthlyRad.m - takes in the hourly date stamps for a year and the corresponding 
 insolation on the collector. The function then finds the sum of insolation for 
@@ -166,6 +166,24 @@ isoReliabilityCurve.fig - This was created by makeIsoReliaPlot.m. This curve is 
 	PV demand goes from 0 to 7000 W with a spacing of 1000 W. Costs are printed 
 	from 0 to 5 USD with a spacing of 0.50 USD.
 
+LEGMap01.fig - This was created using makeLEGMap.m.
+This plot are for the month of August. 
+The load profile is fridgeDemandYear and the weather profile 
+is MaliNTS. These makeLEGMaps.m was called on by 
+makeLEGPHistogram.m. 	
+
+LEGMap03.fig - This was created using makeLEGMap.m.
+This plot are for the month of August. 
+The load profile is fridgeDemandYear and the weather profile 
+is MaliNTS. These makeLEGMaps.m was called on by 
+makeLEGPHistogram.m. 
+
+LEGMap05.fig - This was created using makeLEGMap.m.
+This plot are for the month of August. 
+The load profile is fridgeDemandYear and the weather profile 
+is MaliNTS. These makeLEGMaps.m was called on by 
+makeLEGPHistogram.m. 
+	
 MaliFridgeCostPerkWhr.fig - stored in CvsLLP. This figure was created by
 testSingleWeathPvBatOpt.m in 07172012. It is the cost per kWh vs LEGP 
 for the Mali demand profile, using Mali weather.
