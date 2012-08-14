@@ -5,338 +5,351 @@ Shared Solar Documentation
 
 System Optimization Model
 
-batCapCal.m - computes the necessary Battery bank for a given 
-PV array and desired LEGP. This is called upon by pvBatopt.m 
-to actually produce the battery vs. PV 
-	inputs
-	- I_C - yearly insolation profile on collector
-	- demand - 8760 x 1 vector which is the yearly demand profile (W). 
-	- pvCap - nominal PV capacity (W)
-	- LEGP - desired LEGP (single number)
-	- batStep - step by which to adjust PV capacity
-	- batMin - minimum allowable battery energy (W-hr)
-pvBatOpt.m - is the main optimization algorithm is calls on
-SuppDemSum.m  and batCapCal.m
-	inputs:
-	- I_C - yearly insolation profile on collector
-	- demand - 8760 x 1 vector which is the yearly demand profile (W). 
-	- pvCap - nominal PV capacity (W)
-	- batCap - maximum allowable battery energy (W-hr)
-	- batMin - minimum allowable battery energy (W-hr)
-pvBatOptf.m - is the same algorithm as pvBatOpt.m but in function
-form. The function requires four inputs. 
-These are dates, weathVec, demVec, LEGPVec
-	-dates - is a 8760x4 array. It contains year, month, day, hour. pvBatOptf.m
-	adds the minute and second columns so that Matlab translates the dates
-	correctly into numeric form.
-	-I_C- is a 8760 x 1 vector. It is a yearly insolation profile on the 
-	collector at hourly measurements 
-	-demVec - is a 8760 x1 vector. It is the yearly demand profile recorded 
-	at hourly intervals. 
-	-LEGPVec - is the vector which represents the range of LEGPs in which 
-	system performance will be analyzed. 
+	batCapCal.m - computes the necessary Battery bank for a given 
+	PV array and desired LEGP. This is called upon by pvBatopt.m 
+	to actually produce the battery vs. PV 
+		inputs
+		- I_C - yearly insolation profile on collector
+		- demand - 8760 x 1 vector which is the yearly demand profile (W). 
+		- pvCap - nominal PV capacity (W)
+		- LEGP - desired LEGP (single number)
+		- batStep - step by which to adjust PV capacity
+		- batMin - minimum allowable battery energy (W-hr)
+	pvBatOpt.m - is the main optimization algorithm is calls on
+	SuppDemSum.m  and batCapCal.m
+		inputs:
+		- I_C - yearly insolation profile on collector
+		- demand - 8760 x 1 vector which is the yearly demand profile (W). 
+		- pvCap - nominal PV capacity (W)
+		- batCap - maximum allowable battery energy (W-hr)
+		- batMin - minimum allowable battery energy (W-hr)
+	pvBatOptf.m - is the same algorithm as pvBatOpt.m but in function
+	form. The function requires four inputs. 
+	These are dates, weathVec, demVec, LEGPVec
+		-dates - is a 8760x4 array. It contains year, month, day, hour. pvBatOptf.m
+		adds the minute and second columns so that Matlab translates the dates
+		correctly into numeric form.
+		-I_C- is a 8760 x 1 vector. It is a yearly insolation profile on the 
+		collector at hourly measurements 
+		-demVec - is a 8760 x1 vector. It is the yearly demand profile recorded 
+		at hourly intervals. 
+		-LEGPVec - is the vector which represents the range of LEGPs in which 
+		system performance will be analyzed. 
 
-resourceCalc.m - computes takes the insolation data and converts
-that into the net insolation w/m^2 on the collector.
-	Edited on 07082012 corrected so that phi_c and L are converted into
-	radians.
-	
-SuppDemSum.m - given PV capacity and Battery capacity this 
-outputs the LEGP of the system. This is used by pvBatOpt.m
-to compute the minimum pv panel size that is necessary to meet
-a specified LEGP, when there is a nearly infinite battery bank
-	
-testMultiWeathPvBatOpt.m - specifies the four inputs which are 
-necessary to run pvBatOptf.m. It also calls upon pvBatOptf.m 
-to run the energy balance and optimization algorithms 
-for multiple weather profiles and locations at the same time.
-	-The inputs are the date range (8760 x 4 array), the solar resource
-	profiles (8760 x (number of profiles) array), the demand profile 
-	(8760 x 1 vector), and the range of LEGPs (vector).
-	-Output is a three dimensional matrix length(LEGPs) x 6 x # of solar resource
-	profiles. This matrix is called bestMultiLoc. 
-	
-testSingleWeathPvBatOpt.m - this is the same script as testMultiWeathPvBatOpt.m 
-except that it only runs pvBatOpt.m for a single weather profile and provides
-a 2D array as an output. It specifies the four inputs which are 
-necessary to run pvBatOptf.m. It also calls upon pvBatOptf.m 
-to run the energy balance and optimization algorithms 
-for one weather profile/location.
-	-The inputs are the date range (8760 x 4 array), the solar resource
-	profiles (8760 x 1 vector), the demand profile 
-	(8760 x 1 vector), and the range of LEGPs (vector).
-	-Output is a two dimensional matrix length(LEGPs) x 6.
-	This matrix is called bestMultiLoc. 
-This was modified so that it can conduct the simulation for two different 
-demand profiles in one run.
+	resourceCalc.m - computes takes the insolation data and converts
+	that into the net insolation w/m^2 on the collector.
+		Edited on 07082012 corrected so that phi_c and L are converted into
+		radians.
+		
+	SuppDemSum.m - given PV capacity and Battery capacity this 
+	outputs the LEGP of the system. This is used by pvBatOpt.m
+	to compute the minimum pv panel size that is necessary to meet
+	a specified LEGP, when there is a nearly infinite battery bank
+		
+	testMultiWeathPvBatOpt.m - specifies the four inputs which are 
+	necessary to run pvBatOptf.m. It also calls upon pvBatOptf.m 
+	to run the energy balance and optimization algorithms 
+	for multiple weather profiles and locations at the same time.
+		-The inputs are the date range (8760 x 4 array), the solar resource
+		profiles (8760 x (number of profiles) array), the demand profile 
+		(8760 x 1 vector), and the range of LEGPs (vector).
+		-Output is a three dimensional matrix length(LEGPs) x 6 x # of solar resource
+		profiles. This matrix is called bestMultiLoc. 
+		
+	testSingleWeathPvBatOpt.m - this is the same script as testMultiWeathPvBatOpt.m 
+	except that it only runs pvBatOpt.m for a single weather profile and provides
+	a 2D array as an output. It specifies the four inputs which are 
+	necessary to run pvBatOptf.m. It also calls upon pvBatOptf.m 
+	to run the energy balance and optimization algorithms 
+	for one weather profile/location.
+		-The inputs are the date range (8760 x 4 array), the solar resource
+		profiles (8760 x 1 vector), the demand profile 
+		(8760 x 1 vector), and the range of LEGPs (vector).
+		-Output is a two dimensional matrix length(LEGPs) x 6.
+		This matrix is called bestMultiLoc. 
+	This was modified so that it can conduct the simulation for two different 
+	demand profiles in one run.
 
 
 
 other .m files
 
-ebergyDir.m - A function that is called upon by makeLEGPHistogram. 
-calculates the about of generated energy goes directly into 
-meeting demand. This is to assess the relative importance of the 
-battery bank when comparing different systems. 
-The inputs are supply and demand. The output is a 8760 x 1 vector
-of the energy that goes directly from the PV to the load without 
-first being stored in the battery bank. This function is not 
-100 percent accurate because the simulation is conducted 
-on an hourly time scale. However, this sould provide insight as to 
-how much the system is relying on the batttery bank.
+	energyDir.m - A function that is called upon by makeLEGPHistogram. 
+	calculates the about of generated energy goes directly into 
+	meeting demand. This is to assess the relative importance of the 
+	battery bank when comparing different systems. 
+	The inputs are supply and demand. The output is a 8760 x 1 vector
+	of the energy that goes directly from the PV to the load without 
+	first being stored in the battery bank. This function is not 
+	100 percent accurate because the simulation is conducted 
+	on an hourly time scale. However, this sould provide insight as to 
+	how much the system is relying on the batttery bank.
 
-makeAveDay.m - creates a variable called aveDays. This function makes an average
-hourly day of demand data from one week of demand data.  
+	makeAveDay.m - creates a variable called aveDays. This function makes an average
+	hourly day of demand data from one week of demand data.  
 
-makeEnerBalancePlot.m - creates an energy balance plot of one week 
-of data series. The week starts on the second day of the year.
-On the plot are supply, demand, and battery charge state. 
-This script was used to create energyBalance.fig and energyBalance.pdf.
+	makeEnerBalancePlot.m - creates an energy balance plot of one week 
+	of data series. The week starts on the second day of the year.
+	On the plot are supply, demand, and battery charge state. 
+	This script was used to create energyBalance.fig and energyBalance.pdf.
 
-makeIsoReliaPlot.m - creates an isoReliability plot of PV capacity versus 
-battery capacity. Superimposd on the plot is the cost of each generation
-and storage combination. Reliability is measured as LEGP and cost is 
-measured as USD/kWhr.
+	makeIsoReliaPlot.m - creates an isoReliability plot of PV capacity versus 
+	battery capacity. Superimposd on the plot is the cost of each generation
+	and storage combination. Reliability is measured as LEGP and cost is 
+	measured as USD/kWhr.
 
-makeLEGPHistorgram.m - a modified version of testMultiWeathPvBatOpt.m. Produces
-two bar subplots within a single larger plot. The first bar plot is 
-of the hourly LEGP over the course of the year, for the demand profile with 
-refrigerator base load. The second bar plot is for the demand profile without
-the refrigerator base load. The are conducted for yearly LEGPs of 0.01 and 0.05.
-Also added on the script is the calculation of enDirPercF and enDirPercL. These
-are the percentage of the energy that went directly from the PV to the load without
-being stored in the battery bank.
+	makeLEGPHistorgram.m - a modified version of testMultiWeathPvBatOpt.m. Produces
+	two bar subplots within a single larger plot. The first bar plot is 
+	of the hourly LEGP over the course of the year, for the demand profile with 
+	refrigerator base load. The second bar plot is for the demand profile without
+	the refrigerator base load. The are conducted for yearly LEGPs of 0.01 and 0.05.
+	Also added on the script is the calculation of enDirPercF and enDirPercL. These
+	are the percentage of the energy that went directly from the PV to the load without
+	being stored in the battery bank.
 
-	-Hourly bar plot - The hourly LEGP for two different yearly LEGPs. 
-	The values for the bar plot are stored in the array LEGPHourly. Superimposed
-	is a line plot of the hourly energy demand. The line plot has its scale defined
-	on the right side of the figure. The line plot is made by calling on the 
-	function makeAveDay.m. Superimpose on the plot is the mean hourly demand.
-	
-	- By commenting/uncommenting out two blocks of text, the hourly LEGP bar plot 
-	can be made just for the month of August. The month of August corresponds to
-	the hours of 5089 to 5832
+		-Hourly bar plot - The hourly LEGP for two different yearly LEGPs. 
+		The values for the bar plot are stored in the array LEGPHourly. Superimposed
+		is a line plot of the hourly energy demand. The line plot has its scale defined
+		on the right side of the figure. The line plot is made by calling on the 
+		function makeAveDay.m. Superimpose on the plot is the mean hourly demand.
 		
-	
-makeLEGPHistorgramM.m - a modified version of testMultiWeathPvBatOpt.m. Produces
-two bar subplots within a single larger plot. The first bar plot is 
-of the monthly LEGP over the course of the year, for the demand profile with 
-refrigerator base load. The second bar plot is for the demand profile without
-the refrigerator base load. The are conducted for yearly LEGPs of 0.01 and 0.05.
+		- By commenting/uncommenting out two blocks of text, the hourly LEGP bar plot 
+		can be made just for the month of August. The month of August corresponds to
+		the hours of 5089 to 5832
+			
+		
+	makeLEGPHistorgramM.m - a modified version of testMultiWeathPvBatOpt.m. Produces
+	two bar subplots within a single larger plot. The first bar plot is 
+	of the monthly LEGP over the course of the year, for the demand profile with 
+	refrigerator base load. The second bar plot is for the demand profile without
+	the refrigerator base load. The are conducted for yearly LEGPs of 0.01 and 0.05.
 
-	-monthly bar plot - The monthly LEGP for two different yearly LEGPs. 
-	The values for the bar plot are stored in the array LEGPmonthly. Superimposed
-	is a line plot of the monthly energy demand. The line plot has its scale defined
-	on the right side of the figure. The line plot is made by calling on the 
-	function makeMonthlyRad.m. Superimposed on the plot is the net monthly insolation.
+		-monthly bar plot - The monthly LEGP for two different yearly LEGPs. 
+		The values for the bar plot are stored in the array LEGPmonthly. Superimposed
+		is a line plot of the monthly energy demand. The line plot has its scale defined
+		on the right side of the figure. The line plot is made by calling on the 
+		function makeMonthlyRad.m. Superimposed on the plot is the net monthly insolation.
 
-makeLEGMap.m - is a matlab function called upon by makeLEGPHistogram.m. It produces
-a heatmap of LEP. One the y-axis is the day number. On the x-axis is the hour
-of the day. Cells are colored based on the magnitude of the LEG. 
-The function requires two inputs. The inputs are LEG and Hours. The output is a 
-figure called LEGMap. This function can be used to create non-full year LEGMaps.
-These must be made for entire days. 
-	
-makeMonthlyRad.m - takes in the hourly date stamps for a year and the corresponding 
-insolation on the collector. The function then finds the sum of insolation for 
-each month. This is returned as I_monthly.  
+	makeLEGMap.m - is a matlab function called upon by makeLEGPHistogram.m. It produces
+	a heatmap of LEP. One the y-axis is the day number. On the x-axis is the hour
+	of the day. Cells are colored based on the magnitude of the LEG. 
+	The function requires two inputs. The inputs are LEG and Hours. The output is a 
+	figure called LEGMap. This function can be used to create non-full year LEGMaps.
+	These must be made for entire days. 
+		
+	makeMonthlyRad.m - takes in the hourly date stamps for a year and the corresponding 
+	insolation on the collector. The function then finds the sum of insolation for 
+	each month. This is returned as I_monthly.  
 
-makeSynthDemYear.m - creates two year long hourly demand profiles. Each
-is a 8760 x 1 vector. Within each of the two data sets every day is identical. The 
-first vector created is called fridgeDemandYearSyn. Within fridgeDemandYearSyn hours 
-between 1AM and 6PM have a demand of 250 watts. Between 6PM and 1AM there is a demand 
-of 400 watts. The second vector is called lightDemandYearSyn.m. Between 6PM and 1AM 
-there is a demand of 150 watts. At all other watts there is no demand. These vectors 
-are saved as a .mat file called synthDem.mat
+	makeSynthDemYear.m - creates two year long hourly demand profiles. Each
+	is a 8760 x 1 vector. Within each of the two data sets every day is identical. The 
+	first vector created is called fridgeDemandYearSyn. Within fridgeDemandYearSyn hours 
+	between 1AM and 6PM have a demand of 250 watts. Between 6PM and 1AM there is a demand 
+	of 400 watts. The second vector is called lightDemandYearSyn.m. Between 6PM and 1AM 
+	there is a demand of 150 watts. At all other watts there is no demand. These vectors 
+	are saved as a .mat file called synthDem.mat
 
 figures
 
-energyBalance.fig - This figure was created by makeEnerBalancePlot.m.
-Energy balance algorithm calculations from January 2, 2005 until Jan 8, 2005. 
-Simulation uses micro-grid demand with refrigerator base load
-and insolation profile from Segou, Mali. Micro-grid contains 2500 W of nominal PV 
-capacity, and 13000 W-hr of nominal battery capacity. Battery low charge disconnect
-is 6500 W-hr. Y axis scale for electricity supply and demand is on the left 
-side of the figure. Y axis scale for battery storage is on the right of figure.
+	energyBalance.fig - This figure was created by makeEnerBalancePlot.m.
+	Energy balance algorithm calculations from January 2, 2005 until Jan 8, 2005. 
+	Simulation uses micro-grid demand with refrigerator base load
+	and insolation profile from Segou, Mali. Micro-grid contains 2500 W of nominal PV 
+	capacity, and 13000 W-hr of nominal battery capacity. Battery low charge disconnect
+	is 6500 W-hr. Y axis scale for electricity supply and demand is on the left 
+	side of the figure. Y axis scale for battery storage is on the right of figure.
 
-isoReliabilityCurve.fig - This was created by makeIsoReliaPlot.m. This curve is for 
-	an LEGP of 0.05 with a demand profile from fridgeDemandWeek from truDem.mat.
-	Electricity supply was from MaliNTS from resourceSolTim1.mat The plot is clipped
-	so that battery capacity goes from 6000 to 20000 Whr with a spacing of 2000 Whr. 
-	PV demand goes from 0 to 7000 W with a spacing of 1000 W. Costs are printed 
-	from 0 to 5 USD with a spacing of 0.50 USD.
+	isoReliabilityCurve.fig - This was created by makeIsoReliaPlot.m. This curve is for 
+		an LEGP of 0.05 with a demand profile from fridgeDemandWeek from truDem.mat.
+		Electricity supply was from MaliNTS from resourceSolTim1.mat The plot is clipped
+		so that battery capacity goes from 6000 to 20000 Whr with a spacing of 2000 Whr. 
+		PV demand goes from 0 to 7000 W with a spacing of 1000 W. Costs are printed 
+		from 0 to 5 USD with a spacing of 0.50 USD.
 
-LEGMap01.fig - This was created using makeLEGMap.m.
-This plot are for the month of August. 
-The load profile is fridgeDemandYear and the weather profile 
-is MaliNTS. These makeLEGMaps.m was called on by 
-makeLEGPHistogram.m. 	
+	LEGMap01.fig - This was created using makeLEGMap.m.
+	This plot are for the month of August. 
+	The load profile is fridgeDemandYear and the weather profile 
+	is MaliNTS. These makeLEGMaps.m was called on by 
+	makeLEGPHistogram.m. 	
 
-LEGMap03.fig - This was created using makeLEGMap.m.
-This plot are for the month of August. 
-The load profile is fridgeDemandYear and the weather profile 
-is MaliNTS. These makeLEGMaps.m was called on by 
-makeLEGPHistogram.m. 
+	LEGMap03.fig - This was created using makeLEGMap.m.
+	This plot are for the month of August. 
+	The load profile is fridgeDemandYear and the weather profile 
+	is MaliNTS. These makeLEGMaps.m was called on by 
+	makeLEGPHistogram.m. 
 
-LEGMap05.fig - This was created using makeLEGMap.m.
-This plot are for the month of August. 
-The load profile is fridgeDemandYear and the weather profile 
-is MaliNTS. These makeLEGMaps.m was called on by 
-makeLEGPHistogram.m. 
-	
-MaliFridgeCostPerkWhr.fig - stored in CvsLLP. This figure was created by
-testSingleWeathPvBatOpt.m in 07172012. It is the cost per kWh vs LEGP 
-for the Mali demand profile, using Mali weather.
+	LEGMap05.fig - This was created using makeLEGMap.m.
+	This plot are for the month of August. 
+	The load profile is fridgeDemandYear and the weather profile 
+	is MaliNTS. These makeLEGMaps.m was called on by 
+	makeLEGPHistogram.m. 
 
-MaliFandLCostPerkWhVsLEGP.pdf - stored in CvsLLP. This figure was created by
-testSingleWeathPvBatOpt.m in 07272012 It is the cost per kWh vs LEGP 
-for the Mali demand profiles with and without fridge, using Mali weather.
+	LEGPvsCost_hiRel.fig - created by testSingleWeathPvBatOpt.m. It is a 
+	of columns 1 and 2 of bestSingleLoc1.mat and the corresponding inputs.
+		
+	MaliFridgeCostPerkWhr.fig - stored in CvsLLP. This figure was created by
+	testSingleWeathPvBatOpt.m in 07172012. It is the cost per kWh vs LEGP 
+	for the Mali demand profile, using Mali weather.
 
-
-monthlyLEGPMali0105.fig - stored in CvsLLP folder. This figure was created by
-testMultiWeathPvBatOpt.m on 07172012. It contains the monthly LEGP for 
-MaliNTS resource with fridgeDemandYear demand. Monthly LEGPs are
-plotted for yearly LEGPs of 0.01 and 0.05. Superimposed on the plot is the 
-monthly insolation profile.
-
-monthlyLEGPMali010305.fig - stored in CvsLLP folder. This figure was created by
-makeLEGPHistogramM.m on 08082012. It contains the monthly LEGP for 
-MaliNTS resource with fridgeDemandYear demand. Monthly LEGPs are
-plotted for yearly LEGPs of 0.01, 0.03 and 0.05. 
+	MaliFandLCostPerkWhVsLEGP.pdf - stored in CvsLLP. This figure was created by
+	testSingleWeathPvBatOpt.m in 07272012 It is the cost per kWh vs LEGP 
+	for the Mali demand profiles with and without fridge, using Mali weather.
 
 
-MultiLocCostvsLEGP1.fig - created by testWeathPVBatOpt.m using on 07102012 using
-the following input parameters 
-	dates = MaliNTS(:,1:4);
-	weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)];
-	[r,c] = size(weather);
-	lats = [13.45,25.68,0.51,18.08];
-	demVec = fridgeDemandYearSyn;
-	LEGPVec = 0.01:0.01:0.20;
-	bestMultiLoc = zeros(length(LEGPVec),6,c);
-This is a plot of the first two columns of bestMultiLoc1.
+	monthlyLEGPMali0105.fig - stored in CvsLLP folder. This figure was created by
+	testMultiWeathPvBatOpt.m on 07172012. It contains the monthly LEGP for 
+	MaliNTS resource with fridgeDemandYear demand. Monthly LEGPs are
+	plotted for yearly LEGPs of 0.01 and 0.05. Superimposed on the plot is the 
+	monthly insolation profile.
 
-MultiLocCostvsLEGP2.fig - created by testWeathPVBatOpt.m using on 07102012 using
-the following input parameters 
-	dates = MaliNTS(:,1:4);
-	weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)];
-	[r,c] = size(weather);
-	lats = [13.45,25.68,0.51,18.08];
-	demVec = lightDemandYearSyn;
-	LEGPVec = 0.01:0.01:0.20;
-	bestMultiLoc = zeros(length(LEGPVec),6,c);
-This is a plot of the first two columns of bestMultiLoc2.
+	monthlyLEGPMali010305.fig - stored in CvsLLP folder. This figure was created by
+	makeLEGPHistogramM.m on 08082012. It contains the monthly LEGP for 
+	MaliNTS resource with fridgeDemandYear demand. Monthly LEGPs are
+	plotted for yearly LEGPs of 0.01, 0.03 and 0.05. 
 
-MWCostPerkWhVsLEGP0105 - MW stands for Multi-Weather. This figure is saved in 
-the CvsLLP folder. This figure was created by testMultiWathPvBatOpt.m on 
-07172012.It is a cost per kWh curve vs LEGP curve. The underlying data is 
-for fridgeDemandYear and [MaliNTS,LuxorNTS, KisanganiNTS]
+	MultiLocCostvsLEGP1.fig - created by testWeathPVBatOpt.m using on 07102012 using
+	the following input parameters 
+		dates = MaliNTS(:,1:4);
+		weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)];
+		[r,c] = size(weather);
+		lats = [13.45,25.68,0.51,18.08];
+		demVec = fridgeDemandYearSyn;
+		LEGPVec = 0.01:0.01:0.20;
+		bestMultiLoc = zeros(length(LEGPVec),6,c);
+	This is a plot of the first two columns of bestMultiLoc1.
 
-timeOfSFByHourAug010305.fig was created using makeLEGPHistogram.m which was
-modified to produce the plots just for the month of August. This was only done
-for the fridge demand micro-grid. The bar types are on the plot. One for
-each of the following: LEGP of 0.01, 0.03, and 0.05. Superimposed on 
-the plot is a graph of the average demand profile. The weather profile for this
-plot is for MaliNTS2005. The demand profile comes from fridgeDemandYear
-which is from truDem.mat.
+	MultiLocCostvsLEGP2.fig - created by testWeathPVBatOpt.m using on 07102012 using
+	the following input parameters 
+		dates = MaliNTS(:,1:4);
+		weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)];
+		[r,c] = size(weather);
+		lats = [13.45,25.68,0.51,18.08];
+		demVec = lightDemandYearSyn;
+		LEGPVec = 0.01:0.01:0.20;
+		bestMultiLoc = zeros(length(LEGPVec),6,c);
+	This is a plot of the first two columns of bestMultiLoc2.
 
-timeOfSFByHourAugFrLig0105.fig - This is saved in the CvsLLP folder. It was 
-	created by makeLEGPHistogram.m on 08072012. The hourly LEGP 
-	during August for two different yearly LEGPs (0.01 and 0.05). 
-	The values for the bar plot are stored in the array LEGPHourly.
-	Superimposed is a line plot of the hourly energy demand. 
-	The line plot hasits scale definedon the right side of the
-	figure. This figure consists of two subplots. One the left is 
-	the micro-grid performance with a refrigerator the base load. 
-	On the right is the same figure for the micro-grid without a 
-	base load. The line plot is made by calling on the 
-	function makeAveDay.m. This file is also saved as a pdf file 
-	with the same name. 
+	MWCostPerkWhVsLEGP0105 - MW stands for Multi-Weather. This figure is saved in 
+	the CvsLLP folder. This figure was created by testMultiWathPvBatOpt.m on 
+	07172012.It is a cost per kWh curve vs LEGP curve. The underlying data is 
+	for fridgeDemandYear and [MaliNTS,LuxorNTS, KisanganiNTS]
 
-timeOfShortFallByHourCount0105.fig - This is saved in the CvsLLP folder. It was 
-	created by makeLEGPHistogram.m on 07172012. The hourly LEGP for two different 
-	yearly LEGPs (0.01 and 0.05). The values for the bar plot are stored in
-	the array LEGPHourly. Superimposed is a line plot of the hourly energy demand. 
-	The line plot hasits scale definedon the right side of the
-	figure. The line plot is made by calling on the function makeAveDay.m.
-	This file is also saved as a pdf file with the same name. 
-	
+	timeOfSFByHourAug010305.fig was created using makeLEGPHistogram.m which was
+	modified to produce the plots just for the month of August. This was only done
+	for the fridge demand micro-grid. The bar types are on the plot. One for
+	each of the following: LEGP of 0.01, 0.03, and 0.05. Superimposed on 
+	the plot is a graph of the average demand profile. The weather profile for this
+	plot is for MaliNTS2005. The demand profile comes from fridgeDemandYear
+	which is from truDem.mat.
+
+	timeOfSFByHourAugFrLig0105.fig - This is saved in the CvsLLP folder. It was 
+		created by makeLEGPHistogram.m on 08072012. The hourly LEGP 
+		during August for two different yearly LEGPs (0.01 and 0.05). 
+		The values for the bar plot are stored in the array LEGPHourly.
+		Superimposed is a line plot of the hourly energy demand. 
+		The line plot hasits scale definedon the right side of the
+		figure. This figure consists of two subplots. One the left is 
+		the micro-grid performance with a refrigerator the base load. 
+		On the right is the same figure for the micro-grid without a 
+		base load. The line plot is made by calling on the 
+		function makeAveDay.m. This file is also saved as a pdf file 
+		with the same name. 
+
+	timeOfShortFallByHourCount0105.fig - This is saved in the CvsLLP folder. It was 
+		created by makeLEGPHistogram.m on 07172012. The hourly LEGP for two different 
+		yearly LEGPs (0.01 and 0.05). The values for the bar plot are stored in
+		the array LEGPHourly. Superimposed is a line plot of the hourly energy demand. 
+		The line plot hasits scale definedon the right side of the
+		figure. The line plot is made by calling on the function makeAveDay.m.
+		This file is also saved as a pdf file with the same name. 
+		
 	
 .mat files (Data Sets)
 
-aveDayfridgeDemand.mat - was created by aveDays.
-	 contains:
-		-aveDays - fridgeDemandWeek averaged on an hourly basis to make a
-				representative day of electricity demand.
+	aveDayfridgeDemand.mat - was created by aveDays.
+		 contains:
+			-aveDays - fridgeDemandWeek averaged on an hourly basis to make a
+					representative day of electricity demand.
 
-bestFMultiLoc1.mat - 20x6x4 matrix. This is best matrix for 4 different weather
-profiles. In order they are MaliNTS,LuxorNTS, KisanganiNTS,
-and NouakchottNTS. This was completed using the synthetic fridge demand data 
-from synthDem.mat. These were tested using the LEGPVec = 0.01:0.01:0.20.
-	dates = MaliNTS(:,1:4)
-	weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)]
-	lats = [13.45,25.68,0.51,18.08];
-	demVec = fridgeDemandYearSyn;
-	LEGPVec = 0.01:0.01:0.20;
+	bestFMultiLoc1.mat - 20x6x4 matrix. This is best matrix for 4 different weather
+	profiles. In order they are MaliNTS,LuxorNTS, KisanganiNTS,
+	and NouakchottNTS. This was completed using the synthetic fridge demand data 
+	from synthDem.mat. These were tested using the LEGPVec = 0.01:0.01:0.20.
+		dates = MaliNTS(:,1:4)
+		weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)]
+		lats = [13.45,25.68,0.51,18.08];
+		demVec = fridgeDemandYearSyn;
+		LEGPVec = 0.01:0.01:0.20;
 
-bestFMultiLoc2.mat - 20x6x4 matrix. This is best matrix for 4 different weather
-profiles. In order they are MaliNTS,LuxorNTS, KisanganiNTS,
-and NouakchottNTS. This was completed using the synthetic light demand data 
-from synthDem.mat. These were tested using the LEGPVec = 0.01:0.01:0.20.
-	dates = MaliNTS(:,1:4)
-	weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)]
-	lats = [13.45,25.68,0.51,18.08];
-	demVec = lightDemandYearSyn;
-	LEGPVec = 0.01:0.01:0.20;
-
-ML05_ML06_UGProfile.mat - This is a bundle of arrays that are used
-to run the system optimization model. It contains: 
-	-NTS solar data 
-		-Mali, Kisangani, Luxor, and Nouakchott.
-	-ML05 demand data *Parasitic Load not removed*
-		-lightDemandWeek - hourly data for one week
-		-lightDemandYear - lightDemandWeek propogated out to a full year.
-		-lightDemandDaily - lightDemandYear compressed into daily resolution
-	-ML06 demand data *Parasitic Load not removed*
-		-fridgeDemandWeek - hourly data for one week
-		-fridgeDemandYear - fridgeDemandWeek propogated out to a full year.
-		-fridgeDemandDaily - fridgeDemandYear compressed into daily resolution 
-
-resourceSolTim1.mat
-	-Contains the NTS solar resource profiles for Kisangani, Luxor, (Segou Mali), 
-	and Nouakchott from the HelioClim3 database. These the solar
-	data points are measured at True Solar Time.The data range is 1/1/2005
-	to 12/31/2005. The ground reflectance (albeto) is 0.2. Data is 
-	measured at Hourly Intervals. 
-	-The locations of the cities were chosen using the search feature of the
-	HelioClim/SoDa interface.
-	The cordinates are (using G. Masters convention):
-		-Segou, Mali, 13.45 Lat, 6.26 Long
-		-Luxor, Egypt, 25.68 Lat, -32.65 Long
-		-Kisangani, DRC, 0.51 Lat,-25.2 Long
-		-Nouakchott, Mauritania, 18.08 Lat, 15.97 Long
+	bestFMultiLoc2.mat - 20x6x4 matrix. This is best matrix for 4 different weather
+	profiles. In order they are MaliNTS,LuxorNTS, KisanganiNTS,
+	and NouakchottNTS. This was completed using the synthetic light demand data 
+	from synthDem.mat. These were tested using the LEGPVec = 0.01:0.01:0.20.
+		dates = MaliNTS(:,1:4)
+		weather = [MaliNTS(:,5),LuxorNTS(:,5),KisanganiNTS(:,5),NouakchottNTS(:,5)]
+		lats = [13.45,25.68,0.51,18.08];
+		demVec = lightDemandYearSyn;
+		LEGPVec = 0.01:0.01:0.20;
 		
-	CORRECTIONS FOR MISSING DATA
-	All data missing from columns 5 through 11
-	Kisangani, DRC
-	rows 2574 through 2587. Replaced by 2550 through 2563
-	rows 5646 through 5779. Replaced by 5502 through 5635
-	rows 7903 through 7914. Replaced by 7879 through 7890
-	Luxor, Egypt
-	rows 2574 through 2587. Replaced by 2550 through 2563
-	rows 5646 through 5779. Replaced by 5502 through 5635
-	rows 7903 through 7914. Replaced by 7879 through 7890
-	Segou, Mali
-	rows 5646 through 5779. Replaced by 5502 through 5635
-	Nouakchott, Mauritania
-	rows 5646 through 5779. Replaced by 5502 through 5635
-				
-synthDem.mat - was created by makeSynthYear.m - It contains synthetic electricity
-demand data characteristic of ML05 and ML06.
-	-  fridgeDemandYearSyn. Within fridgeDemandYearSyn hours between 1AM and 6PM 
-	have a demand of 250 watts. Between 6PM and 1AM there is a demand of 400 watts.
-	-	lightDemandYearSyn.m. Between 6PM and 1AM there is a demand of 150 watts. 
-	During other hours there is no demand.
-	
-	
-	
+
+	bestSingleLoc1.mat - 23x6 matrix. This is best matrix for one weather
+	profile, MaliNTS,LuxorNTS, KisanganiNTS. This was completed using the 
+	truDem. fridgeDemandYear
+	from synthDem.mat. These were tested using the LEGPVec = 0.01:0.01:0.20.
+		dates = MaliNTS(:,1:4)
+		weather = MaliNTS(:,5)
+		lats = 13.45;
+		demVec = fridgeDemandYearSyn;
+		LEGPVec = [[0.0006,0.0007,0.0008,0.0009,0.001],(.002:.001:.01),(.02:.01:.10)];
+		
+	ML05_ML06_UGProfile.mat - This is a bundle of arrays that are used
+	to run the system optimization model. It contains: 
+		-NTS solar data 
+			-Mali, Kisangani, Luxor, and Nouakchott.
+		-ML05 demand data *Parasitic Load not removed*
+			-lightDemandWeek - hourly data for one week
+			-lightDemandYear - lightDemandWeek propogated out to a full year.
+			-lightDemandDaily - lightDemandYear compressed into daily resolution
+		-ML06 demand data *Parasitic Load not removed*
+			-fridgeDemandWeek - hourly data for one week
+			-fridgeDemandYear - fridgeDemandWeek propogated out to a full year.
+			-fridgeDemandDaily - fridgeDemandYear compressed into daily resolution 
+
+	resourceSolTim1.mat
+		-Contains the NTS solar resource profiles for Kisangani, Luxor, (Segou Mali), 
+		and Nouakchott from the HelioClim3 database. These the solar
+		data points are measured at True Solar Time.The data range is 1/1/2005
+		to 12/31/2005. The ground reflectance (albeto) is 0.2. Data is 
+		measured at Hourly Intervals. 
+		-The locations of the cities were chosen using the search feature of the
+		HelioClim/SoDa interface.
+		The cordinates are (using G. Masters convention):
+			-Segou, Mali, 13.45 Lat, 6.26 Long
+			-Luxor, Egypt, 25.68 Lat, -32.65 Long
+			-Kisangani, DRC, 0.51 Lat,-25.2 Long
+			-Nouakchott, Mauritania, 18.08 Lat, 15.97 Long
+			
+		CORRECTIONS FOR MISSING DATA
+		All data missing from columns 5 through 11
+		Kisangani, DRC
+		rows 2574 through 2587. Replaced by 2550 through 2563
+		rows 5646 through 5779. Replaced by 5502 through 5635
+		rows 7903 through 7914. Replaced by 7879 through 7890
+		Luxor, Egypt
+		rows 2574 through 2587. Replaced by 2550 through 2563
+		rows 5646 through 5779. Replaced by 5502 through 5635
+		rows 7903 through 7914. Replaced by 7879 through 7890
+		Segou, Mali
+		rows 5646 through 5779. Replaced by 5502 through 5635
+		Nouakchott, Mauritania
+		rows 5646 through 5779. Replaced by 5502 through 5635
+					
+	synthDem.mat - was created by makeSynthYear.m - It contains synthetic electricity
+	demand data characteristic of ML05 and ML06.
+		-  fridgeDemandYearSyn. Within fridgeDemandYearSyn hours between 1AM and 6PM 
+		have a demand of 250 watts. Between 6PM and 1AM there is a demand of 400 watts.
+		-	lightDemandYearSyn.m. Between 6PM and 1AM there is a demand of 150 watts. 
+		During other hours there is no demand.
+		
+		
+		

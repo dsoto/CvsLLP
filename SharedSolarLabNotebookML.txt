@@ -307,4 +307,19 @@ The load profile is fridgeDemandYear and the weather profile
 is MaliNTS. These makeLEGMaps.m was called on by 
 makeLEGPHistogram.m. These plot were then included in Notes for revision
 of WP02A.docx. This was given to Daniel Soto, and is an outline for a new
-version of WP02A.texs
+version of WP02A.tex
+
+08142012
+
+Made a variable (mat-file) called bestSingleLoc1.mat.
+The file is the best array with LEGP, cost/kWh, pvCost, batCost,
+batCap,and pvCap. This was created by testSingleWeathPvBatOpt.m
+using the input LEGP vector:
+[[0.0006,0.0007,0.0008,0.0009,0.001],(.002:.001:.01),(.02:.01:.10)]
+A cost per kWhr plot was created and saved as LEGPvsCost_hiRel.fig
+
+The weather used during the modeling was MaliNTS, and the demand
+profile was fridgeDemandYear.
+
+
+
