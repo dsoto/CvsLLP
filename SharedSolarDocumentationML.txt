@@ -184,7 +184,7 @@ figures
 	is MaliNTS. These makeLEGMaps.m was called on by 
 	makeLEGPHistogram.m. 
 
-	LEGPvsCost_hiRel.fig - created by testSingleWeathPvBatOpt.m. It is a 
+	LEGPvsCost_hiRes.fig - created by testSingleWeathPvBatOpt.m. It is a 
 	of columns 1 and 2 of bestSingleLoc1.mat and the corresponding inputs.
 		
 	MaliFridgeCostPerkWhr.fig - stored in CvsLLP. This figure was created by
@@ -194,7 +194,6 @@ figures
 	MaliFandLCostPerkWhVsLEGP.pdf - stored in CvsLLP. This figure was created by
 	testSingleWeathPvBatOpt.m in 07272012 It is the cost per kWh vs LEGP 
 	for the Mali demand profiles with and without fridge, using Mali weather.
-
 
 	monthlyLEGPMali0105.fig - stored in CvsLLP folder. This figure was created by
 	testMultiWeathPvBatOpt.m on 07172012. It contains the monthly LEGP for 
