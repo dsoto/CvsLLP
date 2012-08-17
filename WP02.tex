@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage[top=1 in, bottom=1 in, left=1 in, right=1 in]{geometry}
 \newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
 
 \begin{document}
@@ -12,165 +13,153 @@
 
 \section{Introduction}
 
-Within this article we describe thought processes and decision making strategies which may be employed in the sizing of isolated micro-grids for the developing world.
-Recognizing the sever costs constraints which result from consumers' financial limitations, we challenge the traditional western goal of 100 percent up-time.
-% can we find evidence of this 100% approach being taken in the dev
-% world? 
-Instead, when sizing isolated micro-grids, policy makers must have a qualitative and quantitative understanding of costs versus reliability trade-offs.
-This includes understanding the temporal reliability characteristics of a proposed micro-grid.
-Knowing \emph{when} energy shortfalls occur will illuminate whether a proposed micro-grid matches consumer demand, and thus represents a satisfactory energy solution.
+\section{Methodology}
 
-This article is divided into four primary sections.
-The first section details our procedure for generating cost versus reliability curves for isolated micro-grids.
-We quantify system reliability using an energy based metric called lack of energy to generate probability (\emph{LEGP}) introduced by Wissem et al.\cite{}.
-The cost versus \emph{LEGP} curves are based off of an energy balance algorithm, and they utilize historical hourly insolation and demand profiles.
-The second section uses our energy balance algorithm to assess the effects of weather and demand profiles on cost versus system \emph{LEGP} curves.
-In the third section we investigate a particular insolation and demand profile, and we adjust the micro-grid's \emph{LEGP}.
-In doing so, we assess the temporal behavior of decreased system reliability.
-In the fourth, and final, section of the article, we further elucidate our findings and the lessons learned from our research.
+Given the stringent financial constraints of energy consumers in the developing world, micro-grids must be sized according minimum acceptable capacity.
+This implies understanding the temporal characteristics of high-priority consumer demand, and pairing micro-grid operational up-time with such characteristics.
+This section of the article outlines a strategy for sizing micro-grid systems. 
+Our strategy emphasizes visualizing, and understanding, the the seasonal and sub-daily temporal characteristics of prospective designs, such that the implications on high priority consumer demand may be understood. 
+Within this section, several figures will be introduced in order to illustrate our general methodology. 
+In section \ref{CaseStudy}, these figures will be reintroduced with an eye toward interpreting the contained data and making design decisions for a micro-grid near Segou, Mali. 
 
-\section{Generation of Cost Versus Reliability Curves}
-% goal of section is to teach the reader about our general approach to
-% reliability curves. (ADDED BELOW)
-Within this section we provide a high-level description of our approach to generating cost versus reliability curves.
-The primary metric we use to evaluate a micro-grid's performance is called lack of energy to generate probability (LEGP) which was introduced by Wissem et al.\cite{}.
-LEGP is equal to the electricity demand that a micro-grid was unable to meet divided by the total demand over a specified time frame.
-For our model the time frame was 8760 hours, or one year.
-% Should we demonstrate this point with a small example?
-Although time based metrics such as loss of load probability \emph{LOLP} may be used to evaluate system performance, these tend to inflate the perceived performance of micro-grids in the developing world.
-Many of the micro-grids we have observed are only used for a small fraction of the day.
-We are more concerned about a micro-grids ability to supply demanded energy, and thus chose \emph{LEGP} as our primary performance metric.
+%% Introduce LEGP
+We chose to express system reliability using using an energy based metric called Lack of Energy to Generate Probability, \emph{LEGP}, which was first introduced by Wissem et al. \cite{•}.
+This metric is equal to the annual consumer demand which a micro-grid could not supply, divided by the annual consumer demand on the micro-grid.
+We compute \emph{LEGP} using an energy balance model with an hourly time step. 
+Within appendix 1, we provide our motivation for using \emph{LEGP}. 
+With appendix 1, we also provide in depth explanation of our energy balance algorithm.
 
-We decided to quantify system cost based on the "break-even" consumer price of electricity in cost per kilowatt-hour\unit{(USD/kWh)}.
-As opposed to installation capital cost, or annual payment, this metric allows us to directly compare micro-grids of different sizes and demand patterns.
-%% Talk about how we estimated costs (Cost estimation added below)
-Throughout all of the analysis we used a fixed capital cost of 1.50 \unit{USD/W} for PV capacity and a cost of 0.20 \unit{USD/Whr} for battery capacity.
-The payback period for the PV modules was 20 years, and the payback period for the batteries is three years. 
-We applied a ten percent annual compound interest to the capital costs.
+%% Introduce cost versus reliability curve
 
-A majority of the analysis we conducted may be replicated using \emph{HOMER} or another proprietary energy balance micro-grid simulator.
-However, we chose to create our own energy balance and optimization models.
-This gave us increased control over the modeling and optimization process.
-In addition, it allowed us to not treat the software like a "black box."
-The model we created contains two basic levels.
-The inner level conducts an energy balance analysis on an hourly timescale.
-This analysis simulates the production, storage, distribution, and consumption of energy by a micro-grid for each hour over the course of a year.
-The energy balance level is called upon by an outer-level script which computes all of the PV generation and battery storage combinations which satisfy a particular LEGP.
-This script then determines the generation and storage combination with the minimum initial capital investment cost.
-The optimization is then executed for several LEGPs, resulting in a cost vs. reliability plot.
+The first step in our design procedure is to create a cost versus reliability curve. 
+Such curves allow the designer to understand the marginal cost of added micro-grid reliability.
+An example of one such curve is illustrated as figure \ref{CVsLEGP}.
+	\footnote{In figure \ref{CVsLEGP}, the cost for a reliability is the optimal 	combination of PV generation and battery storage which achieves that
+	reliability.
+Thus, PV generation and battery storage capacity do not have a fixed ratio. 
+For more information on our optimization strategy refer to appendix 1.}
+From figure \ref{CVsLEGP}, we observe that each incremental decrease in \emph{LEGP} becomes more expensive on a cost per \unit{kW\! \cdot \! hr} basis.
+However, this curve does not help us determine which system reliability will be acceptable to the micro-grid's consumers.
+To determine such, we must know the magnitude and temporal characteristics of energy shortfalls. 
+Because the creation of a cost versus reliability curve relies on a high temporal frequency energy balance algorithm, this energy shortfall information is available. 
+Adequately sizing a micro-grid becomes a matter of understanding the information on time of outages embedded in each point on the cost versus reliability curve. 
 
-\section{Impact of Weather and Demand Profiles on Cost vs. \emph{LEGP} Curve}
-% goal of section is to demonstrate the impact of climate type on the
-% marginal cost of reliability.
+%% Cost versus reliability curve.
 
-The goal of this section is to demonstrate the impact of climate type on the marginal cost of micro-grid reliability.
-The results presented were obtained by using the demand profile of a micro-grid near Segou, Mali. 
-To assess the effects of weather on the \emph{LEGP} vs. cost behavior, we paired this demand profile with three distinct weather data sets. 
-Each data set is characteristic of a different climate type. 
-The first is the semi-arid climate of Segou, Mali. This weather pattern has two distinct seasons, a rainy season and a dry season.
-The dry season lasts from June until September with August being the month with the least solar availability. %%What about February ?
-The second climate is the rain forest climate of Kisangani, Democratic Republic of the Congo. %% Go into more detail
-The third climate is the desert climate of Luxor, Egypt. %% Go into more detail
-
-There is a scarcity of hourly ground based insolation data for locations such as Segou, Mali, which are best served by isolated micro-grids. 
-Thus, all insolation measurements were extrapolated from the HelioClim 3 database. The utilized HelioClim 3 data is of normal to sun insolation on the ground level.
-HelioClim 3 data is derived from Meteosat Second Generation satellite images. 
-
-The micro-grid being analyzed currently relies on 1.4 \unit{kW} of nominal PV capacity, and 17.280 \unit{kW\cdot hr} of lead acid battery storage.
-The households use electricity primarily for nighttime lighting.
-Also on the micro-grid is a 250 liter freezer which provides the micro-grid with a base demand of approximately 250 W. 
-Peak demand on the micro-grid is approximately 450 W. 
-The consumer demand data was created by propagating a single week of demand over an entire year.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[trim = 10mm 48mm 10mm 48mm, clip,width=.75\textwidth]{MWCostPerkWhVsLEGP0105}
-\caption{Cost per kWhr versus LEGP for three distinct climates.}
-\label{MWCostperkWhrLEGP}
-\end{figure} 
-
-
-\section{Impact of \emph{LEGP} on Micro-Grid Temporal Performance Characteristics}
-
-% goal of section is to demonstrate that there is more to microgrid
-% performance than a single metric.
-
-% outline:
-% introduction
-	% main idea: knowing when shortfalls occur helps design
-	% describe analysis behind figure
-		% we histogram bin by hour to determine most frequent shortfalls
-		% we overlay the average load profile
-		% these should ideally be complementary
-
-% describe specific figures
-	% two different loads, nighttime only vs. constant loads
-	% where is data from (simulated, types of loads)
-	% what are the significant differences between the two
-	
-% specific implications for designers
-	% despite high LEGP, loss events may be at tolerable time
-	% more implications
-
-
-
-
-
-
-% is there a difference between the per hour distribution for a
-% continuous vs. a night only load?
-
-Although \emph{LEGP} is an important metric, it by no means fully characterizes system performance. 
-In particular, \emph{LEGP} does not describe when micro-grid energy shortfalls occur.
-As we will illustrate, daily and seasonal variations in energy shortfall may greatly effect a micro-grid's viability for different demand profiles. 
-We begin by analyzing the \emph{LEGP} curve generated using the Segou, Mali, weather data and the demand profile from the previous section. 
-This plot is illustrated as figure \ref{CostVLEGPMali}.
-
-\begin{figure}[ht]  
+\begin{figure}[ht] 
   \centering
-    \includegraphics[trim = 8mm 48mm 8mm 48mm, clip,width=.75\textwidth]{MaliFridgeCostPerkWhVsLEGP}
-  \caption{Cost vs. LEGP of Micro-Grid in Segou, Mali}
-  \label{CostVLEGPMali}
+    \includegraphics[trim = 25mm 93mm 25mm 100mm, clip,width=.75\textwidth]{CvLEGP_hiRel.pdf}
+  \caption{Cost in \unit{USD/kW\! \cdot \! hr} versus \emph{LEGP} of 
+micro-grid with refrigerator base load.
+The simulation uses the insolation profile from Segou, Mali.
+\emph{LEGPs} range from 0.001 to 0.10}
+\label{CVsLEGP}
 \end{figure}
 
-From figure \ref{CostVLEGPMali} we decided to further analyze the micro-grid temporal behavior with \emph{LEGPs} of 0.05 and 0.01.
- We chose to analyze $LEGP = 0.01$ because it approaches the upper threshold of consumer willingness to pay.
-We chose to analyze the system characteristics with $LEGP = 0.05$ because it corresponds to intersection of the linear and exponential cost regimes.
-According to figure \ref{CostVLEGPMali}, for \emph{LEGPs} below 0.05 the marginal cost of electricity generation begins to increase exponentially.  
+%% Introduce seasonal/monthly bar plot. 
 
-%% Describe the PV and battery size combination for the LEGP 0.01 and the LEGP 0.05 systems. 
-To observe the diurnal characteristics of the micro-grid's performance, we created figure \ref{hourlyLEGP}.
-Given our specified annual \emph{LEGPs} of 0.01 and 0.05, we are able to see the hourly \emph{LEGPs} for each potential system configuration.
-Superimposed on \ref{hourlyLEGP} is the average hourly electricity demand in \unit{Whr}.
+As a first step toward understanding the temporal energy shortfall characteristics of a potential micro-grid design, we suggest plotting the \emph{LEGP} for each month. 
+This allows micro-grid designers to observe seasonal variations in reliability and identify portions of the year that may be of concern.
+They are then able to strategically target this areas with a finer level temporal resolution.
+	\footnote{Seasonal variations in reliability may be the
+	 result of variations in demand or solar-resource.
+	Concern over a temporal region may result from a peak in \emph{LEGP}, or it 
+	may also result from seasons which have high consumer demand priority.
+	If it is found that seasonal reliability and demand priority are relatively 	
+	constant, it is up to the discretion of the micro-grid designers to 
+	conduct fine resolution temporal analysis on the entire year or to sample 	 
+	certain months.}
+An example of one such monthly \emph{LEGP} plot is illustrated as figure \ref{MonthBar}. 
+This figure includes the monthly \emph{LEGPs} of three different micro-grid alternatives for a single location.
+	
+%% Monthly LEGP Plot
 
-\begin{figure}[ht]
-\centering
-\includegraphics[trim = 8mm 48mm 8mm 48mm, clip,width=.75\textwidth]{timeOfShortfallByHourCount0105}
-\caption{Probability of energy shortfall for each hour. Model uses weather from Segou, Mali, and micro-grid demand profile with refrigerator base load.}
-\label{hourlyLEGP}
-\end{figure} 
+\begin{figure}[ht] 
+  \centering
+    \includegraphics[trim = 20mm 75mm 20mm 85mm, clip,width=.75\textwidth]{monthlyLEGPMali010305.pdf}
+  \caption{A bar plot of monthly \emph{LEGP} given annual \emph{LEGPs} of 0.01, 0.03, and 0.05. 
+  The underlying model relies on the weather profile of Segou, Mali.
+  The demand data is for the micro-grid with a refrigerator base load. }
+\label{MonthBar}
+\end{figure}
 
-In addition to the diurnal characteristics of \emph{LEGP}, we wish to assess the seasonal characteristics of \emph{LEGP}. 
-We created figure \ref{monthlyLEGP} in order to do such.
-Figure \ref{monthlyLEGP} shows the \emph{LEGP} for each month given yearly \emph{LEGPs} of 0.01 and 0.05.
-Superimposed on figure \ref{monthlyLEGP} is the monthly insolation in \unit{Whr/m^2}.
+%% Introduce Hourly Resolution Analysis
+
+Once we have identified the seasonal areas of concern, we are then able to observe them on a sub-daily time frame. 
+This allows the micro-grid designer to qualitatively and quantitatively understand micro-grid performance from a consumer perspective. 
+For our sub-daily analysis we used hourly increments; however, larger, or smaller, increments can be used depending on data availability.
+%
+%% Hourly Reliability Bar Plot
+%
+One informative data analysis method is to plot collective time of day reliability for a month or season of interest. 
+For example, using hourly increments, a 24 element data set would be created.
+The first element would be the reliability from 12:00 AM to 1:00 AM during the multi-day period.
+These plots allow micro-grid designers to observe long term reliability trends.
+They also allow observe how micro-grid reliability corresponds to trends in peak, or high priority, electricity demand. 
+An example of one such time-of-day reliability plot, for three different micro-grid scenarios, is illustrated as figure \ref{HourBar}.
+
+%% Hourly LEGP Bar Plot 
+
+\begin{figure}[ht] 
+  \centering
+    \includegraphics[trim = 20mm 75mm 20mm 78mm, clip,width=.85\textwidth]{timeOfSFByHourCountAug010305.pdf}
+  \caption{Bar plot of hourly \emph{LEGP} during the month of August. 
+  As indicated in the legend, the different bar column types are for micro-	
+  grids with Annual \emph{LEGPs} of 0.01, 0.03, and 0.05.
+  Superimposed on the bar plot is the average hourly demand in \unit{W\! \cdot \! hr}.
+  The underlying model relies on the weather profile of Segou, Mali.
+  The demand data is for the micro-grid with a refrigerator base load.}
+\label{HourBar}
+\end{figure}
+
+%% Discuss LEG Maps
+% I am really struggling with this paragraph. It is difficult to find the balance between generalness and specificity. Too general and the section becomes difficult to understad. Too specific, and I am discussing the material which was intended for another section.
+
+Another method for visualizing energy shortfalls is to create a Lack of Energy to Generate, \emph{LEG}, map. 
+\emph{LEG} is the amount of demand, in \unit{W\! \cdot \! hr}, that the micro-grid was unable to supply.
+Examples of \emph{LEG} maps for sub-annual time periods are illustrated within figure \ref{LEGMaps}.
+Each cell within the \emph{LEG} maps corresponds to one hour of micro-grid performance, and the color of the cell corresponds to the magnitude of energy shortfall. 
+\emph{LEG} maps allow micro-grid designers to qualitatively analyze how energy shortfalls are distributed across days and weeks.
+For example, they can determine if a low time of day reliability is the result of several small energy shortfalls, or a handful of complete blackouts. 
+In addition, these figures, combined with an understanding of relevant weather and demand data, allow micro-grid designers to assess whether energy shortfalls are supply or demand driven. 
+For example, energy shortfalls randomly spaced across days would suggest weather driven outages; whereas, energy shortfalls spaced at seven day intervals would suggest demand driven outages. 
+
+%% LEG Maps figure 
+
+\begin{figure}[ht] 
+  \centering
+    \includegraphics[trim = 20mm 37mm 20mm 40mm, clip,width=\textwidth]{LEGMap010305.pdf}
+  \caption{Maps of Lack of Energy, \emph{LEG}, at an hourly resolution for the month of August.
+   From left to right, subplots are for Annual \emph{LEGPs} of 0.01, 0.03, and 0.05. 
+  The underlying model relies on the weather profile of Segou, Mali.
+  The demand data is for the micro-grid with a refrigerator base load.}
+\label{LEGMaps}
+\end{figure}
 
 
-\begin{figure}[ht]
-\centering
-\includegraphics[trim = 10mm 48mm 10mm 48mm, clip,width=.75\textwidth]{monthlyLEGPMali0105}
-\caption{LEGP for each month, and corresponding solar resource. Model uses weather from Segou, Mali, and micro-grid demand profile with refrigerator base load.}
-\label{monthlyLEGP}
-\end{figure} 
 
 
 
 
+
+\section{Case Study: Segou, Mali} \label{CaseStudy}
 
 \section{Discussion}
-% goal is to integrate the information on weather and temporal patterns
-% into a coherent story.  maybe discuss a thought process for choosing a
-% sizing for a given demand?
+
+\appendix	
+\section{Appendix 1: \emph{LEGP} and Energy Balance Algorithm} \label{A1}
+
+We chose this metric for two reasons.
+First, our procedure allows use understand both the frequency and magnitude of energy shortfalls. 
+Second, this metric is analogous to maximum annual capacity shortage which is a metric used by HOMER.
 
 
+\section{Appendix 2}
+
+
+\begin{thebibliography}{9}
+
+\bibitem{cite1}
+
+\end{thebibliography}
 \end{document}
