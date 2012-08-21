@@ -149,7 +149,7 @@ other .m files
 	there is a demand of 150 watts. At all other watts there is no demand. These vectors 
 	are saved as a .mat file called synthDem.mat
 
-figures
+figures 
 
 	energyBalance.fig - This figure was created by makeEnerBalancePlot.m.
 	Energy balance algorithm calculations from January 2, 2005 until Jan 8, 2005. 
