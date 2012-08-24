@@ -217,7 +217,7 @@ Current Grid & & & \\
 \hline
 0.03 & 2600 & 8400 & 0.591 \\
 \hline
-0.01 & 2500 & 13000 & 0.7634 \\
+0.01 & 2500 & 13000 & 0.763 \\
 \hline
 \end{tabular}
 \caption[Caption for LOF]{Performance, size, and costs characteristics of current and potential micro-grid's for Segou, Mali.\footnotemark}
@@ -233,26 +233,51 @@ After specifying an annual \emph{LEGP} of 0.05, we plotted the \emph{LEGP} for e
 Figure \ref{MonthBar} illustrates that, as expected from the weather patterns of Segou, the months of July through September had the lowest reliability.  
 Because it had the lowest reliability, with an \emph{LEGP} of 0.136, we chose to analyze the month of August with an hourly resolution. 
 
-When analyzing the month of August with an hourly resolution, we chose to make two figures. 
-The first is a plot of hourly reliability, and it is illustrated as the white columns in figure \ref{HourBar}. Superimposed on this plot is the average hourly demand profile of the micro-grid.
+When analyzing the month of August with an hourly resolution, we made two figures to facilitate the design process. 
+The first is a plot of hourly reliability, and it is illustrated as the white columns in figure \ref{HourBar}. 
+Superimposed on this plot is the average hourly demand profile of the micro-grid. 
+From this plot, we can observe time of day trends in micro-grid reliability. 
 The second is a map of hourly shortfall events, which is illustrated as the rightmost subplot in figure \ref{LEGMaps}.
+The second figure allows us to observe the number and periodicity of energy shortfall events
 After analyzing these two figures, we believe that the 0.05 \emph{LEGP} micro-grid does not offer sufficient performance.
 The micro-grid fails to meet the needs of the 20 households.
 Figure \ref{HourBar} illustrates that for the hours of significant non-freezer demand, 7:00 PM to 1:00 AM, reliability steadily decrease. 
 During this time, the \emph{LEGP} steadily increases from 0.052 to 0.205. 
-During the peak demand window which occurs between 9:00 PM until 10:00 PM, the \emph{LEGP} of the micro-grid was 0.138.
+During the peak demand window, which occurs between 9:00 PM until 10:00 PM, the \emph{LEGP} of the micro-grid was 0.138.
 The \emph{LEG} map within figure \ref{LEGMaps} confirms the inconveniences to the micro-consumers.
-There are five energy energy shortfall events which effect electricity during the 7:00 PM to 1:00 AM period.
-Four of these inhibit electricity consumption during the peak demand hour from 9:00 PM to 10:00 PM.
-The micro-grid performance was equally unsatisfactory for the owners of the freezer.
+In particular, we can see that the high \emph{LEGPs} are the result of regularly occurring energy shortages and not isolated outages.
+Figure \ref{LEGMaps} indicates that there are five energy energy shortfall events which curtail demand during the 7:00 PM to 1:00 AM period.
+Four of these inhibit electricity consumption during the hour of peak demand, 9:00 PM to 10:00 PM.
+We also found that the micro-grid performance was equally unsatisfactory for the owners of the freezer.
 We estimate that any energy shortfalls lasting five hours or longer would significantly impact the production of ice and frozen drinks. 
 As figure \ref{LEGMaps} illustrates, energy shortfalls lasting five or more hours occurred prior to, or during, eight separate work days.
-
  
 % Now it is on to do a brief summary 
 % of the LEGP = 0.03 microgrid and Full summary of why 
 % the LEGP = 0.01 micro-grid is wonderful.
 
+Recognizing that an \emph{LEGP} of 0.05 was insufficient to meet our consumers' demand, we iteratively increased system reliability and observed the temporal characteristics using the aforementioned methodology.
+An intermediate design was of a micro-grid with an annual \emph{LEGP} of 0.03. 
+We found that the \emph{LEGP} micro-grid was not sufficient and that its inadequacies closely paralleled those of the 0.05 \emph{LEGP} micro-grid.
+As indicated by figure \ref{MonthBar}, August was again the month with the lowest reliability; thus, we analyzed this period with an hourly temporal resolution.
+Our results, indicate that this design would have a significant negative impact on residential electricity usage.
+Recognizing that most residential demand occurs between 7:00 PM and 1:00 AM, figure \ref{LEGMaps} illustrates that there were four instances in which power outages would significantly curtail residential demand. 
+With respect to the freezer operators, we found that there would be five outages which have a duration of five hours or longer. 
+Subjectively, we determined that five days of lost revenue concentrated within a one month period would be unacceptable to the freezer operators. 
+
+As a result of our iterative design process, we decided upon a micro-grid with an annual \emph{LEGP} of 0.01. After isolating the lowest reliability month, and analyzing it with an hourly resolution, we decided that the micro-grid was acceptable to residential consumers. 
+%
+% footnote
+%
+\footnote{Observing figure \ref{MonthBar} that September has a slightly higher \emph{LEGP} than \emph{August} for the 0.01 annual \emph{LEGP} micro-grid. 
+We present the hourly performance of August to facilitate reader comparison of design iterations. 
+Although not presented, we also analyzed September with an hourly resolution, and the results confirmed our findings.}
+%
+%
+%
+Figure \ref{LEGMaps} indicates that there was only a single energy shortage between 7:00 PM and 1:00 AM, representing a single event in which residential consumption was significantly impacted.
+We also found that the 0.01 \emph{LEGP} micro-grid significantly improved freezer up time, especially when compared to the aforementioned alternatives. There were only two energy shortfall occurrences which were five ours or longer. 
+Given the reduced frequency and duration of energy shortfalls, it is possible that their effects can be further reduced by demand side energy management.
 
 \section{Discussion}
 
