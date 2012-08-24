@@ -145,11 +145,6 @@ This section is intended as an illustrative example.
 The methodology introduced in the previous section is utilized in order to size a micro-grid for a village outside of Segou, Mali.
 The figures from section \ref{method} are also reintroduced.
 As opposed to illustrating general data visualization strategies, these figures will be used to motivate specific micro-grid design decisions.
-We chose to analyze the performance of this particular micro-grid for two primary reasons.
-First, we have sub-hourly operational data from the micro-grid. 
-This allowed us to avoid estimating electricity demand profiles on a per customer basis.  
-Second, this micro-grid was inappropriately sized for its given demand profile, resulting in frequent energy shortfalls.
-Analyzing this system allows for us to provide pertinent design improvement recommendations to where they are most needed. 
 
 
 \subsection{Input Parameters}
@@ -157,9 +152,8 @@ Analyzing this system allows for us to provide pertinent design improvement reco
 %% Introduce Location and weather profile 
 
 There are three primary input parameters for the micro-grid design strategy. 
-The first was an hourly insolation vector in \unit{W \!/ m^2} for one year.
-The second was a one year long vector of electricity demand in watts with an hourly resolution.
-A third set of inputs parameters is the annual costs of PV and battery capacity. 
+Two are hourly vectors for year. One vector is of available insolation in \unit{w/m^2}, and the other is of electricity demand in \unit{w\! \cdot \! hr}.
+A third set of input parameters is the annual costs of PV and battery capacity. 
 %
 % Introduce Location
 %
@@ -184,8 +178,8 @@ Each household is equipped with two 5 W LED light bulbs and a two plug outlet.
 The outlets are used primarily for cellphone charging.
 A few households may also have larger electronics, such as a television or radio.
 All households are individually metered, resulting in a financially motivated culture of energy conservation. 
-Thus, non-refrigerator electricity peak demand is significantly less than the maximum possible power draw. 
-On average, non-refrigerator electricity demand peaks during the early evening at 150 W.
+Thus, residential electricity peak demand is significantly less than the maximum possible power draw. 
+On average, residential electricity demand peaks during the early evening at 150 W.
 The daily average of the demand data used in our analysis is illustrated as the dashed line in figure \ref{HourBar}.
 
 When conducting our financial analysis, we estimated the annual cost of PV capacity to be 0.1762 \unit{USD/W}.
@@ -198,7 +192,7 @@ For a more detailed explanation of how the weather, demand, and economic paramet
 
 Our design procedure for the micro-grid in Segou, Mali, required several iterations.
 Each iteration generated a unique micro-grid configuration. 
-The \emph{LEGP}, PV capacity, battery capacity, and cost per \unit{kW \! \cdot \! hr} of each configuration are printed in table \ref{ConfigSumm}.
+The \emph{LEGP}, PV capacity, battery capacity, and cost per \unit{kW \! \cdot \! hr} of select iterations are printed in table \ref{ConfigSumm}.
 
 % Design alternative summary table
 
@@ -233,20 +227,15 @@ After specifying an annual \emph{LEGP} of 0.05, we plotted the \emph{LEGP} for e
 Figure \ref{MonthBar} illustrates that, as expected from the weather patterns of Segou, the months of July through September had the lowest reliability.  
 Because it had the lowest reliability, with an \emph{LEGP} of 0.136, we chose to analyze the month of August with an hourly resolution. 
 
-When analyzing the month of August with an hourly resolution, we made two figures to facilitate the design process. 
-The first is a plot of hourly reliability, and it is illustrated as the white columns in figure \ref{HourBar}. 
-Superimposed on this plot is the average hourly demand profile of the micro-grid. 
-From this plot, we can observe time of day trends in micro-grid reliability. 
-The second is a map of hourly shortfall events, which is illustrated as the rightmost subplot in figure \ref{LEGMaps}.
-The second figure allows us to observe the number and periodicity of energy shortfall events
+When analyzing the month of August with an hourly resolution, we created the figures described in section 2.
 After analyzing these two figures, we believe that the 0.05 \emph{LEGP} micro-grid does not offer sufficient performance.
 The micro-grid fails to meet the needs of the 20 households.
-Figure \ref{HourBar} illustrates that for the hours of significant non-freezer demand, 7:00 PM to 1:00 AM, reliability steadily decrease. 
+Figure \ref{HourBar} illustrates that for the hours of significant residential demand, 7:00 PM to 1:00 AM, reliability steadily decreases. 
 During this time, the \emph{LEGP} steadily increases from 0.052 to 0.205. 
 During the peak demand window, which occurs between 9:00 PM until 10:00 PM, the \emph{LEGP} of the micro-grid was 0.138.
 The \emph{LEG} map within figure \ref{LEGMaps} confirms the inconveniences to the micro-consumers.
-In particular, we can see that the high \emph{LEGPs} are the result of regularly occurring energy shortages and not isolated outages.
-Figure \ref{LEGMaps} indicates that there are five energy energy shortfall events which curtail demand during the 7:00 PM to 1:00 AM period.
+In particular, we can see that the high \emph{LEGPs} were the result of regularly occurring energy shortages and not isolated outages.
+Figure \ref{LEGMaps} indicates that there were five energy shortfall events which curtailed demand during the 7:00 PM to 1:00 AM period.
 Four of these inhibit electricity consumption during the hour of peak demand, 9:00 PM to 10:00 PM.
 We also found that the micro-grid performance was equally unsatisfactory for the owners of the freezer.
 We estimate that any energy shortfalls lasting five hours or longer would significantly impact the production of ice and frozen drinks. 
@@ -260,7 +249,7 @@ Recognizing that an \emph{LEGP} of 0.05 was insufficient to meet our consumers' 
 An intermediate design was of a micro-grid with an annual \emph{LEGP} of 0.03. 
 We found that the \emph{LEGP} micro-grid was not sufficient and that its inadequacies closely paralleled those of the 0.05 \emph{LEGP} micro-grid.
 As indicated by figure \ref{MonthBar}, August was again the month with the lowest reliability; thus, we analyzed this period with an hourly temporal resolution.
-Our results, indicate that this design would have a significant negative impact on residential electricity usage.
+Our results indicate that this design would have a significant negative impact on residential electricity usage.
 Recognizing that most residential demand occurs between 7:00 PM and 1:00 AM, figure \ref{LEGMaps} illustrates that there were four instances in which power outages would significantly curtail residential demand. 
 With respect to the freezer operators, we found that there would be five outages which have a duration of five hours or longer. 
 Subjectively, we determined that five days of lost revenue concentrated within a one month period would be unacceptable to the freezer operators. 
@@ -269,7 +258,7 @@ As a result of our iterative design process, we decided upon a micro-grid with a
 %
 % footnote
 %
-\footnote{Observing figure \ref{MonthBar} that September has a slightly higher \emph{LEGP} than \emph{August} for the 0.01 annual \emph{LEGP} micro-grid. 
+\footnote{Observing figure \ref{MonthBar}, September has a slightly higher \emph{LEGP} than August for the 0.01 annual \emph{LEGP} micro-grid. 
 We present the hourly performance of August to facilitate reader comparison of design iterations. 
 Although not presented, we also analyzed September with an hourly resolution, and the results confirmed our findings.}
 %
