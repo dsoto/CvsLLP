@@ -14,13 +14,61 @@
 
 \section{Introduction}
 
+As the size of electricity distribution networks is decreased, so is the diversity of demand sources and the diversity of generation.
+Thus, the smaller an electricity distribution grid, the more vulnerable it becomes to fluctuations in demand and electricity generation.
+As a result, small standalone micro-grids must rely more heavily on energy storage in order to buffer variability and meet demand.  
+The inclusion of storage capacity greatly increases the capital cost of micro-grids.
+Thus, it is vital to appropriately size electricity storage capacity.
 
-Given the stringent financial constraints of energy consumers in the developing world, micro-grids must be sized according minimum acceptable capacity.
-This implies understanding the temporal characteristics of high-priority consumer demand, and pairing micro-grid operational up-time with such characteristics.
-Section \ref{method}: Methodology, outlines a strategy for sizing micro-grid systems. 
-Our strategy emphasizes visualizing, and understanding, the the seasonal and sub-daily temporal characteristics of prospective designs, such that the implications on high priority consumer demand may be understood. 
-Within section \ref{method}, several figures will be introduced in order to illustrate our general methodology. 
-In section \ref{CaseStudy}, these figures will be reintroduced with an eye toward interpreting the contained data and making design decisions for a micro-grid near Segou, Mali. 
+The issue of appropriately sizing small scale micro-grid installations is highly pertinent to the electrification of rural locations within the developing world. 
+Given stringent financial limitations, consumers are unwilling and unable to pay for unnecessary surplus capacity. 
+Moreover, cost versus reliability trade offs can be made, as long as, the micro-grid satisfies their basic energy requirements. \cite{Marawanyika} 
+This article is focused specifically on the sizing of micro-grids with solar photovoltaic, PV, electricity generation and battery storage. 
+Within the developing world, proper maintenance and repair of fossil fuel engine generators can be difficult. 
+Likewise, gasoline and diesel supply chains can be expensive and unreliable.  
+As a result, depending on the availability of other renewable resources, PV micro-grids may offer the least expensive and most reliable form of energy service. \cite{Nouni,WB}
+PV infrastructure needs only minimal maintenance.
+Maintenance consists primarily of lead-acid battery replacement which must be completed every two to five years. 
+Another advantage of small scale-photovoltaic technology is its modularity.  
+As long as additional hardware constraints are satisfied, PV generation and battery storage capacity can be increased to meet the growing needs of first time electricity customers. \cite{Wamukonya}  
+
+Recognizing the importance of proper micro-grid sizing, numerous studies have been conducted with the goal of designing stand alone systems for a specified reliability. 
+These studies often rely upon a single or multi-year time series of solar data in order to simulate micro-grid performance. 
+References \cite{Markvart,Arun,Hadj} used time series simulations to develop curves of PV electricity generation versus battery storage for a desired reliability. 
+Knowing the per unit cost of PV and battery installation, it is then possible to determine the lowest cost option on a generation versus storage iso-reliability curve. 
+Hadj Arab et al. stresses the importance of conducting time series analysis and iso-reliability optimization. 
+They illustrate that the shape of an iso-reliability curve is dependent upon a location's weather profile, the relative cost of PV and battery installations, and the desired micro-grid reliability. 
+Moreover, they stress that these influences may be lost while using more simple methods. \cite{Hadj}   
+
+Within the developed world, micro-grid consumers can afford and expect 100 percent system reliability.
+Thus, the role of micro-grid designers is to choose the lowest cost PV and battery combination on an iso-reliability curve for 100 percent up-time.
+However, consumers in the developing world are more willing to sacrifice reliability in favor of decreased cost.
+In such a case, micro-grid designers should determine the minimum cost solution for a series of reliablities. 
+The designers should then choose a design from the locus of minimum cost solutions which meets the consumers' basic reliability requirements and fits within the consumers' budget constraints. 
+Researchers \cite{Hadj,Kanase,Wissem} have tangentially observed the cost versus reliability trade offs for stand alone micro-grid designs.  
+The work of Kanase-Pital et al \cite{Kanase} observes how the cost of delivered energy, and the composition of hybrid renewable energy systems changes as a function of reliability.  
+Similarly, Wissem et al \cite{Wissem} observe how the reliability of autonomous PV systems influences the cost per \unit{kW \! \cdot \! hr} of electricity. 
+Hadj Arab et al. \cite{Hadj} determine the least expensive PV to battery ratio for several system reliabilities. 
+Using their methodology, it is then possible to compute a cost versus reliability relationship for a prospective micro-grid project. 
+
+Existing research illustrates the feasibility of calculating cost versus reliability relationships for potential micro-grid designs.
+However, this research does not provide an overarching strategy to determine which cost-reliability combination is best for a particular group of consumers.  
+To address the shortfall in existing literature, we propose a methodology by which a system planner may subjectively determine an optimum point where both cost and customer satisfaction are met.
+Drawing on the work of others, we create a locus of optimal PV and battery combinations for a range of system reliabilities.
+Embedded in each point on the curve is one year temporal simulation of micro-grid performance with hourly resolution.  
+We then iteratively observe points on the curve while observing when energy shortfalls occur and how they correlate to consumer demand patterns.
+When analyzing a potential micro-grid design, we begin our temporal analysis by quantifying its reliability for each month of the year. 
+This allows us to observe seasonal trends in micro-grid performance. 
+After identifying the month or months of principal importance, or lowest reliability, we isolate those periods and analyze their performance using sub-daily resolution. 
+From observing these periods, system designers are then able to determine the acceptability of system performance.
+
+Within section \ref{method}: methodology, we present a detailed description of our procedure for designing standalone PV micro-grids. 
+This section introduces several figures.
+These figures are used to demonstrate data visualization techniques which help to evaluate the performance of a potential micro-grid.  
+Section \ref{CaseStudy} is an illustrative example of how we used our proposed micro-grid design strategy to design a micro-grid design for consumers in Segou, Mali. 
+Within section \ref{CaseStudy}, the figures from section \ref{method} are reintroduced in order to illustrate how they informed our design decisions.
+Using section \ref{Discussion}, discussion, we BLAH BLAH BLAH!!!!!!!!!!!!!
+
 
 \section{Methodology} \label{method}
 
@@ -30,9 +78,7 @@ In section \ref{CaseStudy}, these figures will be reintroduced with an eye towar
 %this info is good but might be more relevant to the introduction.  
 
 %drs here is my attempt at the first paragraph for this section
-Cost pressures in the developing world demand that system size be made
-as small as possible while meeting customer demands.  
-We propose a method of identifying the lowest cost system that uses real or
+Within this section, we describe our methodology of identifying the lowest cost system that uses real or
 forecast customer demand and weather data and price estimates for
 photovoltaic panels and storage.
 In this method, we adjust the system reliability to minimize costs while simultaneously observing the times when the system is unable to meet demand.  
@@ -178,7 +224,7 @@ As opposed to illustrating general data visualization strategies, these figures 
 %% Introduce Location and weather profile 
 
 There are three primary input parameters for the micro-grid design strategy. 
-Two are hourly vectors for year. One vector is of available insolation in \unit{w/m^2}, and the other is of electricity demand in \unit{w\! \cdot \! hr}.
+Two are hourly vectors for year. One vector is of available insolation in \unit{W/m^2}, and the other is of electricity demand in \unit{w\! \cdot \! hr}.
 A third set of input parameters is the annual costs of PV and battery capacity. 
 %
 % Introduce Location
@@ -197,12 +243,12 @@ Segou's weather is characterized by a rainy season which lasts from June until S
 A majority of the electricity demand on the micro-grid is used to operate
 a 250 liter freezer.
 The freezer operates nearly 24 hours per day, and on average it draws 200 W. 
-Ice bricks and frozen drinks produced by the freezer are sold to neighboring villages and are a significant source of income for the community.
+Ice bricks and frozen drinks produced by the freezer are sold to neighboring villages.
 In addition to powering the freezer, the micro-grid serves approximately 20 households.
 Each household is equipped with two 5 W LED light bulbs and a two plug outlet. 
 The outlets are used primarily for cellphone charging.
 A few households may also have larger electronics, such as a television or radio.
-All households are individually metered, resulting in a financially motivated culture of energy conservation. 
+All households are individually metered, and are charged on a per watt basis.
 Thus, residential electricity peak demand is significantly less than the maximum possible power draw. 
 On average, residential electricity demand peaks during the early evening at 150 W.
 The daily average of the demand data used in our analysis is illustrated as the dashed line in figure \ref{HourBar}.
@@ -226,8 +272,9 @@ The \emph{LEGP}, PV capacity, battery capacity, and cost per \unit{kW \! \cdot \
 \centering
 \begin{tabular}{|l|c|c|c|c|c|}
 \hline
-\emph{LEGP}  &  PV Capacity & Bat Capacity & Total Cost\\
-      & \unit{W}     & \unit{W \! \cdot \!hr} & \unit{USD/kW \! \cdot \!hr} \\
+\emph{LEGP}  &  PV Capacity & Bat Capacity & Combine Total Cost\\
+      & \unit{W}     & \unit{W \! \cdot \!hr} & of PV and Bat Bank\\
+       & & &  \unit{USD/kW \! \cdot \!hr}\\
 \hline
 Current Grid & & & \\
 \emph{LEGP} = 0.054 & 1400 & 17280 & 0.881 \\
@@ -245,6 +292,8 @@ Current Grid & & & \\
 
 \footnotetext{Note that the \emph{LEGP} and the cost per \unit{kW\! \cdot \! hr} were estimated by our model and do not constitute measured reliability or cost data.}
 % 0.05 LEGP Micro-Grid
+
+As illustrated by figure \ref{ConfigSumm}, the current micro-grid configuration has an annual \emph{LEGP} of 0.054.
 
 When sizing the micro-grid for the village outside of Segou, we started by specifying an annual \emph{LEGP} of 0.05.
 Recognizing the severe financial limitations on micro-grid design, we wanted to start with a reliability that was marginally better than that of the current system.
@@ -291,7 +340,7 @@ Figure \ref{LEGMaps} indicates that there was only a single energy shortage betw
 We also found that the 0.01 \emph{LEGP} micro-grid significantly improved freezer operation, especially when compared to the aforementioned alternatives. There were only two energy shortfall occurrences which were five ours or longer. 
 Given the reduced frequency and duration of energy shortfalls, it is possible that their effects can be further reduced by demand side energy management.
 
-\section{Discussion}
+\section{Discussion} \label{Discussion}
 
 \appendix	
 \section{Appendix 1: \emph{LEGP} and Energy Balance Algorithm} \label{A1}
@@ -309,7 +358,26 @@ Second, this metric is analogous to maximum annual capacity shortage which is a 
 
 \begin{thebibliography}{9}
 
-\bibitem{cite1}
+\bibitem{Marawanyika} Marawanyika G. The Zimbabwe UNDP-G.E.F solar project for rural household and community use in Zimbabwe. Renewable Energy 1997; 10(2–3): 157–162
+
+\bibitem{Nouni} Nouni MR, Mullick SC, Kandpal TC. Providing electricity access to remote areas in India: Niche areas for decentralized electricity supply. Renewable Energy 2009; 34(2): 430-4.
+
+\bibitem{WB} World Bank, Rural energy and development: improving energy supplies for 2 billion people. World Bank, Washington, DC (1996)
+
+\bibitem{Oparaku}Oparaku OU. Photovoltaic systems for distributed power supply in Nigeria. Renewable Energy 2002; 25:31-40.
+
+\bibitem{Wamukonya} Wamukonya N. 2007. Solar home system electrification as a viable technology option for Africa’s development. Energy Policy 35, 6–14.
+
+\bibitem{Markvart} Markvart T, Fragaki A, Ross JN. PV system sizing using observed time series of solar radiation, Solar Energy 2006; 80(1):46-50.
+
+\bibitem{Arun} Arun P, Banerjee R,Bandyopadhyay S, Sizing curve for design of isolated power systems, Energy for Sustainable Development 2007; 11(4) 21-8.
+
+\bibitem{Hadj} Hadj Arab A, Ait Driss B, Amimeur R, Lorenzo E, Photovoltaic systems sizing for Algeria, Solar Energy 1995; 54(2): 99-104.
+
+\bibitem{Kanase} Kanase-Patil AB, Saini RP,Sharma MP, Sizing of integrated renewable energy system based on load profiles and reliability index for the state of Uttarakhand in India, Renewable Energy 2011; 36(11): 2809-21.
+
+\bibitem{Wissem} Wissem Z, Gueorgui K, Hédi K, Modeling and technical–economic optimization of an autonomous photovoltaic system, Energy 2012; 37(1): 263-272.
+
 
 \end{thebibliography}
 \end{document}
