@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11p]{article}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{textcomp}
@@ -55,12 +55,14 @@ Existing research illustrates the feasibility of calculating cost versus reliabi
 However, this research does not provide an overarching strategy to determine which cost-reliability combination is best for a particular group of consumers.  
 To address the shortfall in existing literature, we propose a methodology by which a system planner may subjectively determine an optimum point where both cost and customer satisfaction are met.
 Drawing on the work of others, we create a locus of optimal PV and battery combinations for a range of system reliabilities.
-Embedded in each point on the curve is one year temporal simulation of micro-grid performance with hourly resolution.  
+Embedded in each point on the curve is a one year temporal simulation of micro-grid performance with hourly resolution.  
 We then iteratively observe points on the curve while observing when energy shortfalls occur and how they correlate to consumer demand patterns.
 When analyzing a potential micro-grid design, we begin our temporal analysis by quantifying its reliability for each month of the year. 
 This allows us to observe seasonal trends in micro-grid performance. 
 After identifying the month or months of principal importance, or lowest reliability, we isolate those periods and analyze their performance using sub-daily resolution. 
+Depending on he accuracy of the input parameters, the results should be quantitatively and qualitatively representative of trends in micro-grid performance. 
 From observing these periods, system designers are then able to determine the acceptability of system performance.
+
 
 Within section \ref{method}: methodology, we present a detailed description of our procedure for designing standalone PV micro-grids. 
 This section introduces several figures.
@@ -78,9 +80,7 @@ Using section \ref{Discussion}, discussion, we BLAH BLAH BLAH!!!!!!!!!!!!!
 %this info is good but might be more relevant to the introduction.  
 
 %drs here is my attempt at the first paragraph for this section
-Within this section, we describe our methodology of identifying the lowest cost system that uses real or
-forecast customer demand and weather data and price estimates for
-photovoltaic panels and storage.
+Within this section, we describe our methodology of identifying the lowest cost system that uses real or forecast customer demand and weather data and price estimates for photovoltaic panels and storage.
 In this method, we adjust the system reliability to minimize costs while simultaneously observing the times when the system is unable to meet demand.  
 We begin our temporal analysis by quantifying the micro-grid reliability for each month of the year. 
 This allows us to observe seasonal trends in micro-grid reliability. 
@@ -89,16 +89,35 @@ This iterative procedure is subjective but allows a system designer with knowled
 
 %% Introduce LEGP and Introduce cost versus reliability curve
 
-%drs put footnotes in paper paragraph
 
-The first step in our design procedure is to create a cost versus reliability curve. 
+
+\begin{verbatim}
+** I think the next paragraph is important, I'm just not sure if it belongs here.**
+\end{verbatim} 
+The first step in our design procedure is to input insolation and demand data. 
+Several strategies have been employed to estimate electricity demand on new micro-grid installations for the developing world. 
+The authors of \cite{Camblong,Alzola} used extensive surveying to estimate the magnitude of electricity demand on a per load consuming device basis. 
+The surveys also included time of day information about usage which employed to used create a daily power profile with hourly resolution. 
+Nfah et al. \cite{Nfah} employed a different strategy.
+They estimated the electricity demand of future installation by using historical data of grid connected households with similar electricity consumption behavior. 
+Tools are also available which assist in estimating solar resource data.
+Given the scarcity of ground-based solar resource data, these tools have been developed to convert geostationary imagery into site-time specific solar data. 
+For instance, Mines ParisTech and the Center for Energy and Processes utilized Meteosat geostationary satellite imaging to create insolation data sets for all of Africa and Western Europe. 
+For most locations, from 2005 to the present these data sets have a spacial resolution finer than 10 km and a temporal solution finer than 1 hour.  
+Similarly, the NASA Langley Research Center has completed a worldwide solar energy data set using satellite imagery. 
+The data set embodies 20 years of data with a 100-km spacial resolution and a daily temporal resolution.  
+NASA has also used this data to create an average daily insolation for each month at each location.
+As a result, this data may easily imported into a tool such as HOMER in order to create synthetic daily sets at sub-daily resolution.   
+
+After input energy demand and insolation data has been specified, the next step in our design procedure is to create a cost versus reliability curve. 
 Such curves allow the designer to understand the marginal cost of added micro-grid reliability.
 An example of one such curve is illustrated as figure \ref{CVsLEGP}.
 As indicated in figure \ref{CVsLEGP}, the metric we use in order to express system reliability is called Lack of Energy to Generate Probability, \emph{LEGP}. 
-First introduced by Wissem et al. \cite{•}, \emph{LEGP} is an energy based metric which is equal to the annual consumer demand a micro-grid could not supply, divided by the annual consumer demand on the micro-grid.
+First introduced by Wissem et al. \cite{Wissem}, \emph{LEGP} is an energy based metric which is equal to the annual consumer demand a micro-grid could not supply, divided by the annual consumer demand on the micro-grid.
 We compute \emph{LEGP} using an energy balance model with an hourly time step. 
-Within appendix 1, we provide our motivation for using \emph{LEGP}. 
-Within appendix 1, we also provide in depth explanation of our energy balance algorithm.
+Within appendix 1, we provide in depth explanation of our energy balance algorithm.
+Within appendix 1, we also provide our motivation for using \emph{LEGP}.
+
 
 From figure \ref{CVsLEGP}, we observe that each incremental decrease in \emph{LEGP} becomes more expensive on a cost per \unit{kW\! \cdot \! hr} basis.
 However, this curve does not help us determine which system reliability will be acceptable to the micro-grid's consumers.
@@ -215,14 +234,16 @@ Regardless, our procedure allows micro-grid designers to analyze the performance
 
 This section is intended as an illustrative example.
 The methodology introduced in the previous section is utilized in order to size a micro-grid for a village outside of Segou, Mali.
-The figures from section \ref{method} are also reintroduced.
-As opposed to illustrating general data visualization strategies, these figures will be used to motivate specific micro-grid design decisions.
-
+There is currently a micro-grid on the site. 
+From consumer feedback, the micro-grid is deemed to have an unacceptable reliability.
+According to our model, the micro-grid has a \emph{LEGP} of 0.054.
+In order to facilitate the design process, and motivate specific micro-grid design decisions, the figures from section \ref{method} are reintroduced.
 
 \subsection{Input Parameters}
 
 %% Introduce Location and weather profile 
-
+The following subsection describes the input parameters of our model.
+A majority of the inputs were drawn from the operational data of the current micro-grid. 
 There are three primary input parameters for the micro-grid design strategy. 
 Two are hourly vectors for year. One vector is of available insolation in \unit{W/m^2}, and the other is of electricity demand in \unit{w\! \cdot \! hr}.
 A third set of input parameters is the annual costs of PV and battery capacity. 
@@ -272,7 +293,7 @@ The \emph{LEGP}, PV capacity, battery capacity, and cost per \unit{kW \! \cdot \
 \centering
 \begin{tabular}{|l|c|c|c|c|c|}
 \hline
-\emph{LEGP}  &  PV Capacity & Bat Capacity & Combine Total Cost\\
+\emph{LEGP}  &  PV Capacity & Bat Capacity & Combine Cost\\
       & \unit{W}     & \unit{W \! \cdot \!hr} & of PV and Bat Bank\\
        & & &  \unit{USD/kW \! \cdot \!hr}\\
 \hline
@@ -293,24 +314,27 @@ Current Grid & & & \\
 \footnotetext{Note that the \emph{LEGP} and the cost per \unit{kW\! \cdot \! hr} were estimated by our model and do not constitute measured reliability or cost data.}
 % 0.05 LEGP Micro-Grid
 
-As illustrated by figure \ref{ConfigSumm}, the current micro-grid configuration has an annual \emph{LEGP} of 0.054.
+%Paragraph 2
 
 When sizing the micro-grid for the village outside of Segou, we started by specifying an annual \emph{LEGP} of 0.05.
-Recognizing the severe financial limitations on micro-grid design, we wanted to start with a reliability that was marginally better than that of the current system.
+Recognizing the severe financial limitations on micro-grid design, we wanted to start with a reliability that was marginally better than the 0.054 \emph{LEGP} of the current system.
 After specifying an annual \emph{LEGP} of 0.05, we plotted the \emph{LEGP} for each operational month. 
 Figure \ref{MonthBar} illustrates that, as expected from the weather patterns of Segou, the months of July through September had the lowest reliability.  
 Because it had the lowest reliability, with an \emph{LEGP} of 0.136, we chose to analyze the month of August with an hourly resolution. 
 
-When analyzing the month of August with an hourly resolution, we created the figures described in section 2.
-After analyzing these two figures, we believe that the 0.05 \emph{LEGP} micro-grid does not offer sufficient performance.
-The micro-grid fails to meet the needs of the 20 households.
-Figure \ref{HourBar} illustrates that for the hours of significant residential demand, 7:00 PM to 1:00 AM, reliability steadily decreases, with \emph{LEGP} rising from 0.052 to 0.205. 
+%Paragraph 3
+ 
+In order to qualitatively understand the temporal spacing of energy shortages, and how they affect electricity demand, we created figures \ref{HourBar} and \ref{LEGMaps}.
+After analyzing the figures, we concluded that the 0.05 \emph{LEGP} micro-grid did not offer adequate reliability for either the freezer base load or the resident demand.
+We found that micro-grid was insufficient for the residential consumers because a significant number of energy shortages occur during times of significant residential demand.
+As illustrated by figure \ref{HourBar}, we can see that there is a significant level of residential electricity demand between 7:00 PM and 1:00 AM, with peak demand occurring between 9:00 PM and 10:00 PM.
+Between 7:00 PM and 1:00 AM reliability steadily decreases, with \emph{LEGP} rising from 0.052 to 0.205. 
 During the peak demand window, which occurs between 9:00 PM until 10:00 PM, the \emph{LEGP} of the micro-grid was 0.138.
-The \emph{LEG} map within figure \ref{LEGMaps} confirms the inconveniences to the micro-consumers.
+The 0.05 \emph{LEG} map within figure \ref{LEGMaps} confirms that the system provides insufficient electricity service to the residential customers. 
 In particular, we can see that the high \emph{LEGPs} were the result of regularly occurring energy shortages and not isolated outages.
 Figure \ref{LEGMaps} indicates that there were five energy shortfall events which curtailed demand during the 7:00 PM to 1:00 AM period.
 Four of these inhibit electricity consumption during the hour of peak demand, 9:00 PM to 10:00 PM.
-We also found that the micro-grid performance was equally unsatisfactory for the owners of the freezer.
+We found that the micro-grid failed to provide sufficient service for the freezer system because there were several outages of long duration.
 We estimate that any energy shortfalls lasting five hours or longer would significantly impact the production of ice and frozen drinks. 
 As figure \ref{LEGMaps} illustrates, energy shortfalls lasting five or more hours occurred prior to, or during, eight separate work days.
  
@@ -377,6 +401,12 @@ Second, this metric is analogous to maximum annual capacity shortage which is a 
 \bibitem{Kanase} Kanase-Patil AB, Saini RP,Sharma MP, Sizing of integrated renewable energy system based on load profiles and reliability index for the state of Uttarakhand in India, Renewable Energy 2011; 36(11): 2809-21.
 
 \bibitem{Wissem} Wissem Z, Gueorgui K, Hédi K, Modeling and technical–economic optimization of an autonomous photovoltaic system, Energy 2012; 37(1): 263-272.
+
+\bibitem{Camblong} Camblong H, Sarr J, Niang AT, Curea O, Alzola JA, Sylla EH, Santos M, Micro-grids project, Part 1: Analysis of rural electrification with high content of renewable energy sources in Senegal, Renewable Energy 2009; 34(10): 2141-2150.
+
+\bibitem{Alzola} Alzola JA, Vechiu I, Camblong H, Santos M, Sall M, Sow G, Microgrids project, Part 2: Design of an electrification kit with high content of renewable energy sources in Senegal, Renewable Energy 2009; 34(10):  2151-2159. 
+
+\bibitem{Nfah} E.M. Nfah, J.M. Ngundam, M. Vandenbergh, J. Schmid, Simulation of off-grid generation options for remote villages in Cameroon, Renewable Energy, Volume 33, Issue 5, May 2008, Pages 1064-1072.
 
 
 \end{thebibliography}
