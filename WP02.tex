@@ -86,9 +86,17 @@ We begin our temporal analysis by quantifying the micro-grid reliability for eac
 This allows us to observe seasonal trends in micro-grid reliability. 
 After identifying the month or months of principal importance, or lowest reliability, we isolate those periods and analyze their performance using sub-daily resolution. 
 This iterative procedure is subjective but allows a system designer with knowledge of local demands to design a lower cost system without the complexity of backup fossil fuel based generation.
+A process diagram summarizing our iterative procedure is illustrated as figure \ref{FlowChart}. 
+
 
 %% Introduce LEGP and Introduce cost versus reliability curve
+\begin{figure}
+\centering
+\includegraphics[trim = 25mm 180mm 95mm 25mm, clip,width=.5\textwidth]{DesignProcessFlow.pdf}
+\caption{Overview of design procedure for stand-alone micro-grid systems.}
 
+\label{FlowChart}
+\end{figure}
 
 
 \begin{verbatim}
@@ -365,6 +373,37 @@ We also found that the 0.01 \emph{LEGP} micro-grid significantly improved freeze
 Given the reduced frequency and duration of energy shortfalls, it is possible that their effects can be further reduced by demand side energy management.
 
 \section{Discussion} \label{Discussion}
+
+The results of the case study illustrate that a combination of optimization tools and designer discretion can produce a micro-grid design that is more reliable, and less expensive, than a micro-grid designed using "rule of thumb" techniques. 
+Moreover, we were able to come about a design which made an acceptable and significant cost versus reliability trade off.
+As indicated in table \ref{ConfigSumm}, we arrived at a design with a \emph{LEGP} of 0.001 and a break even cost of electricity of 0.763 \unit{USD/kW \! \cdot \! hr}.   
+For a reliability which would be demanded by an off-grid customer in the developed world, the cost of generation would be significantly higher. 
+To achieve an \emph{LEGP} of 0.001, the break even cost of electricity would have been 1.050 \unit{USD/kW \! \cdot \! hr}.
+In essence, in order to reduce the micro-grid's \emph{LEGP} by 0.009, would have required an increase in the cost of delivered electricity by 38 percent.   
+
+In writing this article, we narrowed our scope to stand alone PV and battery micro-grids, and we chose to demonstrate our methodology using one specific example. 
+Nevertheless, we believe that the combination of optimization tools and pseudo-subjective cost versus reliability trade offs can be utilized to design a wide array of isolated micro-grids for the developing world. 
+Sophisticated simulation tools, such as HOMER, allow designers to simulate systems which incorporate several types of generation and storage technologies. 
+Moreover, our methodology allows designers the flexibility to analyze a wide array of energy use and renewable resource availability patterns.
+
+
+When employing the proposed methodologies to their unique circumstances, there are two primary questions which micro-grid designers must consider.
+The first is, "what are the high priority uses of electricity?"
+Identifying the electricity using devices will help specify reliability requirements.
+For example, a refrigerator used to store vaccines may have very different reliability requirements from an electric water pump. 
+The second important question is, "when does high priority electricity demand occur?"
+Answering this question will help to ensure energy shortfalls do not happen when energy is most needed.
+For example, power outages which occur in the early morning may not be problematic if a majority of income generating electricity usage happens at midday, or during early evening hours. 
+In summary, cost savings in the per \unit{kW \! \cdot \! hr} can be achieved when designers are cognizant of when energy is needed, the priority of energy demand, and consumer willingness to pay. 
+
+
+
+
+
+
+
+
+
 
 \appendix	
 \section{Appendix 1: \emph{LEGP} and Energy Balance Algorithm} \label{A1}
