@@ -6,9 +6,24 @@
 \usepackage[top=1 in, bottom=1 in, left=1 in, right=1 in]{geometry}
 \newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
 
+
+\title{Cost Versus Reliability Sizing Strategy for Isolated Photovoltaic Micro-grids in the Developing World}
+\author{Mitchell Lee, Daniel Soto, Vijay Modi}
+\date{}
+
 \begin{document}
+\maketitle
 
 \begin{abstract}
+For many isolated regions in the developing world, micro-grids which combine photovoltaic electricity generation and battery storage represent the most reliable and least expensive form of energy service. 
+Due to climate induced solar resource variations, achieving high reliability levels necessitates excess generation and storage capacity which can significantly increase the end consumer cost of energy.
+Due to severe financial limitations, many consumers in the developing world may prefer cost versus reliability tradeoffs, as long as, their basic energy needs are met. 
+Recognizing such, we utilize a time series energy balance algorithm at hourly resolution to create cost versus reliability curves of micro-grid performance. 
+We then propose a data visualization and analysis strategy which enables designers with knowledge of local energy needs to determine the acceptability of potential micro-grids.  
+Our strategy relies on visualizing simulation data at increasing levels of temporal resolution to determine where energy shortfalls occur and if they interfere with high priority energy demand. 
+A case study is presented which utilizes the proposed methods.
+Results suggest that the methodology has the potential to reduce the cost of service while maintaining acceptable consumer reliability
+
 
 \end{abstract}
 
@@ -98,10 +113,6 @@ A process diagram summarizing our iterative procedure is illustrated as figure \
 \label{FlowChart}
 \end{figure}
 
-
-\begin{verbatim}
-** I think the next paragraph is important, I'm just not sure if it belongs here.**
-\end{verbatim} 
 The first step in our design procedure is to input insolation and demand data. 
 Several strategies have been employed to estimate electricity demand on new micro-grid installations for the developing world. 
 The authors of \cite{Camblong,Alzola} used extensive surveying to estimate the magnitude of electricity demand on a per load consuming device basis. 
@@ -381,25 +392,40 @@ Furthermore, as indicated in table \ref{ConfigSumm} we can see that for \emph{LE
 
 The results of the case study illustrate that a combination of optimization tools and designer discretion can produce a micro-grid design that is more reliable, and less expensive, than a micro-grid designed using "rule of thumb" techniques. 
 Moreover, we were able to come about a design which made an acceptable and significant cost versus reliability trade off.
-As indicated in table \ref{ConfigSumm}, we arrived at a design with a \emph{LEGP} of 0.001 and a break even cost of electricity of 0.763 \unit{USD/kW \! \cdot \! hr}.   
+As indicated in table \ref{ConfigSumm}, we arrived at a design with a \emph{LEGP} of 0.01 and a break even cost of electricity of 0.763 \unit{USD/kW \! \cdot \! hr}.   
 For a reliability which would be demanded by an off-grid customer in the developed world, the cost of generation would be significantly higher. 
 To achieve an \emph{LEGP} of 0.001, the break even cost of electricity would have been 1.050 \unit{USD/kW \! \cdot \! hr}.
 In essence, in order to reduce the micro-grid's \emph{LEGP} by 0.009, the cost of delivered electricity would have to be increased by 38 percent.   
 
 In writing this article, we narrowed our scope to stand alone PV and battery micro-grids, and we chose to demonstrate our methodology using one specific example. 
 Nevertheless, we believe that the combination of optimization tools and pseudo-subjective cost versus reliability trade offs can be utilized to design a wide array of isolated micro-grids for the developing world. 
-Sophisticated simulation tools, such as HOMER, allow designers to simulate systems which incorporate several types of generation and storage technologies. 
-Moreover, our methodology allows designers the flexibility to analyze a wide array of energy use and renewable resource availability patterns.
+These techniques can be implemented using well established tools, such as HOMER, which accommodate several generation and storage types.
+Moreover, our methodology allows micro-grids to be designed with respect to their unique load requirements. 
+For example, if the base load in our case study was a freezer used to store vaccines, instead of frozen drinks, we would have specified different reliability requirements. 
+Similarly, if a community has seasonally elevated energy consumption as a result of important economic activity, the proposed methodology allows such information to be incorporated into design decisions.
 
 
-When utilizing our proposed methodology ti facilitate micro-grid design, there are two primary questions which micro-grid designers must consider.
-The first is, "what are the high priority uses of electricity?"
-Identifying the electricity using devices will help specify reliability requirements.
-For example, a refrigerator used to store vaccines may have very different reliability requirements from an electric water pump. 
-The second important question is, "when does high priority electricity demand occur?"
+
+
+%When utilizing our proposed methodology to facilitate micro-grid design decisions, there are two primary questions which micro-grid designers must consider.
+%The first is, "what are the high priority uses of electricity?"
+% the electricity using devices will help specify reliability requirements. 
+%The second important question is, "when does high priority electricity demand occur?"
+%Answering this question will help to ensure energy shortfalls do not occur when energy is most needed.
+%For example, power outages which occur in the early morning may not be problematic if a majority of income generating electricity usage happens at midday, or during early evening hours. 
+
+
+
+\section{Conclusion}
+
+We believe that the proposed methodology can be used in unison with existing sizing tools, such as HOMER, to size many future isolated micro-grids within the developing world.
+As illustrated by the case study in section \ref{CaseStudy}, our research suggests that cost versus reliability trade offs have the potential to significantly reduce the cost of energy while maintaining an acceptable level of service.
+In order to produce an acceptable design, two factors must be considered.
+The first is determining high priority electricity applications or devices. 
+Identifying the uses of electricity will help specify reliability requirements.
+The second important factor is determining when high priority electricity demand occurs. 
 Answering this question will help to ensure energy shortfalls do not happen when energy is most needed.
-For example, power outages which occur in the early morning may not be problematic if a majority of income generating electricity usage happens at midday, or during early evening hours. 
-In summary, reductions in the consumer cost of electricity can be achieved when designers are cognizant of when energy is needed, the priority of energy demand, and consumer willingness to pay. 
+
 
 
 \appendix	
@@ -496,7 +522,7 @@ This week of demand data was then propagated in order to create a 365 day year.
 The cost analysis included in this article only considered the cost of the solar and battery equipment.
 It did not include the cost of installation or maintenance. 
 We estimated that the cost of solar modules to be 1.50 \unit{USD/W} and the cost of batteries to be \unit{USD/W \! \cdot \! hr}.
-It was estimated that the life of the PV modules would be 20 years, and the live of the batteries would be three years.
+It was estimated that the life of the PV modules would be 20 years, and the life of the batteries would be three years.
 It was also estimated that the cost of PV modules and battery bank would be repaid using annual payments over their respective design lives.
 A ten percent annual interest rate is added to repayment fees.    
 Table \ref{Costs} contains a summary of the input parameters which affected our cost calculations.
