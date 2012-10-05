@@ -300,7 +300,15 @@ figures
 		lats = 13.45;
 		demVec = fridgeDemandYearSyn;
 		LEGPVec = [[0.0006,0.0007,0.0008,0.0009,0.001],(.002:.001:.01),(.02:.01:.10)];
-		
+	
+	truDem2.mat - was created using the data from meter_stats3.py. 
+	I reduced the resolution from every 3 seconds to every hour using
+	HourSample.m. The rate range imported into HourSample.m is from 
+	3/01/2012 at 0:00 to 2/14/2012 at 13:48. Becuase the last day is not
+	complete, I had to only convert data up until 3/14/2012 at 0:00 into
+	hourly resolutoion. This corresponded to row 314542.
+	
+	
 	ML05_ML06_UGProfile.mat - This is a bundle of arrays that are used
 	to run the system optimization model. It contains: 
 		-NTS solar data 
